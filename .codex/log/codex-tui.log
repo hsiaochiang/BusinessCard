@@ -1,0 +1,1666 @@
+[2m2025-11-21T15:15:40.318947Z[0m [32m INFO[0m cwd not set, using current dir
+[2m2025-11-21T15:16:15.365132Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-21T15:16:16.643486Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-21T15:16:16.643572Z[0m [32m INFO[0m ghost commit captured: d7e6b25a9c21afb46f54f2b1f911d65f25f0ac00
+[2m2025-11-21T15:16:16.643582Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-21T15:16:24.742389Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:16:27.852571Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat AGENTS.md"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:16:31.509174Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls .github/prompts"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:16:34.400708Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls .github"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:16:38.315048Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls /mnt/d/program/businesscard"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:16:41.193055Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls -a"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:16:44.439222Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls .specify"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:16:47.701461Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls .codex"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:16:52.592800Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat .specify/memory/constitution.md"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:16:55.654141Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls .specify/templates"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:16:58.454379Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls .specify/templates/commands"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:17:02.494120Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls -a .."],"workdir":"/mnt/d/program/businesscard/.specify"}
+[2m2025-11-21T15:17:05.238260Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","ls .."],"workdir":"/mnt/d/program/businesscard/.specify"}
+[2m2025-11-21T15:17:10.211386Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","rg --files"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:17:15.027589Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","rg --files --hidden"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:17:20.276835Z[0m [32m INFO[0m ToolCall: update_plan {"plan":[{"status":"in_progress","step":"Review existing constitution template and supporting templates to understand placeholders and current guidance."},{"status":"pending","step":"Define concrete principles/sections/governance updates based on user input and repo context, including version/date decisions."},{"status":"pending","step":"Update constitution file with filled content and sync impact report, ensuring alignment with other templates or flagging needed updates."}]}
+[2m2025-11-21T15:17:23.710685Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat .specify/templates/plan-template.md"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:17:26.506417Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat .specify/templates/spec-template.md"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:17:30.354156Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat .specify/templates/tasks-template.md"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:17:33.323896Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat .specify/templates/checklist-template.md"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:17:36.922450Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat .specify/templates/agent-file-template.md"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:17:41.231707Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","find .specify -maxdepth 3 -type d"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:17:48.850067Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","date -I"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:18:20.698765Z[0m [32m INFO[0m ToolCall: update_plan {"plan":[{"status":"completed","step":"Review existing constitution template and supporting templates to understand placeholders and current guidance."},{"status":"in_progress","step":"Define concrete principles/sections/governance updates based on user input and repo context, including version/date decisions."},{"status":"pending","step":"Update constitution file with filled content and sync impact report, ensuring alignment with other templates or flagging needed updates."}]}
+[2m2025-11-21T15:18:53.488123Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: .specify/memory/constitution.md
+@@
+-# [PROJECT_NAME] Constitution
+-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+-
+-## Core Principles
+-
+-### [PRINCIPLE_1_NAME]
+-<!-- Example: I. Library-First -->
+-[PRINCIPLE_1_DESCRIPTION]
+-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+-
+-### [PRINCIPLE_2_NAME]
+-<!-- Example: II. CLI Interface -->
+-[PRINCIPLE_2_DESCRIPTION]
+-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+-
+-### [PRINCIPLE_3_NAME]
+-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
+-[PRINCIPLE_3_DESCRIPTION]
+-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+-
+-### [PRINCIPLE_4_NAME]
+-<!-- Example: IV. Integration Testing -->
+-[PRINCIPLE_4_DESCRIPTION]
+-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+-
+-### [PRINCIPLE_5_NAME]
+-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
+-[PRINCIPLE_5_DESCRIPTION]
+-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+-
+-## [SECTION_2_NAME]
+-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+-
+-[SECTION_2_CONTENT]
+-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+-
+-## [SECTION_3_NAME]
+-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+-
+-[SECTION_3_CONTENT]
+-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+-
+-## Governance
+-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+-
+-[GOVERNANCE_RULES]
+-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+-
+-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
+-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
++<!--
++Sync Impact Report
++Version change: 0.0.0 → 1.0.0
++Modified principles:
++- [PRINCIPLE_1_NAME] → I. Code Quality Stewardship
++- [PRINCIPLE_2_NAME] → II. Tests Define Reality
++- [PRINCIPLE_3_NAME] → III. Unified Experience Guarantees
++- [PRINCIPLE_4_NAME] → IV. Performance Predictability
++Added sections:
++- Delivery Standards & Constraints
++- Development Workflow & Quality Gates
++Removed sections:
++- Template placeholder for [PRINCIPLE_5_NAME]
++Templates requiring updates:
++- ✅ .specify/templates/plan-template.md (Constitution Check gating)
++- ✅ .specify/templates/spec-template.md (quality/testing/performance requirements)
++- ✅ .specify/templates/tasks-template.md (quality/performance task guidance)
++- ⚠ .specify/templates/commands (directory absent; add when command docs are created)
++Follow-up TODOs:
++- TODO(COMMAND_TEMPLATES): Create `.specify/templates/commands` once command docs exist so constitution-driven guidance is enforced end-to-end.
++-->
++
++# Business Card Constitution
++
++## Core Principles
++
++### I. Code Quality Stewardship
++- Every change MUST leave the codebase healthier: reduce lint/static-analysis debt, eliminate orphaned code, and document architectural intent directly in the touched modules.
++- Owners MUST publish explicit module boundaries, dependencies, and public contracts in `/specs/.../plan.md` or supporting docs before implementation begins; changes without updated documentation are non-compliant.
++- Code reviews MUST include the craftsmanship checklist (readability, error handling, security, logging) and block merges unless all checklist items pass.
++- Continuous integration MUST run formatters, linters, and dependency vulnerability scans; failures halt the pipeline until resolved.
++*Rationale: Quality is the cheapest place to catch defects and preserves Business Card’s lightweight maintenance model.*
++
++### II. Tests Define Reality
++- Feature work MUST begin with executable acceptance criteria: at least one failing integration or contract test per user story plus unit coverage for critical branches.
++- Core modules MUST maintain ≥90% statement coverage and ≥75% branch coverage; deviations require an explicit waiver recorded in the plan checklist.
++- Regression, accessibility, and performance tests MUST be part of CI, and any failure blocks deployment until fixed or waived by product and engineering leads.
++- Test artifacts (fixtures, datasets, golden snapshots) MUST be versioned with the feature to ensure reproducibility.
++*Rationale: Business Card is only trustworthy when behavior is proven automatically; untested code is unscheduled rework.*
++
++### III. Unified Experience Guarantees
++- All user experiences MUST implement the shared design language (typography, spacing, color tokens, motion) captured in the latest UX kits; deviations require a documented design decision in the spec.
++- Every screen or interaction MUST log accessibility results that demonstrate WCAG 2.1 AA conformance, preferred input methods, and localization behavior.
++- Cross-device validation (desktop, tablet, mobile widths) MUST be automated through visual regression or snapshot tests for any user-visible change.
++- Copy, iconography, and interaction patterns MUST stay consistent; reuse shared components before creating new variants, and record rationale if a new pattern is unavoidable.
++*Rationale: A consistent experience preserves user trust and keeps the brand recognizable across every touchpoint.*
++
++### IV. Performance Predictability
++- Each feature spec MUST declare explicit budgets (e.g., ≤200 ms input-to-render, ≤1 MB incremental payload, ≤5% CPU over baseline). Lacking budgets is a blocker.
++- Instrumentation for those budgets MUST ship with the feature (profilers, RUM hooks, synthetic monitors), and dashboards MUST alert on ≥5% regression.
++- Performance tests MUST run in CI for hot paths; failing tests stop merges until either the regression is fixed or an approved exception that includes a remediation date is filed.
++- Build artifacts MUST remain deterministic and cacheable; any optimization toggles must default to the most performant safe option.
++*Rationale: Business Card succeeds only if it feels instantaneous on commodity devices; performance debt compounds faster than functional debt.*
++
++## Delivery Standards & Constraints
++- Specifications, plans, and tasks MUST explicitly call out how each constitutional principle is satisfied; missing sections keep `/speckit.*` commands from completing.
++- Documentation (README excerpts, quickstarts, API descriptions) MUST be updated alongside code; documentation debt counts as code debt.
++- Production telemetry, logging, and dashboards MUST be provisioned before enabling user traffic.
++- Third-party dependencies MUST be evaluated for license compatibility and performance footprint; upgrades require recorded benchmarks.
++
++## Development Workflow & Quality Gates
++- `/speckit.plan`, `/speckit.specify`, and `/speckit.tasks` outputs MUST embed the Constitution Check section summarizing compliance evidence.
++- Pull requests MUST attach the relevant spec/plan/tasks links and note which constitutional gate they satisfy; reviewers reject changes lacking this traceability.
++- Releases MUST include a signed changelog entry summarizing quality, testing, experience, and performance impacts, plus links to passing test runs.
++- Quarterly audits review adherence metrics (lint debt, coverage, UX regressions, perf budgets) and schedule remediation work for any drift.
++
++## Governance
++The Business Card Constitution supersedes bespoke team practices. Amendments require (1) a written proposal referencing this document, (2) review by engineering, design, and product leads, (3) consensus approval recorded in version control, and (4) updates to all dependent templates or tooling. Version numbers follow semantic versioning: MAJOR for breaking governance or principle removals, MINOR for new principles/sections or materially stronger guidance, PATCH for clarifications. Ratified versions remain in force until superseded, and compliance reviews occur every release cycle to verify that plans, specs, tasks, and runtime documentation uphold all principles.
++
++**Version**: 1.0.0 | **Ratified**: 2025-11-21 | **Last Amended**: 2025-11-21
+*** End Patch
+[2m2025-11-21T15:18:59.826089Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: .specify/memory/constitution.md
+@@
+-Modified principles:
+-- [PRINCIPLE_1_NAME] → I. Code Quality Stewardship
+-- [PRINCIPLE_2_NAME] → II. Tests Define Reality
+-- [PRINCIPLE_3_NAME] → III. Unified Experience Guarantees
+-- [PRINCIPLE_4_NAME] → IV. Performance Predictability
++Modified principles:
++- Principle 1 placeholder → I. Code Quality Stewardship
++- Principle 2 placeholder → II. Tests Define Reality
++- Principle 3 placeholder → III. Unified Experience Guarantees
++- Principle 4 placeholder → IV. Performance Predictability
+@@
+-Removed sections:
+-- Template placeholder for [PRINCIPLE_5_NAME]
++Removed sections:
++- Template placeholder for unused Principle 5
+*** End Patch
+[2m2025-11-21T15:19:06.424220Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","rg -n \"[≤≥ ]\" -n .specify/memory/constitution.md"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:19:11.002848Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: .specify/memory/constitution.md
+@@
+-- Core modules MUST maintain ≥90% statement coverage and ≥75% branch coverage; deviations require an explicit waiver recorded in the plan checklist.
++- Core modules MUST maintain >=90% statement coverage and >=75% branch coverage; deviations require an explicit waiver recorded in the plan checklist.
+@@
+-- Each feature spec MUST declare explicit budgets (e.g., ≤200 ms input-to-render, ≤1 MB incremental payload, ≤5% CPU over baseline). Lacking budgets is a blocker.
+-- Instrumentation for those budgets MUST ship with the feature (profilers, RUM hooks, synthetic monitors), and dashboards MUST alert on ≥5% regression.
++- Each feature spec MUST declare explicit budgets (e.g., <=200 ms input-to-render, <=1 MB incremental payload, <=5% CPU over baseline). Lacking budgets is a blocker.
++- Instrumentation for those budgets MUST ship with the feature (profilers, RUM hooks, synthetic monitors), and dashboards MUST alert on >=5% regression.
+*** End Patch
+[2m2025-11-21T15:19:17.963081Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: .specify/templates/plan-template.md
+@@
+ ## Constitution Check
+ 
+-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+-
+-[Gates determined based on constitution file]
++*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
++
++1. **Code Quality Stewardship** – Identify module ownership, target refactors, lint/static-analysis coverage, and the reviewers responsible for enforcing craftsmanship.
++2. **Tests Define Reality** – List the acceptance, integration, and regression tests that will be written first, plus how coverage (>=90% statement / >=75% branch on core modules) will be measured.
++3. **Unified Experience Guarantees** – Document the design tokens, reusable components, localization scope, and accessibility validations required for this feature.
++4. **Performance Predictability** – Declare latency, payload, CPU, and memory budgets plus the instrumentation or dashboards that will guard them.
++5. **Delivery & Workflow Standards** – Confirm links to updated documentation, telemetry plans, and how `/speckit.*` artifacts will stay in sync with the constitution.
+*** End Patch
+[2m2025-11-21T15:19:24.415788Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: .specify/templates/spec-template.md
+@@
+ ### Key Entities *(include if feature involves data)*
+ 
+ - **[Entity 1]**: [What it represents, key attributes without implementation]
+ - **[Entity 2]**: [What it represents, relationships to other entities]
+ 
++## Quality & Testing Standards *(mandatory)*
++
++- **Test Strategy**: [List acceptance, integration, regression, and accessibility tests that will be written before implementation]
++- **Coverage Goals**: [Confirm >=90% statement / >=75% branch coverage for critical modules or document the waiver/justification]
++- **Regression Suite**: [Describe how automated suites (CI, nightly, performance) run and where their outputs are recorded]
++- **Data & Fixtures**: [Identify fixtures/golden files needed to reproduce behaviors]
++
++## Experience & Performance Benchmarks *(mandatory)*
++
++- **Design & Content Alignment**: [Design tokens, copy sources, localization and accessibility expectations]
++- **Consistency Tests**: [Visual regression or snapshot coverage across target devices/breakpoints]
++- **Performance Budgets**: [Latency, payload, CPU, memory limits plus instrumentation/dashboards]
++- **Telemetry Plan**: [User experience metrics captured (e.g., FID, scroll FPS) and alert thresholds]
++
+ ## Success Criteria *(mandatory)*
+*** End Patch
+[2m2025-11-21T15:19:30.332183Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: .specify/templates/tasks-template.md
+@@
+ **Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
+ 
+ ## Format: `[ID] [P?] [Story] Description`
+ 
+ - **[P]**: Can run in parallel (different files, no dependencies)
+ - **[Story]**: Which user story this task belongs to (e.g., US1, US2, US3)
+ - Include exact file paths in descriptions
++- Every user story MUST include at least one task covering: code quality improvements/refactoring, automated tests (unit + integration/contract), UX consistency validation (accessibility + visual regression), and performance instrumentation tied to the declared budgets.
+@@
+ ## Phase 2: Foundational (Blocking Prerequisites)
+ 
+ **Purpose**: Core infrastructure that MUST be complete before ANY user story can be implemented
+ 
+ **⚠️ CRITICAL**: No user story work can begin until this phase is complete
+@@
+ - [ ] T009 Setup environment configuration management
+ 
+ **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
+ 
++## Constitution-Mandated Quality Tasks (Required Every Feature)
++
++- [ ] Q001 [P] Document ownership and architectural notes for touched modules (Code Quality Stewardship)
++- [ ] Q002 [P] Implement/extend automated tests until >=90% statement and >=75% branch coverage is met for critical logic
++- [ ] Q003 Validate UX consistency: visual regression snapshots across breakpoints + accessibility audits logged in docs/
++- [ ] Q004 Instrument and benchmark performance budgets; fail pipeline on regressions >=5% vs baseline
++
+ ---
+*** End Patch
+[2m2025-11-21T15:19:34.334951Z[0m [32m INFO[0m ToolCall: update_plan {"plan":[{"status":"completed","step":"Review existing constitution template and supporting templates to understand placeholders and current guidance."},{"status":"completed","step":"Define concrete principles/sections/governance updates based on user input and repo context, including version/date decisions."},{"status":"in_progress","step":"Update constitution file with filled content and sync impact report, ensuring alignment with other templates or flagging needed updates."}]}
+[2m2025-11-21T15:19:40.979027Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","rg -n \"\\[\" .specify/memory/constitution.md"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:19:47.054578Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","git status -sb"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:19:52.548290Z[0m [32m INFO[0m ToolCall: update_plan {"plan":[{"status":"completed","step":"Review existing constitution template and supporting templates to understand placeholders and current guidance."},{"status":"completed","step":"Define concrete principles/sections/governance updates based on user input and repo context, including version/date decisions."},{"status":"completed","step":"Update constitution file with filled content and sync impact report, ensuring alignment with other templates or flagging needed updates."}]}
+[2m2025-11-21T15:19:59.619065Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","nl -ba .specify/memory/constitution.md"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:20:02.751006Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","nl -ba .specify/templates/plan-template.md | sed -n '1,160p'"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:20:08.781865Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","nl -ba .specify/templates/spec-template.md | sed -n '1,220p'"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:20:12.529873Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","nl -ba .specify/templates/tasks-template.md | sed -n '1,220p'"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:23:57.280501Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-21T15:23:58.495382Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-21T15:23:58.495470Z[0m [32m INFO[0m ghost commit captured: 870d936883c7864ee8cacf94051d961f4ffc7ff5
+[2m2025-11-21T15:23:58.495480Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-21T15:24:08.749807Z[0m [32m INFO[0m ToolCall: update_plan {"plan":[{"status":"in_progress","step":"Review constitution and templates to understand current language requirements and impacted sections."},{"status":"pending","step":"Define amendments (language mandate, version bump, dates) and decide how they propagate to templates."},{"status":"pending","step":"Update constitution/templates, ensure sync report + validation, and summarize changes."}]}
+[2m2025-11-21T15:24:15.033492Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat .specify/memory/constitution.md"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:25:43.021388Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: .specify/memory/constitution.md
+@@
+-<!--
+-Sync Impact Report
+-Version change: 0.0.0 → 1.0.0
+-Modified principles:
+-- Principle 1 placeholder → I. Code Quality Stewardship
+-- Principle 2 placeholder → II. Tests Define Reality
+-- Principle 3 placeholder → III. Unified Experience Guarantees
+-- Principle 4 placeholder → IV. Performance Predictability
+-Added sections:
+-- Delivery Standards & Constraints
+-- Development Workflow & Quality Gates
+-Removed sections:
+-- Template placeholder for unused Principle 5
+-Templates requiring updates:
+-- ✅ .specify/templates/plan-template.md (Constitution Check gating)
+-- ✅ .specify/templates/spec-template.md (quality/testing/performance requirements)
+-- ✅ .specify/templates/tasks-template.md (quality/performance task guidance)
+-- ⚠ .specify/templates/commands (directory absent; add when command docs are created)
+-Follow-up TODOs:
+-- TODO(COMMAND_TEMPLATES): Create `.specify/templates/commands` once command docs exist so constitution-driven guidance is enforced end-to-end.
+--->
+-
+-# Business Card Constitution
+-
+-## Core Principles
+-
+-### I. Code Quality Stewardship
+-- Every change MUST leave the codebase healthier: reduce lint/static-analysis debt, eliminate orphaned code, and document architectural intent directly in the touched modules.
+-- Owners MUST publish explicit module boundaries, dependencies, and public contracts in `/specs/.../plan.md` or supporting docs before implementation begins; changes without updated documentation are non-compliant.
+-- Code reviews MUST include the craftsmanship checklist (readability, error handling, security, logging) and block merges unless all checklist items pass.
+-- Continuous integration MUST run formatters, linters, and dependency vulnerability scans; failures halt the pipeline until resolved.
+-*Rationale: Quality is the cheapest place to catch defects and preserves Business Card’s lightweight maintenance model.*
+-
+-### II. Tests Define Reality
+-- Feature work MUST begin with executable acceptance criteria: at least one failing integration or contract test per user story plus unit coverage for critical branches.
+-- Core modules MUST maintain >=90% statement coverage and >=75% branch coverage; deviations require an explicit waiver recorded in the plan checklist.
+-- Regression, accessibility, and performance tests MUST be part of CI, and any failure blocks deployment until fixed or waived by product and engineering leads.
+-- Test artifacts (fixtures, datasets, golden snapshots) MUST be versioned with the feature to ensure reproducibility.
+-*Rationale: Business Card is only trustworthy when behavior is proven automatically; untested code is unscheduled rework.*
+-
+-### III. Unified Experience Guarantees
+-- All user experiences MUST implement the shared design language (typography, spacing, color tokens, motion) captured in the latest UX kits; deviations require a documented design decision in the spec.
+-- Every screen or interaction MUST log accessibility results that demonstrate WCAG 2.1 AA conformance, preferred input methods, and localization behavior.
+-- Cross-device validation (desktop, tablet, mobile widths) MUST be automated through visual regression or snapshot tests for any user-visible change.
+-- Copy, iconography, and interaction patterns MUST stay consistent; reuse shared components before creating new variants, and record rationale if a new pattern is unavoidable.
+-*Rationale: A consistent experience preserves user trust and keeps the brand recognizable across every touchpoint.*
+-
+-### IV. Performance Predictability
+-- Each feature spec MUST declare explicit budgets (e.g., <=200 ms input-to-render, <=1 MB incremental payload, <=5% CPU over baseline). Lacking budgets is a blocker.
+-- Instrumentation for those budgets MUST ship with the feature (profilers, RUM hooks, synthetic monitors), and dashboards MUST alert on >=5% regression.
+-- Performance tests MUST run in CI for hot paths; failing tests stop merges until either the regression is fixed or an approved exception that includes a remediation date is filed.
+-- Build artifacts MUST remain deterministic and cacheable; any optimization toggles must default to the most performant safe option.
+-*Rationale: Business Card succeeds only if it feels instantaneous on commodity devices; performance debt compounds faster than functional debt.*
+-
+-## Delivery Standards & Constraints
+-- Specifications, plans, and tasks MUST explicitly call out how each constitutional principle is satisfied; missing sections keep `/speckit.*` commands from completing.
+-- Documentation (README excerpts, quickstarts, API descriptions) MUST be updated alongside code; documentation debt counts as code debt.
+-- Production telemetry, logging, and dashboards MUST be provisioned before enabling user traffic.
+-- Third-party dependencies MUST be evaluated for license compatibility and performance footprint; upgrades require recorded benchmarks.
+-
+-## Development Workflow & Quality Gates
+-- `/speckit.plan`, `/speckit.specify`, and `/speckit.tasks` outputs MUST embed the Constitution Check section summarizing compliance evidence.
+-- Pull requests MUST attach the relevant spec/plan/tasks links and note which constitutional gate they satisfy; reviewers reject changes lacking this traceability.
+-- Releases MUST include a signed changelog entry summarizing quality, testing, experience, and performance impacts, plus links to passing test runs.
+-- Quarterly audits review adherence metrics (lint debt, coverage, UX regressions, perf budgets) and schedule remediation work for any drift.
+-
+-## Governance
+-The Business Card Constitution supersedes bespoke team practices. Amendments require (1) a written proposal referencing this document, (2) review by engineering, design, and product leads, (3) consensus approval recorded in version control, and (4) updates to all dependent templates or tooling. Version numbers follow semantic versioning: MAJOR for breaking governance or principle removals, MINOR for new principles/sections or materially stronger guidance, PATCH for clarifications. Ratified versions remain in force until superseded, and compliance reviews occur every release cycle to verify that plans, specs, tasks, and runtime documentation uphold all principles.
+-
+-**Version**: 1.0.0 | **Ratified**: 2025-11-21 | **Last Amended**: 2025-11-21
++<!--
++同步影響報告
++版本變更：1.0.0 → 1.1.0
++修改的原則：
++- 無（既有四大原則維持原名與條文）
++新增章節：
++- 無
++移除章節：
++- 無
++調整章節：
++- 交付標準與限制：新增繁體中文語言義務
++更新的模板：
++- ✅ .specify/templates/plan-template.md（新增繁體中文語言指引與全中文模板）
++- ✅ .specify/templates/spec-template.md（新增繁體中文語言指引與全中文模板）
++- ✅ .specify/templates/tasks-template.md（新增繁體中文語言指引）
++- ⚠ .specify/templates/commands（目錄仍不存在，需建立以延伸語言政策）
++後續 TODO：
++- TODO(COMMAND_TEMPLATES)：建立 `.specify/templates/commands` 內容以套用語言與治理要求。
++-->
++
++# Business Card 憲章
++
++## 核心原則
++
++### I. 程式碼品質監護
++- 每一次變更都必須讓程式碼庫更健康：減少 lint/靜態分析技術債、移除孤兒程式碼，並在受影響模組內記錄架構意圖。
++- 模組負責人必須在 `/specs/.../plan.md` 或相關文件中先定義模組邊界、相依與公開合約；若程式碼變動未同步文件即屬不合規。
++- 程式碼審查必須套用工藝檢查清單（可讀性、錯誤處理、安全性、日誌），任一項未通過即不可合併。
++- CI 必須執行格式化、lint 與相依弱點掃描；任何失敗都要阻擋 Pipeline 直到修復。
++*理由：高品質是捕捉缺陷最划算的作法，並維持 Business Card 的輕量維運模式。*
++
++### II. 測試界定真實
++- 功能開發必須從可執行的驗收標準開始：每個使用者故事至少要先寫一個失敗的整合或契約測試，並補齊關鍵邏輯的單元測試。
++- 核心模組必須維持 >=90% 陳述覆蓋率與 >=75% 分支覆蓋率；若無法達成，需在計畫檢查清單中明訂豁免理由。
++- 回歸、無障礙與效能測試必須納入 CI；任何失敗都會阻擋發布，直到修復或由產品與工程領導核准豁免。
++- 測試素材（Fixtures、資料集、金樣快照）必須與功能一同版控，以確保可重現性。
++*理由：只有透過自動驗證的行為才可信；未測試的程式碼都是未排程的返工。*
++
++### III. 統一體驗保證
++- 所有使用者體驗都必須套用最新 UX 套件中的設計語言（字體、間距、色票、動態）；若需偏離，必須在規格文件中紀錄設計決策。
++- 每個畫面或互動都必須紀錄可達到 WCAG 2.1 AA 的可及性結果、偏好輸入方式與在地化行為。
++- 任何可見變更都必須透過視覺回歸或快照測試驗證桌面、平板、手機等斷點。
++- 文案、圖示與互動模式必須一致；優先重用現有元件，如需新樣式必須記錄其必要性。
++*理由：一致的體驗維繫使用者信任，並讓品牌在所有接觸點中維持辨識度。*
++
++### IV. 效能可預測性
++- 每份功能規格都必須定義明確的預算（例如 <=200 ms 輸入至呈現、<=1 MB 額外載荷、<=5% CPU 成本），缺少預算視為阻擋項。
++- 這些預算的量測工具（分析器、RUM Hook、合成監控）必須隨功能一同發布，且儀表板在 >=5% 回退時需立即警示。
++- 熱路徑必須在 CI 中執行效能測試；如有回退，除非獲得核准並附上修復日期，否則禁止合併。
++- 建置產物必須可重現且可快取；任何最佳化選項都必須以最安全且效能最佳的組態作為預設。
++*理由：Business Card 只有在平價裝置上仍然即時才算成功；效能技術債成長速度遠超功能債。*
++
++## 交付標準與限制
++- 規格、實作計畫與任務文件必須清楚說明如何滿足憲章原則；缺漏將使 `/speckit.*` 指令無法通過。
++- 所有規格、實作計畫與對使用者公開的文件（README、Quickstart、說明文件等）必須以繁體中文 (zh-TW) 撰寫與維護，其他語言僅能作為附錄並以 zh-TW 原文為準。
++- 文件（README 節錄、Quickstart、API 說明）必須與程式碼同步更新；文件技術債視同程式碼技術債。
++- 上線前必須配置正式環境的遙測、記錄與儀表板。
++- 第三方套件必須評估授權相容性與效能開銷；升級需附帶量測紀錄。
++
++## 開發流程與品質閘門
++- `/speckit.plan`、`/speckit.specify` 與 `/speckit.tasks` 的輸出必須包含憲章檢查，總結每項原則的符合證據。
++- Pull Request 必須附上對應的規格/計畫/任務連結，並標示通過的憲章閘門；缺少追溯性不得審核通過。
++- 發布必須提供簽署的變更記錄，摘要品質、測試、體驗與效能影響，並附上通過的測試連結。
++- 每季稽核會檢視 lint 負債、覆蓋率、UX 回歸、效能預算等指標，並為偏移項建立補救工作。
++
++## 治理
++Business Card 憲章優先於所有客製流程。修訂流程為：（1）提出引用本文件的書面提案、（2）由工程、設計與產品領導審查、（3）取得共識並記錄於版本控制、（4）同步更新所有相關模板與工具。版本號遵循語意化規則：MAJOR 代表破壞性治理/原則移除，MINOR 代表新增原則或大幅強化條文，PATCH 代表措辭澄清。憲章一經制定即生效，並在每個發布週期檢查規格、計畫、任務與執行文件是否持續遵守。
++
++**版本**：1.1.0 | **制定日期**：2025-11-21 | **最近修訂**：2025-11-21
+*** End Patch
+[2m2025-11-21T15:26:05.441752Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: .specify/templates/plan-template.md
+@@
+-# Implementation Plan: [FEATURE]
+-
+-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
+-**Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
+-
+-**Note**: This template is filled in by the `/speckit.plan` command. See `.specify/templates/commands/plan.md` for the execution workflow.
+-
+-## Summary
+-
+-[Extract from feature spec: primary requirement + technical approach from research]
+-
+-## Technical Context
+-
+-<!--
+-  ACTION REQUIRED: Replace the content in this section with the technical details
+-  for the project. The structure here is presented in advisory capacity to guide
+-  the iteration process.
+--->
+-
+-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
+-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
+-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
+-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
+-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
+-**Project Type**: [single/web/mobile - determines source structure]  
+-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
+-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
+-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+-
+-## Constitution Check
+-
+-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+-
+-1. **Code Quality Stewardship** – Identify module ownership, target refactors, lint/static-analysis coverage, and the reviewers responsible for enforcing craftsmanship.
+-2. **Tests Define Reality** – List the acceptance, integration, and regression tests that will be written first, plus how coverage (>=90% statement / >=75% branch on core modules) will be measured.
+-3. **Unified Experience Guarantees** – Document the design tokens, reusable components, localization scope, and accessibility validations required for this feature.
+-4. **Performance Predictability** – Declare latency, payload, CPU, and memory budgets plus the instrumentation or dashboards that will guard them.
+-5. **Delivery & Workflow Standards** – Confirm links to updated documentation, telemetry plans, and how `/speckit.*` artifacts will stay in sync with the constitution.
+-
+-## Project Structure
+-
+-### Documentation (this feature)
+-
+-```text
+-specs/[###-feature]/
+-├── plan.md              # This file (/speckit.plan command output)
+-├── research.md          # Phase 0 output (/speckit.plan command)
+-├── data-model.md        # Phase 1 output (/speckit.plan command)
+-├── quickstart.md        # Phase 1 output (/speckit.plan command)
+-├── contracts/           # Phase 1 output (/speckit.plan command)
+-└── tasks.md             # Phase 2 output (/speckit.tasks command - NOT created by /speckit.plan)
+-```
+-
+-### Source Code (repository root)
+-<!--
+-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
+-  for this feature. Delete unused options and expand the chosen structure with
+-  real paths (e.g., apps/admin, packages/something). The delivered plan must
+-  not include Option labels.
+--->
+-
+-```text
+-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
+-src/
+-├── models/
+-├── services/
+-├── cli/
+-└── lib/
+-
+-tests/
+-├── contract/
+-├── integration/
+-└── unit/
+-
+-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
+-backend/
+-├── src/
+-│   ├── models/
+-│   ├── services/
+-│   └── api/
+-└── tests/
+-
+-frontend/
+-├── src/
+-│   ├── components/
+-│   ├── pages/
+-│   └── services/
+-└── tests/
+-
+-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
+-api/
+-└── [same as backend above]
+-
+-ios/ or android/
+-└── [platform-specific structure: feature modules, UI flows, platform tests]
+-```
+-
+-**Structure Decision**: [Document the selected structure and reference the real
+-directories captured above]
+-
+-## Complexity Tracking
+-
+-> **Fill ONLY if Constitution Check has violations that must be justified**
+-
+-| Violation | Why Needed | Simpler Alternative Rejected Because |
+-|-----------|------------|-------------------------------------|
+-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
+-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
++# 實作計畫：[FEATURE]
++
++**分支**：`[###-feature-name]` | **日期**：[DATE] | **規格**：[link]
++**輸入**：來自 `/specs/[###-feature-name]/spec.md` 的功能規格
++
++**語言要求**：本計畫與所有引用內容必須以繁體中文 (zh-TW) 撰寫，其他語言僅能作為附錄。
++**注意**：此模板由 `/speckit.plan` 指令產生；操作流程請參閱 `.specify/templates/commands/plan.md`。
++
++## 摘要
++
++[從規格擷取：主要需求與研究後的技術作法]
++
++## 技術背景
++
++<!--
++  操作說明：請以專案實際的技術細節取代下列欄位。這個結構僅供參考，可依需要增減。
++-->
++
++**程式語言 / 版本**：[例如 Python 3.11、Swift 5.9、Rust 1.75 或 NEEDS CLARIFICATION]  
++**主要相依**：[例如 FastAPI、UIKit、LLVM 或 NEEDS CLARIFICATION]  
++**儲存層**：[例如 PostgreSQL、CoreData、檔案或 N/A]  
++**測試框架**：[例如 pytest、XCTest、cargo test 或 NEEDS CLARIFICATION]  
++**目標平台**：[例如 Linux 伺服器、iOS 15+、WASM 或 NEEDS CLARIFICATION]  
++**專案型態**：[單一 / Web / 行動，決定來源結構]  
++**效能目標**：[領域需求，例如 1000 req/s、10k lines/sec、60 fps 或 NEEDS CLARIFICATION]  
++**運作限制**：[例如 <200ms p95、<100MB 記憶體、需離線運作或 NEEDS CLARIFICATION]  
++**規模 / 範圍**：[例如 1 萬使用者、100 萬行程式、50 個畫面或 NEEDS CLARIFICATION]
++
++## 憲章檢查
++
++*閘門：Phase 0 研究前必須通過，Phase 1 設計後需再次確認。*
++
++1. **程式碼品質監護** – 說明模組負責人、預期重構、lint/靜態分析覆蓋，以及誰負責執行工藝審查。
++2. **測試界定真實** – 列出最先撰寫的驗收、整合、回歸測試，並說明如何量測 >=90% 陳述 / >=75% 分支覆蓋率。
++3. **統一體驗保證** – 紀錄設計 Token、可重用元件、在地化範圍與無障礙驗證方式。
++4. **效能可預測性** – 宣告延遲、載荷、CPU、記憶體預算，以及會監控這些預算的工具 / 儀表板。
++5. **交付與流程標準** – 確認文件更新、遙測計畫，以及 `/speckit.*` 產物如何保持與憲章同步。
++
++## 專案結構
++
++### 文件（此功能）
++
++```text
++specs/[###-feature]/
++├── plan.md              # 本檔案（/speckit.plan 指令輸出）
++├── research.md          # Phase 0 輸出（/speckit.plan 指令）
++├── data-model.md        # Phase 1 輸出（/speckit.plan 指令）
++├── quickstart.md        # Phase 1 輸出（/speckit.plan 指令）
++├── contracts/           # Phase 1 輸出（/speckit.plan 指令）
++└── tasks.md             # Phase 2 輸出（/speckit.tasks 指令，非 /speckit.plan 建立）
++```
++
++### 原始碼（版本庫根目錄）
++<!--
++  操作說明：以實際的專案結構取代下列樹狀圖。刪除未使用的選項，並補上真實路徑（例如 apps/admin、packages/...）。
++-->
++
++```text
++# [未使用請刪除] 選項 1：單一專案（預設）
++src/
++├── models/
++├── services/
++├── cli/
++└── lib/
++
++tests/
++├── contract/
++├── integration/
++└── unit/
++
++# [未使用請刪除] 選項 2：Web（同時包含 frontend 與 backend）
++backend/
++├── src/
++│   ├── models/
++│   ├── services/
++│   └── api/
++└── tests/
++
++frontend/
++├── src/
++│   ├── components/
++│   ├── pages/
++│   └── services/
++└── tests/
++
++# [未使用請刪除] 選項 3：Mobile + API（iOS/Android）
++api/
++└── [與 backend 類似的結構]
++
++ios/ 或 android/
++└── [依平台分模組、UI 流程、平台測試]
++```
++
++**結構決策**：[紀錄實際採用的結構並引用上方路徑]
++
++## 複雜度追蹤
++
++> **僅在憲章檢查有違規但經核准時填寫**
++
++| 違規項 | 為何需要 | 已拒絕的較簡方案 |
++|--------|----------|------------------|
++| [例如：第 4 個專案] | [目前原因] | [為何三個專案不足] |
++| [例如：Repository Pattern] | [具體問題] | [為何直接存取資料庫不可行] |
+*** End Patch
+[2m2025-11-21T15:26:25.746964Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: .specify/templates/spec-template.md
+@@
+-# Feature Specification: [FEATURE NAME]
+-
+-**Feature Branch**: `[###-feature-name]`  
+-**Created**: [DATE]  
+-**Status**: Draft  
+-**Input**: User description: "$ARGUMENTS"
+-
+-## User Scenarios & Testing *(mandatory)*
+-
+-<!--
+-  IMPORTANT: User stories should be PRIORITIZED as user journeys ordered by importance.
+-  Each user story/journey must be INDEPENDENTLY TESTABLE - meaning if you implement just ONE of them,
+-  you should still have a viable MVP (Minimum Viable Product) that delivers value.
+-  
+-  Assign priorities (P1, P2, P3, etc.) to each story, where P1 is the most critical.
+-  Think of each story as a standalone slice of functionality that can be:
+-  - Developed independently
+-  - Tested independently
+-  - Deployed independently
+-  - Demonstrated to users independently
+--->
+-
+-### User Story 1 - [Brief Title] (Priority: P1)
+-
+-[Describe this user journey in plain language]
+-
+-**Why this priority**: [Explain the value and why it has this priority level]
+-
+-**Independent Test**: [Describe how this can be tested independently - e.g., "Can be fully tested by [specific action] and delivers [specific value]"]
+-
+-**Acceptance Scenarios**:
+-
+-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
+-2. **Given** [initial state], **When** [action], **Then** [expected outcome]
+-
+----
+-
+-### User Story 2 - [Brief Title] (Priority: P2)
+-
+-[Describe this user journey in plain language]
+-
+-**Why this priority**: [Explain the value and why it has this priority level]
+-
+-**Independent Test**: [Describe how this can be tested independently]
+-
+-**Acceptance Scenarios**:
+-
+-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
+-
+----
+-
+-### User Story 3 - [Brief Title] (Priority: P3)
+-
+-[Describe this user journey in plain language]
+-
+-**Why this priority**: [Explain the value and why it has this priority level]
+-
+-**Independent Test**: [Describe how this can be tested independently]
+-
+-**Acceptance Scenarios**:
+-
+-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
+-
+----
+-
+-[Add more user stories as needed, each with an assigned priority]
+-
+-### Edge Cases
+-
+-<!--
+-  ACTION REQUIRED: The content in this section represents placeholders.
+-  Fill them out with the right edge cases.
+--->
+-
+-- What happens when [boundary condition]?
+-- How does system handle [error scenario]?
+-
+-## Requirements *(mandatory)*
+-
+-<!--
+-  ACTION REQUIRED: The content in this section represents placeholders.
+-  Fill them out with the right functional requirements.
+--->
+-
+-### Functional Requirements
+-
+-- **FR-001**: System MUST [specific capability, e.g., "allow users to create accounts"]
+-- **FR-002**: System MUST [specific capability, e.g., "validate email addresses"]  
+-- **FR-003**: Users MUST be able to [key interaction, e.g., "reset their password"]
+-- **FR-004**: System MUST [data requirement, e.g., "persist user preferences"]
+-- **FR-005**: System MUST [behavior, e.g., "log all security events"]
+-
+-*Example of marking unclear requirements:*
+-
+-- **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
+-- **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
+-
+-### Key Entities *(include if feature involves data)*
+-
+-- **[Entity 1]**: [What it represents, key attributes without implementation]
+-- **[Entity 2]**: [What it represents, relationships to other entities]
+-
+-## Quality & Testing Standards *(mandatory)*
+-
+-- **Test Strategy**: [List acceptance, integration, regression, and accessibility tests that will be written before implementation]
+-- **Coverage Goals**: [Confirm >=90% statement / >=75% branch coverage for critical modules or document the waiver/justification]
+-- **Regression Suite**: [Describe how automated suites (CI, nightly, performance) run and where their outputs are recorded]
+-- **Data & Fixtures**: [Identify fixtures/golden files needed to reproduce behaviors]
+-
+-## Experience & Performance Benchmarks *(mandatory)*
+-
+-- **Design & Content Alignment**: [Design tokens, copy sources, localization and accessibility expectations]
+-- **Consistency Tests**: [Visual regression or snapshot coverage across target devices/breakpoints]
+-- **Performance Budgets**: [Latency, payload, CPU, memory limits plus instrumentation/dashboards]
+-- **Telemetry Plan**: [User experience metrics captured (e.g., FID, scroll FPS) and alert thresholds]
+-
+-## Success Criteria *(mandatory)*
+-
+-<!--
+-  ACTION REQUIRED: Define measurable success criteria.
+-  These must be technology-agnostic and measurable.
+--->
+-
+-### Measurable Outcomes
+-
+-- **SC-001**: [Measurable metric, e.g., "Users can complete account creation in under 2 minutes"]
+-- **SC-002**: [Measurable metric, e.g., "System handles 1000 concurrent users without degradation"]
+-- **SC-003**: [User satisfaction metric, e.g., "90% of users successfully complete primary task on first attempt"]
+-- **SC-004**: [Business metric, e.g., "Reduce support tickets related to [X] by 50%"]
++# 功能規格：[FEATURE NAME]
++
++**功能分支**：`[###-feature-name]`  
++**建立日期**：[DATE]  
++**狀態**：草稿  
++**輸入**：使用者敘述：「$ARGUMENTS」
++
++**語言要求**：本規格必須以繁體中文 (zh-TW) 撰寫，其他語言僅能作為附錄。
++
++## 使用者情境與測試（必填）
++
++<!--
++  重要：使用者故事需依重要性排序。每個故事都必須能獨立測試，
++  即便只完成其中一個，也應能形成可驗證並具價值的 MVP。
++  優先級請以 P1、P2、P3... 表示。
++-->
++
++### 使用者故事 1 - [簡短標題]（優先級：P1）
++
++[以淺白語言描述此使用者旅程]
++
++**優先原因**：[說明價值與為何需要此優先級]
++
++**獨立測試方式**：[描述如何獨立驗證，例如「透過 [特定操作] 即可完整測試並帶來 [具體價值]」]
++
++**驗收情境**：
++
++1. **Given** [初始狀態]，**When** [動作]，**Then** [預期結果]
++2. **Given** [初始狀態]，**When** [動作]，**Then** [預期結果]
++
++---
++
++### 使用者故事 2 - [簡短標題]（優先級：P2）
++
++[描述此使用者旅程]
++
++**優先原因**：[說明價值]
++
++**獨立測試方式**：[描述獨立測試方式]
++
++**驗收情境**：
++
++1. **Given** [初始狀態]，**When** [動作]，**Then** [預期結果]
++
++---
++
++### 使用者故事 3 - [簡短標題]（優先級：P3）
++
++[描述此使用者旅程]
++
++**優先原因**：[說明價值]
++
++**獨立測試方式**：[描述獨立測試方式]
++
++**驗收情境**：
++
++1. **Given** [初始狀態]，**When** [動作]，**Then** [預期結果]
++
++---
++
++[視需要新增更多使用者故事並指定優先級]
++
++### 邊界情境
++
++<!--
++  操作說明：此區為範例占位，請改為實際的邊界與錯誤情境。
++-->
++
++- 當 [邊界條件] 發生時會如何？
++- 系統如何處理 [錯誤情境]？
++
++## 需求（必填）
++
++<!--
++  操作說明：請以具體需求取代下列占位文字。
++-->
++
++### 功能需求
++
++- **FR-001**：系統必須 [能力，例如「允許使用者建立帳號」]
++- **FR-002**：系統必須 [能力，例如「驗證電子郵件格式」]  
++- **FR-003**：使用者必須能 [互動，例如「重設密碼」]
++- **FR-004**：系統必須 [資料要求，例如「儲存使用者偏好」]
++- **FR-005**：系統必須 [行為，例如「記錄所有安全事件」]
++
++*用以標示不明需求的範例：*
++
++- **FR-006**：系統必須透過 [NEEDS CLARIFICATION：未指定的驗證方式（電子郵件/SSO/OAuth?）] 驗證使用者
++- **FR-007**：系統必須保留資料 [NEEDS CLARIFICATION：未指定的保存期間]
++
++### 關鍵實體（若功能涉及資料）
++
++- **[Entity 1]**：[代表意義與關鍵屬性（不含實作）]
++- **[Entity 2]**：[代表意義與與其他實體的關係]
++
++## 品質與測試標準（必填）
++
++- **測試策略**：[列出會先撰寫的驗收、整合、回歸與無障礙測試]
++- **覆蓋率目標**：[確認關鍵模組 >=90% 陳述 / >=75% 分支覆蓋，或說明豁免理由]
++- **回歸套件**：[描述 CI、夜間、效能等自動化測試如何執行與紀錄]
++- **資料與樣本**：[列出重現行為所需的 Fixtures/金樣檔]
++
++## 體驗與效能基準（必填）
++
++- **設計與內容一致性**：[規範設計 Token、文案來源、在地化與無障礙預期]
++- **一致性測試**：[描述跨裝置視覺回歸或快照覆蓋]
++- **效能預算**：[定義延遲、載荷、CPU、記憶體限制與量測工具]
++- **遙測計畫**：[列出所需的體驗指標（如 FID、捲動 FPS）與警戒門檻]
++
++## 成功指標（必填）
++
++<!--
++  操作說明：定義可量測、與技術無關的成功指標。
++-->
++
++### 可量測成果
++
++- **SC-001**：[指標，例如「使用者可在 2 分鐘內完成註冊」]
++- **SC-002**：[指標，例如「系統可在無退化情況下處理 1000 並發使用者」]
++- **SC-003**：[使用者滿意度，例如「90% 使用者首次操作即成功完成主要任務」]
++- **SC-004**：[商業指標，例如「與 [X] 相關的客服工單減少 50%」]
+*** End Patch
+[2m2025-11-21T15:27:01.698643Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: .specify/templates/tasks-template.md
+@@
+----
+-
+-description: "Task list template for feature implementation"
+----
+-
+-# Tasks: [FEATURE NAME]
+-
+-**Input**: Design documents from `/specs/[###-feature-name]/`
+-**Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, contracts/
+-
+-**Tests**: The examples below include test tasks. Tests are OPTIONAL - only include them if explicitly requested in the feature specification.
+-
+-**Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
+-
+-## Format: `[ID] [P?] [Story] Description`
+-
+-- **[P]**: Can run in parallel (different files, no dependencies)
+-- **[Story]**: Which user story this task belongs to (e.g., US1, US2, US3)
+-- Include exact file paths in descriptions
+-- Every user story MUST include at least one task covering: code quality improvements/refactoring, automated tests (unit + integration/contract), UX consistency validation (accessibility + visual regression), and performance instrumentation tied to the declared budgets.
+-
+-## Path Conventions
+-
+-- **Single project**: `src/`, `tests/` at repository root
+-- **Web app**: `backend/src/`, `frontend/src/`
+-- **Mobile**: `api/src/`, `ios/src/` or `android/src/`
+-- Paths shown below assume single project - adjust based on plan.md structure
+-
+-<!-- 
+-  ============================================================================
+-  IMPORTANT: The tasks below are SAMPLE TASKS for illustration purposes only.
+-  
+-  The /speckit.tasks command MUST replace these with actual tasks based on:
+-  - User stories from spec.md (with their priorities P1, P2, P3...)
+-  - Feature requirements from plan.md
+-  - Entities from data-model.md
+-  - Endpoints from contracts/
+-  
+-  Tasks MUST be organized by user story so each story can be:
+-  - Implemented independently
+-  - Tested independently
+-  - Delivered as an MVP increment
+-  
+-  DO NOT keep these sample tasks in the generated tasks.md file.
+-  ============================================================================
+--->
+-
+-## Phase 1: Setup (Shared Infrastructure)
+-
+-**Purpose**: Project initialization and basic structure
+-
+-- [ ] T001 Create project structure per implementation plan
+-- [ ] T002 Initialize [language] project with [framework] dependencies
+-- [ ] T003 [P] Configure linting and formatting tools
+-
+----
+-
+-## Phase 2: Foundational (Blocking Prerequisites)
+-
+-**Purpose**: Core infrastructure that MUST be complete before ANY user story can be implemented
+-
+-**⚠️ CRITICAL**: No user story work can begin until this phase is complete
+-
+-Examples of foundational tasks (adjust based on your project):
+-
+-- [ ] T004 Setup database schema and migrations framework
+-- [ ] T005 [P] Implement authentication/authorization framework
+-- [ ] T006 [P] Setup API routing and middleware structure
+-- [ ] T007 Create base models/entities that all stories depend on
+-- [ ] T008 Configure error handling and logging infrastructure
+-- [ ] T009 Setup environment configuration management
+-
+-**Checkpoint**: Foundation ready - user story implementation can now begin in parallel
+-
+-## Constitution-Mandated Quality Tasks (Required Every Feature)
+-
+-- [ ] Q001 [P] Document ownership and architectural notes for touched modules (Code Quality Stewardship)
+-- [ ] Q002 [P] Implement/extend automated tests until >=90% statement and >=75% branch coverage is met for critical logic
+-- [ ] Q003 Validate UX consistency: visual regression snapshots across breakpoints + accessibility audits logged in docs/
+-- [ ] Q004 Instrument and benchmark performance budgets; fail pipeline on regressions >=5% vs baseline
+-
+----
+-
+-## Phase 3: User Story 1 - [Title] (Priority: P1) 🎯 MVP
+-
+-**Goal**: [Brief description of what this story delivers]
+-
+-**Independent Test**: [How to verify this story works on its own]
+-
+-### Tests for User Story 1 (OPTIONAL - only if tests requested) ⚠️
+-
+-> **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
+-
+-- [ ] T010 [P] [US1] Contract test for [endpoint] in tests/contract/test_[name].py
+-- [ ] T011 [P] [US1] Integration test for [user journey] in tests/integration/test_[name].py
+-
+-### Implementation for User Story 1
+-
+-- [ ] T012 [P] [US1] Create [Entity1] model in src/models/[entity1].py
+-- [ ] T013 [P] [US1] Create [Entity2] model in src/models/[entity2].py
+-- [ ] T014 [US1] Implement [Service] in src/services/[service].py (depends on T012, T013)
+-- [ ] T015 [US1] Implement [endpoint/feature] in src/[location]/[file].py
+-- [ ] T016 [US1] Add validation and error handling
+-- [ ] T017 [US1] Add logging for user story 1 operations
+-
+-**Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
+-
+----
+-
+-## Phase 4: User Story 2 - [Title] (Priority: P2)
+-
+-**Goal**: [Brief description of what this story delivers]
+-
+-**Independent Test**: [How to verify this story works on its own]
+-
+-### Tests for User Story 2 (OPTIONAL - only if tests requested) ⚠️
+-
+-- [ ] T018 [P] [US2] Contract test for [endpoint] in tests/contract/test_[name].py
+-- [ ] T019 [P] [US2] Integration test for [user journey] in tests/integration/test_[name].py
+-
+-### Implementation for User Story 2
+-
+-- [ ] T020 [P] [US2] Create [Entity] model in src/models/[entity].py
+-- [ ] T021 [US2] Implement [Service] in src/services/[service].py
+-- [ ] T022 [US2] Implement [endpoint/feature] in src/[location]/[file].py
+-- [ ] T023 [US2] Integrate with User Story 1 components (if needed)
+-
+-**Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
+-
+----
+-
+-## Phase 5: User Story 3 - [Title] (Priority: P3)
+-
+-**Goal**: [Brief description of what this story delivers]
+-
+-**Independent Test**: [How to verify this story works on its own]
+-
+-### Tests for User Story 3 (OPTIONAL - only if tests requested) ⚠️
+-
+-- [ ] T024 [P] [US3] Contract test for [endpoint] in tests/contract/test_[name].py
+-- [ ] T025 [P] [US3] Integration test for [user journey] in tests/integration/test_[name].py
+-
+-### Implementation for User Story 3
+-
+-- [ ] T026 [P] [US3] Create [Entity] model in src/models/[entity].py
+-- [ ] T027 [US3] Implement [Service] in src/services/[service].py
+-- [ ] T028 [US3] Implement [endpoint/feature] in src/[location]/[file].py
+-
+-**Checkpoint**: All user stories should now be independently functional
+-
+----
+-
+-[Add more user story phases as needed, following the same pattern]
+-
+----
+-
+-## Phase N: Polish & Cross-Cutting Concerns
+-
+-**Purpose**: Improvements that affect multiple user stories
+-
+-- [ ] TXXX [P] Documentation updates in docs/
+-- [ ] TXXX Code cleanup and refactoring
+-- [ ] TXXX Performance optimization across all stories
+-- [ ] TXXX [P] Additional unit tests (if requested) in tests/unit/
+-- [ ] TXXX Security hardening
+-- [ ] TXXX Run quickstart.md validation
+-
+----
+-
+-## Dependencies & Execution Order
+-
+-### Phase Dependencies
+-
+-- **Setup (Phase 1)**: No dependencies - can start immediately
+-- **Foundational (Phase 2)**: Depends on Setup completion - BLOCKS all user stories
+-- **User Stories (Phase 3+)**: All depend on Foundational phase completion
+-  - User stories can then proceed in parallel (if staffed)
+-  - Or sequentially in priority order (P1 → P2 → P3)
+-- **Polish (Final Phase)**: Depends on all desired user stories being complete
+-
+-### User Story Dependencies
+-
+-- **User Story 1 (P1)**: Can start after Foundational (Phase 2) - No dependencies on other stories
+-- **User Story 2 (P2)**: Can start after Foundational (Phase 2) - May integrate with US1 but should be independently testable
+-- **User Story 3 (P3)**: Can start after Foundational (Phase 2) - May integrate with US1/US2 but should be independently testable
+-
+-### Within Each User Story
+-
+-- Tests (if included) MUST be written and FAIL before implementation
+-- Models before services
+-- Services before endpoints
+-- Core implementation before integration
+-- Story complete before moving to next priority
+-
+-### Parallel Opportunities
+-
+-- All Setup tasks marked [P] can run in parallel
+-- All Foundational tasks marked [P] can run in parallel (within Phase 2)
+-- Once Foundational phase completes, all user stories can start in parallel (if team capacity allows)
+-- All tests for a user story marked [P] can run in parallel
+-- Models within a story marked [P] can run in parallel
+-- Different user stories can be worked on in parallel by different team members
+-
+----
+-
+-## Parallel Example: User Story 1
+-
+-```bash
+-# Launch all tests for User Story 1 together (if tests requested):
+-Task: "Contract test for [endpoint] in tests/contract/test_[name].py"
+-Task: "Integration test for [user journey] in tests/integration/test_[name].py"
+-
+-# Launch all models for User Story 1 together:
+-Task: "Create [Entity1] model in src/models/[entity1].py"
+-Task: "Create [Entity2] model in src/models/[entity2].py"
+-```
+-
+----
+-
+-## Implementation Strategy
+-
+-### MVP First (User Story 1 Only)
+-
+-1. Complete Phase 1: Setup
+-2. Complete Phase 2: Foundational (CRITICAL - blocks all stories)
+-3. Complete Phase 3: User Story 1
+-4. **STOP and VALIDATE**: Test User Story 1 independently
+-5. Deploy/demo if ready
+-
+-### Incremental Delivery
+-
+-1. Complete Setup + Foundational → Foundation ready
+-2. Add User Story 1 → Test independently → Deploy/Demo (MVP!)
+-3. Add User Story 2 → Test independently → Deploy/Demo
+-4. Add User Story 3 → Test independently → Deploy/Demo
+-5. Each story adds value without breaking previous stories
+-
+-### Parallel Team Strategy
+-
+-With multiple developers:
+-
+-1. Team completes Setup + Foundational together
+-2. Once Foundational is done:
+-   - Developer A: User Story 1
+-   - Developer B: User Story 2
+-   - Developer C: User Story 3
+-3. Stories complete and integrate independently
+-
+----
+-
+-## Notes
+-
+-- [P] tasks = different files, no dependencies
+-- [Story] label maps task to specific user story for traceability
+-- Each user story should be independently completable and testable
+-- Verify tests fail before implementing
+-- Commit after each task or logical group
+-- Stop at any checkpoint to validate story independently
+-- Avoid: vague tasks, same file conflicts, cross-story dependencies that break independence
++---
++
++description: "功能實作任務清單模板"
++---
++
++# 任務：[FEATURE NAME]
++
++**輸入**：`/specs/[###-feature-name]/` 內的設計文件  
++**前置需求**：plan.md（必填）、spec.md（敘述使用者故事必填）、research.md、data-model.md、contracts/
++
++**測試說明**：以下示例包含測試任務；僅在規格明確要求時才建立測試任務。
++
++**組織方式**：任務以使用者故事分組，以確保可以獨立實作與測試。
++
++## 格式：`[ID] [P?] [Story] 描述`
++
++- **[P]**：可平行執行（不同檔案、無相依）
++- **[Story]**：此任務所屬的使用者故事（例如 US1、US2、US3）
++- 描述中必須包含精確檔案路徑
++- 每個使用者故事至少需包含：程式碼品質/重構、 自動化測試（單元 + 整合/契約）、UX 一致性驗證（無障礙 + 視覺回歸）、以及連結效能預算的量測任務。
++- 涉及文件或對外素材的任務必須註明產出會以繁體中文 (zh-TW) 撰寫。
++
++## 路徑慣例
++
++- **單一專案**：版本庫根目錄下的 `src/` 與 `tests/`
++- **Web 專案**：`backend/src/`、`frontend/src/`
++- **行動專案**：`api/src/`、`ios/src/` 或 `android/src/`
++- 下方範例以單一專案為假設，請依 plan.md 的決策調整
++
++<!-- 
++  ============================================================================
++  重要：以下任務僅為示意。/speckit.tasks 指令必須依據：
++  - spec.md 的使用者故事（含優先級）
++  - plan.md 的功能需求
++  - data-model.md 的實體
++  - contracts/ 的端點
++  重新產生實際任務，並維持每個故事可獨立交付。
++  ============================================================================
++-->
++
++## Phase 1：初始化（共享基礎設施）
++
++**目的**：建立專案骨架與基本結構
++
++- [ ] T001 依實作計畫建立專案結構
++- [ ] T002 初始化 [語言] 專案並加入 [框架] 相依
++- [ ] T003 [P] 設定 Lint 與格式化工具
++
++---
++
++## Phase 2：基礎建設（阻擋性前置）
++
++**目的**：在進入任何使用者故事前完成必要基礎
++
++**⚠️ 關鍵**：未完成此階段不得開始使用者故事
++
++範例（請依專案調整）：
++
++- [ ] T004 建立資料庫綱要與 Migration 框架
++- [ ] T005 [P] 實作驗證 / 授權框架
++- [ ] T006 [P] 建立 API Routing 與 Middleware 結構
++- [ ] T007 建立所有故事共用的基礎模型/實體
++- [ ] T008 設定錯誤處理與日誌機制
++- [ ] T009 建立環境設定管理
++
++**檢查點**：基礎完成後可平行進入使用者故事
++
++## 憲章強制品質任務（每個功能皆需）
++
++- [ ] Q001 [P] 為受影響模組紀錄 Ownership 與架構說明（對應程式碼品質監護）
++- [ ] Q002 [P] 擴充自動化測試，達成 >=90% 陳述與 >=75% 分支覆蓋（關鍵邏輯）
++- [ ] Q003 驗證 UX 一致性：跨斷點視覺回歸 + 無障礙稽核並記錄於 docs/
++- [ ] Q004 量測並對比效能預算；若回退 >=5% 則使 Pipeline 失敗
++- [ ] Q005 確認規格、實作計畫與對外文件皆以繁體中文撰寫且同步更新
++
++---
++
++## Phase 3：使用者故事 1 - [標題]（優先級：P1）🎯 MVP
++
++**目標**：[此故事帶來的價值]
++
++**獨立測試**：[如何單獨驗證此故事]
++
++### 使用者故事 1 的測試（僅在規格要求時）⚠️
++
++> **注意：先撰寫這些測試並確認失敗，再開始實作。**
++
++- [ ] T010 [P] [US1] 在 tests/contract/test_[name].py 建立 [端點] 契約測試
++- [ ] T011 [P] [US1] 在 tests/integration/test_[name].py 建立 [旅程] 整合測試
++
++### 使用者故事 1 的實作
++
++- [ ] T012 [P] [US1] 在 src/models/[entity1].py 建立 [Entity1] 模型
++- [ ] T013 [P] [US1] 在 src/models/[entity2].py 建立 [Entity2] 模型
++- [ ] T014 [US1] 在 src/services/[service].py 實作 [Service]（依賴 T012、T013）
++- [ ] T015 [US1] 在 src/[location]/[file].py 實作 [端點/功能]
++- [ ] T016 [US1] 補上驗證與錯誤處理
++- [ ] T017 [US1] 補上與此故事相關的記錄
++
++**檢查點**：此時 US1 應能獨立運作與測試
++
++---
++
++## Phase 4：使用者故事 2 - [標題]（優先級：P2）
++
++**目標**：[此故事帶來的價值]
++
++**獨立測試**：[如何單獨驗證此故事]
++
++### 使用者故事 2 的測試（僅在規格要求時）⚠️
++
++- [ ] T018 [P] [US2] 在 tests/contract/test_[name].py 建立 [端點] 契約測試
++- [ ] T019 [P] [US2] 在 tests/integration/test_[name].py 建立 [旅程] 整合測試
++
++### 使用者故事 2 的實作
++
++- [ ] T020 [P] [US2] 在 src/models/[entity].py 建立 [Entity] 模型
++- [ ] T021 [US2] 在 src/services/[service].py 實作 [Service]
++- [ ] T022 [US2] 在 src/[location]/[file].py 實作 [端點/功能]
++- [ ] T023 [US2] 視需要與 US1 元件整合
++
++**檢查點**：US1 與 US2 應皆可獨立運作
++
++---
++
++## Phase 5：使用者故事 3 - [標題]（優先級：P3）
++
++**目標**：[此故事帶來的價值]
++
++**獨立測試**：[如何單獨驗證此故事]
++
++### 使用者故事 3 的測試（僅在規格要求時）⚠️
++
++- [ ] T024 [P] [US3] 在 tests/contract/test_[name].py 建立 [端點] 契約測試
++- [ ] T025 [P] [US3] 在 tests/integration/test_[name].py 建立 [旅程] 整合測試
++
++### 使用者故事 3 的實作
++
++- [ ] T026 [P] [US3] 在 src/models/[entity].py 建立 [Entity] 模型
++- [ ] T027 [US3] 在 src/services/[service].py 實作 [Service]
++- [ ] T028 [US3] 在 src/[location]/[file].py 實作 [端點/功能]
++
++**檢查點**：所有使用者故事皆能獨立運作
++
++---
++
++[視需要新增更多故事階段，並沿用相同格式]
++
++---
++
++## Phase N：潤飾與跨故事議題
++
++**目的**：改善會同時影響多個故事的事項
++
++- [ ] TXXX [P] 更新 docs/ 內的文件（確保繁體中文）
++- [ ] TXXX 程式碼清理與重構
++- [ ] TXXX 跨故事效能優化
++- [ ] TXXX [P] 追加單元測試（若規格要求）於 tests/unit/
++- [ ] TXXX 安全性強化
++- [ ] TXXX 驗證 quickstart.md 的步驟
++
++---
++
++## 相依與執行順序
++
++### 階段相依
++
++- **Phase 1（初始化）**：無相依，可立即開始
++- **Phase 2（基礎建設）**：依賴 Phase 1，並阻擋所有使用者故事
++- **Phase 3+（使用者故事）**：皆需 Phase 2 完成
++  - 若人力足夠，可平行處理
++  - 否則依優先級 P1 → P2 → P3 順序進行
++- **Phase N（潤飾）**：需所有目標故事完成後才能展開
++
++### 使用者故事相依
++
++- **US1 (P1)**：完成 Phase 2 後即可開始，無其他故事相依
++- **US2 (P2)**：完成 Phase 2 後即可開始，得以 US1 元件為基礎但須可獨立測試
++- **US3 (P3)**：完成 Phase 2 後即可開始，與 US1/US2 整合時仍須維持獨立可測
++
++### 各故事內部順序
++
++- 測試（若存在）必須先寫並確認失敗
++- 先建模，再建 Service，再建 Endpoint
++- 先完成核心實作，再進行整合
++- 故事完成且驗證無誤後才前往下一優先級
++
++### 可平行的機會
++
++- 所有標記 [P] 的初始化任務可平行
++- Phase 2 中所有標記 [P] 的任務可平行
++- 完成 Phase 2 後，各使用者故事可由不同人員平行推進
++- 同一故事中標記 [P] 的測試與模型可平行
++- 不同故事可由不同人員同時進行，須確保檔案不衝突
++
++---
++
++## 平行作業範例：使用者故事 1
++
++```bash
++# 同步啟動所有測試（若規格要求）
++Task: "Contract test for [endpoint] in tests/contract/test_[name].py"
++Task: "Integration test for [user journey] in tests/integration/test_[name].py"
++
++# 同步建立所有模型
++Task: "Create [Entity1] model in src/models/[entity1].py"
++Task: "Create [Entity2] model in src/models/[entity2].py"
++```
++
++---
++
++## 實作策略
++
++### MVP 優先（僅交付 US1）
++
++1. 完成 Phase 1：初始化
++2. 完成 Phase 2：基礎建設（⚠️ 阻擋所有故事）
++3. 完成 Phase 3：US1
++4. **停止並驗證**：獨立測試 US1
++5. 若可用則部署 / Demo
++
++### 漸進式交付
++
++1. 完成 Phase 1 + Phase 2 → 基礎就緒
++2. 加入 US1 → 測試 → 部署 / Demo（MVP）
++3. 加入 US2 → 測試 → 部署 / Demo
++4. 加入 US3 → 測試 → 部署 / Demo
++5. 每個故事都能在不破壞前一故事的情況下增值
++
++### 平行團隊策略
++
++多人協作時：
++
++1. 團隊共同完成 Phase 1 + Phase 2
++2. 基礎完成後：
++   - 開發者 A：US1
++   - 開發者 B：US2
++   - 開發者 C：US3
++3. 各故事獨立完成並整合
++
++---
++
++## 備註
++
++- [P] 任務表示不同檔案、可無衝突平行
++- [Story] 標籤提供故事追蹤
++- 每個故事應能獨立完成與測試
++- 先撰寫並確保測試失敗再實作
++- 以任務或合適的邏輯階段為單位提交 Commit
++- 在任何檢查點都可暫停以驗證故事
++- 避免模糊任務、同檔案衝突、或造成跨故事耦合
+*** End Patch
+[2m2025-11-21T15:27:06.967277Z[0m [32m INFO[0m ToolCall: update_plan {"plan":[{"status":"completed","step":"Review constitution and templates to understand current language requirements and impacted sections."},{"status":"completed","step":"Define amendments (language mandate, version bump, dates) and decide how they propagate to templates."},{"status":"in_progress","step":"Update constitution/templates, ensure sync report + validation, and summarize changes."}]}
+[2m2025-11-21T15:27:11.561455Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","rg -n \"\\[[A-Z0-9_]+\\]\" .specify/memory/constitution.md"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:27:15.878506Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","git status -sb"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:27:22.198549Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","rg -n \"Task: \\\"\" -n .specify/templates/tasks-template.md"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:27:28.999860Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: .specify/templates/tasks-template.md
+@@
+ ```bash
+ # 同步啟動所有測試（若規格要求）
+-Task: "Contract test for [endpoint] in tests/contract/test_[name].py"
+-Task: "Integration test for [user journey] in tests/integration/test_[name].py"
++任務："在 tests/contract/test_[name].py 為 [endpoint] 建立契約測試"
++任務："在 tests/integration/test_[name].py 為 [user journey] 建立整合測試"
+ 
+ # 同步建立所有模型
+-Task: "Create [Entity1] model in src/models/[entity1].py"
+-Task: "Create [Entity2] model in src/models/[entity2].py"
++任務："在 src/models/[entity1].py 建立 [Entity1] 模型"
++任務："在 src/models/[entity2].py 建立 [Entity2] 模型"
+ ```
+*** End Patch
+[2m2025-11-21T15:27:34.294482Z[0m [32m INFO[0m ToolCall: update_plan {"plan":[{"status":"completed","step":"Review constitution and templates to understand current language requirements and impacted sections."},{"status":"completed","step":"Define amendments (language mandate, version bump, dates) and decide how they propagate to templates."},{"status":"completed","step":"Update constitution/templates, ensure sync report + validation, and summarize changes."}]}
+[2m2025-11-21T15:27:39.698521Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","nl -ba .specify/memory/constitution.md"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:27:46.326661Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","nl -ba .specify/templates/plan-template.md | sed -n '1,220p'"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:27:50.890656Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","nl -ba .specify/templates/spec-template.md | sed -n '1,220p'"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:27:54.794541Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","nl -ba .specify/templates/tasks-template.md | sed -n '1,260p'"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:28:06.610759Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: .specify/templates/plan-template.md
+@@
+-**程式語言 / 版本**：[例如 Python 3.11、Swift 5.9、Rust 1.75 或 NEEDS CLARIFICATION]  
+-**主要相依**：[例如 FastAPI、UIKit、LLVM 或 NEEDS CLARIFICATION]  
+-**儲存層**：[例如 PostgreSQL、CoreData、檔案或 N/A]  
+-**測試框架**：[例如 pytest、XCTest、cargo test 或 NEEDS CLARIFICATION]  
+-**目標平台**：[例如 Linux 伺服器、iOS 15+、WASM 或 NEEDS CLARIFICATION]  
++**程式語言 / 版本**：[例如 Python 3.11、Swift 5.9、Rust 1.75 或 NEEDS CLARIFICATION（待釐清）]  
++**主要相依**：[例如 FastAPI、UIKit、LLVM 或 NEEDS CLARIFICATION（待釐清）]  
++**儲存層**：[例如 PostgreSQL、CoreData、檔案或 N/A]  
++**測試框架**：[例如 pytest、XCTest、cargo test 或 NEEDS CLARIFICATION（待釐清）]  
++**目標平台**：[例如 Linux 伺服器、iOS 15+、WASM 或 NEEDS CLARIFICATION（待釐清）]  
+ **專案型態**：[單一 / Web / 行動，決定來源結構]  
+-**效能目標**：[領域需求，例如 1000 req/s、10k lines/sec、60 fps 或 NEEDS CLARIFICATION]  
+-**運作限制**：[例如 <200ms p95、<100MB 記憶體、需離線運作或 NEEDS CLARIFICATION]  
+-**規模 / 範圍**：[例如 1 萬使用者、100 萬行程式、50 個畫面或 NEEDS CLARIFICATION]
++**效能目標**：[領域需求，例如 1000 req/s、10k lines/sec、60 fps 或 NEEDS CLARIFICATION（待釐清）]  
++**運作限制**：[例如 <200ms p95、<100MB 記憶體、需離線運作或 NEEDS CLARIFICATION（待釐清）]  
++**規模 / 範圍**：[例如 1 萬使用者、100 萬行程式、50 個畫面或 NEEDS CLARIFICATION（待釐清）]
+*** End Patch
+[2m2025-11-21T15:31:51.034295Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-21T15:31:52.172226Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-21T15:31:52.172317Z[0m [32m INFO[0m ghost commit captured: a95b5588714446cfb7b01429419eb4ab2de342a0
+[2m2025-11-21T15:31:52.172326Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-21T15:32:33.546148Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: .specify/memory/constitution.md
+@@
+-<!--
+-同步影響報告
+-版本變更：1.0.0 → 1.1.0
+-修改的原則：
+-- 無（既有四大原則維持原名與條文）
+-新增章節：
+-- 無
+-移除章節：
+-- 無
+-調整章節：
+-- 交付標準與限制：新增繁體中文語言義務
+-更新的模板：
+-- ✅ .specify/templates/plan-template.md（新增繁體中文語言指引與全中文模板）
+-- ✅ .specify/templates/spec-template.md（新增繁體中文語言指引與全中文模板）
+-- ✅ .specify/templates/tasks-template.md（新增繁體中文語言指引）
+-- ⚠ .specify/templates/commands（目錄仍不存在，需建立以延伸語言政策）
+-後續 TODO：
+-- TODO(COMMAND_TEMPLATES)：建立 `.specify/templates/commands` 內容以套用語言與治理要求。
+--->
+-
+-# Business Card 憲章
+-
+-## 核心原則
+-
+-### I. 程式碼品質監護
+-- 每一次變更都必須讓程式碼庫更健康：減少 lint/靜態分析技術債、移除孤兒程式碼，並在受影響模組內記錄架構意圖。
+-- 模組負責人必須在 `/specs/.../plan.md` 或相關文件中先定義模組邊界、相依與公開合約；若程式碼變動未同步文件即屬不合規。
+-- 程式碼審查必須套用工藝檢查清單（可讀性、錯誤處理、安全性、日誌），任一項未通過即不可合併。
+-- CI 必須執行格式化、lint 與相依弱點掃描；任何失敗都要阻擋 Pipeline 直到修復。
+-*理由：高品質是捕捉缺陷最划算的作法，並維持 Business Card 的輕量維運模式。*
+-
+-### II. 測試界定真實
+-- 功能開發必須從可執行的驗收標準開始：每個使用者故事至少要先寫一個失敗的整合或契約測試，並補齊關鍵邏輯的單元測試。
+-- 核心模組必須維持 >=90% 陳述覆蓋率與 >=75% 分支覆蓋率；若無法達成，需在計畫檢查清單中明訂豁免理由。
+-- 回歸、無障礙與效能測試必須納入 CI；任何失敗都會阻擋發布，直到修復或由產品與工程領導核准豁免。
+-- 測試素材（Fixtures、資料集、金樣快照）必須與功能一同版控，以確保可重現性。
+-*理由：只有透過自動驗證的行為才可信；未測試的程式碼都是未排程的返工。*
+-
+-### III. 統一體驗保證
+-- 所有使用者體驗都必須套用最新 UX 套件中的設計語言（字體、間距、色票、動態）；若需偏離，必須在規格文件中紀錄設計決策。
+-- 每個畫面或互動都必須紀錄可達到 WCAG 2.1 AA 的可及性結果、偏好輸入方式與在地化行為。
+-- 任何可見變更都必須透過視覺回歸或快照測試驗證桌面、平板、手機等斷點。
+-- 文案、圖示與互動模式必須一致；優先重用現有元件，如需新樣式必須記錄其必要性。
+-*理由：一致的體驗維繫使用者信任，並讓品牌在所有接觸點中維持辨識度。*
+-
+-### IV. 效能可預測性
+-- 每份功能規格都必須定義明確的預算（例如 <=200 ms 輸入至呈現、<=1 MB 額外載荷、<=5% CPU 成本），缺少預算視為阻擋項。
+-- 這些預算的量測工具（分析器、RUM Hook、合成監控）必須隨功能一同發布，且儀表板在 >=5% 回退時需立即警示。
+-- 熱路徑必須在 CI 中執行效能測試；如有回退，除非獲得核准並附上修復日期，否則禁止合併。
+-- 建置產物必須可重現且可快取；任何最佳化選項都必須以最安全且效能最佳的組態作為預設。
+-*理由：Business Card 只有在平價裝置上仍然即時才算成功；效能技術債成長速度遠超功能債。*
+-
+-## 交付標準與限制
+-- 規格、實作計畫與任務文件必須清楚說明如何滿足憲章原則；缺漏將使 `/speckit.*` 指令無法通過。
+-- 所有規格、實作計畫與對使用者公開的文件（README、Quickstart、說明文件等）必須以繁體中文 (zh-TW) 撰寫與維護，其他語言僅能作為附錄並以 zh-TW 原文為準。
+-- 文件（README 節錄、Quickstart、API 說明）必須與程式碼同步更新；文件技術債視同程式碼技術債。
+-- 上線前必須配置正式環境的遙測、記錄與儀表板。
+-- 第三方套件必須評估授權相容性與效能開銷；升級需附帶量測紀錄。
+-
+-## 開發流程與品質閘門
+-- `/speckit.plan`、`/speckit.specify` 與 `/speckit.tasks` 的輸出必須包含憲章檢查，總結每項原則的符合證據。
+-- Pull Request 必須附上對應的規格/計畫/任務連結，並標示通過的憲章閘門；缺少追溯性不得審核通過。
+-- 發布必須提供簽署的變更記錄，摘要品質、測試、體驗與效能影響，並附上通過的測試連結。
+-- 每季稽核會檢視 lint 負債、覆蓋率、UX 回歸、效能預算等指標，並為偏移項建立補救工作。
+-
+-## 治理
+-Business Card 憲章優先於所有客製流程。修訂流程為：（1）提出引用本文件的書面提案、（2）由工程、設計與產品領導審查、（3）取得共識並記錄於版本控制、（4）同步更新所有相關模板與工具。版本號遵循語意化規則：MAJOR 代表破壞性治理/原則移除，MINOR 代表新增原則或大幅強化條文，PATCH 代表措辭澄清。憲章一經制定即生效，並在每個發布週期檢查規格、計畫、任務與執行文件是否持續遵守。
+-
+-**版本**：1.1.0 | **制定日期**：2025-11-21 | **最近修訂**：2025-11-21
++<!--
++Sync Impact Report
++Version change: 1.1.0 → 1.2.0
++Modified principles:
++- None (existing titles retained, content translated to English)
++Added sections:
++- Principle V. Language Governance
++Removed sections:
++- None
++Templates requiring updates:
++- ✅ .specify/templates/plan-template.md (reinforce zh-TW output requirement after constitution language switch)
++- ✅ .specify/templates/spec-template.md (reinforce zh-TW output requirement after constitution language switch)
++- ✅ .specify/templates/tasks-template.md (reinforce zh-TW output requirement after constitution language switch)
++- ⚠ .specify/templates/commands (directory still missing; needed for language policy propagation)
++Follow-up TODOs:
++- TODO(COMMAND_TEMPLATES): Create `.specify/templates/commands` entries so command docs enforce bilingual governance.
++-->
++
++# Business Card Constitution
++
++## Core Principles
++
++### I. Code Quality Stewardship
++- Every change MUST leave the codebase healthier: reduce lint/static-analysis debt, eliminate dead code, and document architectural intent inside the impacted modules.
++- Owners MUST publish module boundaries, dependencies, and contracts in `/specs/.../plan.md` or companion docs before implementation begins; code merged without synchronized docs is non-compliant.
++- Code reviews MUST apply the craftsmanship checklist (readability, failure handling, security, logging); failure on any item blocks the merge.
++- Continuous integration MUST run formatters, linters, and dependency vulnerability scans; failures halt the pipeline until resolved.
++*Rationale: Quality is the cheapest place to catch defects and protects Business Card’s lightweight maintenance model.*
++
++### II. Tests Define Reality
++- Feature work starts with executable acceptance criteria: at least one failing integration or contract test per user story plus unit coverage for critical branches.
++- Core modules MUST maintain >=90% statement coverage and >=75% branch coverage; waivers require explicit justification in the plan checklist.
++- Regression, accessibility, and performance suites MUST run in CI, and any failure blocks release until fixed or jointly waived by product and engineering leads.
++- Test artifacts (fixtures, datasets, goldens) MUST be versioned with the feature to guarantee reproducibility.
++*Rationale: Business Card is trustworthy only when behavior is continuously proven; untested code is unscheduled rework.*
++
++### III. Unified Experience Guarantees
++- All user experiences MUST implement the shared design language (typography, spacing, color tokens, motion) captured in the latest UX kits; deviations require a recorded design decision in the spec.
++- Every screen or interaction MUST log accessibility evidence demonstrating WCAG 2.1 AA conformance, preferred input methods, and localization behavior.
++- Cross-device validation (desktop, tablet, mobile widths) MUST be automated via visual regression or snapshot tests for any user-visible change.
++- Copy, iconography, and interaction patterns MUST stay consistent; reuse shared components before introducing variants and record rationale if a new pattern is unavoidable.
++*Rationale: Consistency sustains user trust and keeps the Business Card brand recognizable everywhere.*
++
++### IV. Performance Predictability
++- Each feature spec MUST declare budgets (e.g., <=200 ms input-to-render, <=1 MB incremental payload, <=5% CPU overhead). Missing budgets are blockers.
++- Instrumentation for those budgets (profilers, RUM hooks, synthetic monitors) MUST ship with the feature; dashboards MUST alert on >=5% regression.
++- Performance tests MUST run in CI for hot paths; failing tests stop merges unless an approved exception with a remediation date exists.
++- Build artifacts MUST remain deterministic and cacheable; optimization flags default to the safest, fastest setting.
++*Rationale: Business Card succeeds only when it feels instant on commodity hardware; performance debt compounds faster than functional debt.*
++
++### V. Language Governance
++- This constitution MUST remain in English to guarantee universal interpretation across teams and tooling.
++- Specifications, implementation plans, and all user-facing documentation (README excerpts, quickstarts, help centers, marketing copy) MUST be authored and maintained in Traditional Chinese (zh-TW); other languages MAY exist only as appendices referencing the zh-TW source of truth.
++- `/speckit.*` command outputs MUST verify that their generated artifacts are zh-TW compliant before handing off for review.
++- Transliteration or machine-generated zh-TW content MUST be reviewed by a native or fluent speaker before publication.
++*Rationale: English governance keeps the rules stable across jurisdictions, while zh-TW delivery ensures regional alignment with Business Card’s audience.*
++
++## Delivery Standards & Constraints
++- Specs, plans, and task docs MUST spell out how each principle is satisfied; missing evidence blocks `/speckit.*` commands.
++- Specs, plans, and user-facing docs MUST be written in zh-TW; if supplemental languages exist they are subordinate to the zh-TW canonical copy.
++- Documentation (README excerpts, quickstarts, API descriptions) MUST be updated with the code; documentation debt counts as code debt.
++- Production telemetry, logging, and dashboards MUST be provisioned before serving traffic.
++- Third-party dependencies MUST be evaluated for license compatibility and performance footprint; upgrades require recorded benchmarks.
++
++## Development Workflow & Quality Gates
++- `/speckit.plan`, `/speckit.specify`, and `/speckit.tasks` outputs MUST embed the Constitution Check, summarizing compliance evidence across all principles.
++- Pull requests MUST link to their plan/spec/tasks artifacts, note which constitutional gates they satisfy, and confirm zh-TW coverage for user-facing deliverables.
++- Releases MUST include a signed changelog entry summarizing quality, testing, experience, performance, and language impacts plus links to passing test runs.
++- Quarterly audits review lint debt, coverage, UX regressions, performance budgets, and zh-TW documentation health, then schedule remediation whenever drift occurs.
++
++## Governance
++The Business Card Constitution supersedes bespoke practices. Amendments require (1) a written proposal referencing this document, (2) review by engineering, design, and product leads, (3) consensus recorded in version control, and (4) synchronized updates to dependent templates or tools. Version numbers follow semantic rules: MAJOR for breaking governance/principle removals, MINOR for new principles/sections or materially stronger mandates, PATCH for clarifications. Ratified versions stay in force until superseded, and every release cycle includes compliance checks that ensure specs, plans, tasks, and runtime documentation uphold the constitution.
++
++**Version**: 1.2.0 | **Ratified**: 2025-11-21 | **Last Amended**: 2025-11-21
+*** End Patch
+[2m2025-11-21T15:32:56.048474Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: .specify/templates/plan-template.md
+@@
+ 1	# 實作計畫：[FEATURE]
+@@
+-33	1. **程式碼品質監護** – 說明模組負責人、預期重構、lint/靜態分析覆蓋，以及誰負責執行工藝審查。
+-34	2. **測試界定真實** – 列出最先撰寫的驗收、整合、回歸測試，並說明如何量測 >=90% 陳述 / >=75% 分支覆蓋率。
+-35	3. **統一體驗保證** – 紀錄設計 Token、可重用元件、在地化範圍與無障礙驗證方式。
+-36	4. **效能可預測性** – 宣告延遲、載荷、CPU、記憶體預算，以及會監控這些預算的工具 / 儀表板。
+-37	5. **交付與流程標準** – 確認文件更新、遙測計畫，以及 `/speckit.*` 產物如何保持與憲章同步。
++33	1. **程式碼品質監護** – 說明模組負責人、預期重構、lint/靜態分析覆蓋，以及誰負責執行工藝審查。
++34	2. **測試界定真實** – 列出最先撰寫的驗收、整合、回歸測試，並說明如何量測 >=90% 陳述 / >=75% 分支覆蓋率。
++35	3. **統一體驗保證** – 紀錄設計 Token、可重用元件、在地化範圍與無障礙驗證方式。
++36	4. **效能可預測性** – 宣告延遲、載荷、CPU、記憶體預算，以及會監控這些預算的工具 / 儀表板。
++37	5. **交付與流程標準** – 確認文件更新、遙測計畫，以及 `/speckit.*` 產物如何保持與憲章同步。
++38	6. **語言治理** – 確認本計畫與相依文件均以繁體中文撰寫，記錄審稿人與驗證流程，並指出任何附加語言版本的來源。
+*** End Patch
+[2m2025-11-21T15:33:00.340263Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","sed -n '1,80p' .specify/templates/plan-template.md"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:33:05.586157Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: .specify/templates/plan-template.md
+@@
+-1. **程式碼品質監護** – 說明模組負責人、預期重構、lint/靜態分析覆蓋，以及誰負責執行工藝審查。
+-2. **測試界定真實** – 列出最先撰寫的驗收、整合、回歸測試，並說明如何量測 >=90% 陳述 / >=75% 分支覆蓋率。
+-3. **統一體驗保證** – 紀錄設計 Token、可重用元件、在地化範圍與無障礙驗證方式。
+-4. **效能可預測性** – 宣告延遲、載荷、CPU、記憶體預算，以及會監控這些預算的工具 / 儀表板。
+-5. **交付與流程標準** – 確認文件更新、遙測計畫，以及 `/speckit.*` 產物如何保持與憲章同步。
++1. **程式碼品質監護** – 說明模組負責人、預期重構、lint/靜態分析覆蓋，以及誰負責執行工藝審查。
++2. **測試界定真實** – 列出最先撰寫的驗收、整合、回歸測試，並說明如何量測 >=90% 陳述 / >=75% 分支覆蓋率。
++3. **統一體驗保證** – 紀錄設計 Token、可重用元件、在地化範圍與無障礙驗證方式。
++4. **效能可預測性** – 宣告延遲、載荷、CPU、記憶體預算，以及會監控這些預算的工具 / 儀表板。
++5. **交付與流程標準** – 確認文件更新、遙測計畫，以及 `/speckit.*` 產物如何保持與憲章同步。
++6. **語言治理** – 確認本計畫與相關規格、任務、README/Quickstart 等皆以繁體中文撰寫，記錄審稿人與驗證流程，並註明任何附加語言版本的來源。
+*** End Patch
+[2m2025-11-21T15:33:12.230764Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: .specify/templates/spec-template.md
+@@
+ ## 品質與測試標準（必填）
+ 
+ - **測試策略**：[列出會先撰寫的驗收、整合、回歸與無障礙測試]
+ - **覆蓋率目標**：[確認關鍵模組 >=90% 陳述 / >=75% 分支覆蓋，或說明豁免理由]
+ - **回歸套件**：[描述 CI、夜間、效能等自動化測試如何執行與紀錄]
+ - **資料與樣本**：[列出重現行為所需的 Fixtures/金樣檔]
++- **語言治理**：[說明此規格與派生文件以繁體中文撰寫的流程、審稿人以及其他語言版本的對應來源]
+*** End Patch
+[2m2025-11-21T15:33:16.024085Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: .specify/templates/tasks-template.md
+@@
+-- [ ] Q005 確認規格、實作計畫與對外文件皆以繁體中文撰寫且同步更新
++- [ ] Q005 確認規格、實作計畫與對外文件皆以繁體中文撰寫、紀錄審稿人並同步更新（語言治理）
+*** End Patch
+[2m2025-11-21T15:33:21.182785Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","rg -n \"[≥≤]\" .specify/memory/constitution.md"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:33:27.825732Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","rg -n \"’\" .specify/memory/constitution.md"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:33:32.571713Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: .specify/memory/constitution.md
+@@
+-*Rationale: Quality is the cheapest place to catch defects and protects Business Card’s lightweight maintenance model.*
++*Rationale: Quality is the cheapest place to catch defects and protects Business Card's lightweight maintenance model.*
+@@
+-*Rationale: English governance keeps the rules stable across jurisdictions, while zh-TW delivery ensures regional alignment with Business Card’s audience.*
++*Rationale: English governance keeps the rules stable across jurisdictions, while zh-TW delivery ensures regional alignment with Business Card's audience.*
+*** End Patch
+[2m2025-11-21T15:33:36.208521Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","rg -n \"[’“”]\" .specify/memory/constitution.md"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:33:40.408214Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","rg -n \"[≥≤]\" .specify/templates/plan-template.md .specify/templates/spec-template.md .specify/templates/tasks-template.md"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:33:47.198188Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","rg -n \"\\[[A-Z0-9_]+\\]\" .specify/memory/constitution.md"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:33:51.507822Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","git status -sb"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:33:57.227322Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","nl -ba .specify/memory/constitution.md"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:34:02.084101Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","nl -ba .specify/templates/plan-template.md | sed -n '1,80p'"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:34:09.128987Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","nl -ba .specify/templates/spec-template.md | sed -n '1,160p'"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-21T15:34:14.442933Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","rg -n \"Q005\" -n .specify/templates/tasks-template.md"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-22T11:46:52.365905Z[0m [32m INFO[0m Resuming rollout from "/mnt/d/program/businesscard/.codex/sessions/2025/11/21/rollout-2025-11-21T23-15-42-019aa6fc-4560-7663-ac22-8bfbe1286d96.jsonl"
+[2m2025-11-22T11:46:52.559376Z[0m [32m INFO[0m Resumed rollout with 542 items, conversation ID: Some(ConversationId { uuid: 019aa6fc-4560-7663-ac22-8bfbe1286d96 })
+[2m2025-11-22T11:46:52.559433Z[0m [32m INFO[0m Resumed rollout successfully from "/mnt/d/program/businesscard/.codex/sessions/2025/11/21/rollout-2025-11-21T23-15-42-019aa6fc-4560-7663-ac22-8bfbe1286d96.jsonl"
+[2m2025-11-22T11:52:27.067437Z[0m [32m INFO[0m spawning ghost snapshot task

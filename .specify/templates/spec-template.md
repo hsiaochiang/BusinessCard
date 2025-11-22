@@ -1,115 +1,122 @@
-# Feature Specification: [FEATURE NAME]
+# 功能規格：[FEATURE NAME]
 
-**Feature Branch**: `[###-feature-name]`  
-**Created**: [DATE]  
-**Status**: Draft  
-**Input**: User description: "$ARGUMENTS"
+**功能分支**：`[###-feature-name]`  
+**建立日期**：[DATE]  
+**狀態**：草稿  
+**輸入**：使用者敘述：「$ARGUMENTS」
 
-## User Scenarios & Testing *(mandatory)*
+**語言要求**：本規格必須以繁體中文 (zh-TW) 撰寫，其他語言僅能作為附錄。
+
+## 使用者情境與測試（必填）
 
 <!--
-  IMPORTANT: User stories should be PRIORITIZED as user journeys ordered by importance.
-  Each user story/journey must be INDEPENDENTLY TESTABLE - meaning if you implement just ONE of them,
-  you should still have a viable MVP (Minimum Viable Product) that delivers value.
-  
-  Assign priorities (P1, P2, P3, etc.) to each story, where P1 is the most critical.
-  Think of each story as a standalone slice of functionality that can be:
-  - Developed independently
-  - Tested independently
-  - Deployed independently
-  - Demonstrated to users independently
+  重要：使用者故事需依重要性排序。每個故事都必須能獨立測試，
+  即便只完成其中一個，也應能形成可驗證並具價值的 MVP。
+  優先級請以 P1、P2、P3... 表示。
 -->
 
-### User Story 1 - [Brief Title] (Priority: P1)
+### 使用者故事 1 - [簡短標題]（優先級：P1）
 
-[Describe this user journey in plain language]
+[以淺白語言描述此使用者旅程]
 
-**Why this priority**: [Explain the value and why it has this priority level]
+**優先原因**：[說明價值與為何需要此優先級]
 
-**Independent Test**: [Describe how this can be tested independently - e.g., "Can be fully tested by [specific action] and delivers [specific value]"]
+**獨立測試方式**：[描述如何獨立驗證，例如「透過 [特定操作] 即可完整測試並帶來 [具體價值]」]
 
-**Acceptance Scenarios**:
+**驗收情境**：
 
-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
-2. **Given** [initial state], **When** [action], **Then** [expected outcome]
+1. **Given** [初始狀態]，**When** [動作]，**Then** [預期結果]
+2. **Given** [初始狀態]，**When** [動作]，**Then** [預期結果]
 
 ---
 
-### User Story 2 - [Brief Title] (Priority: P2)
+### 使用者故事 2 - [簡短標題]（優先級：P2）
 
-[Describe this user journey in plain language]
+[描述此使用者旅程]
 
-**Why this priority**: [Explain the value and why it has this priority level]
+**優先原因**：[說明價值]
 
-**Independent Test**: [Describe how this can be tested independently]
+**獨立測試方式**：[描述獨立測試方式]
 
-**Acceptance Scenarios**:
+**驗收情境**：
 
-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
-
----
-
-### User Story 3 - [Brief Title] (Priority: P3)
-
-[Describe this user journey in plain language]
-
-**Why this priority**: [Explain the value and why it has this priority level]
-
-**Independent Test**: [Describe how this can be tested independently]
-
-**Acceptance Scenarios**:
-
-1. **Given** [initial state], **When** [action], **Then** [expected outcome]
+1. **Given** [初始狀態]，**When** [動作]，**Then** [預期結果]
 
 ---
 
-[Add more user stories as needed, each with an assigned priority]
+### 使用者故事 3 - [簡短標題]（優先級：P3）
 
-### Edge Cases
+[描述此使用者旅程]
 
-<!--
-  ACTION REQUIRED: The content in this section represents placeholders.
-  Fill them out with the right edge cases.
--->
+**優先原因**：[說明價值]
 
-- What happens when [boundary condition]?
-- How does system handle [error scenario]?
+**獨立測試方式**：[描述獨立測試方式]
 
-## Requirements *(mandatory)*
+**驗收情境**：
 
-<!--
-  ACTION REQUIRED: The content in this section represents placeholders.
-  Fill them out with the right functional requirements.
--->
+1. **Given** [初始狀態]，**When** [動作]，**Then** [預期結果]
 
-### Functional Requirements
+---
 
-- **FR-001**: System MUST [specific capability, e.g., "allow users to create accounts"]
-- **FR-002**: System MUST [specific capability, e.g., "validate email addresses"]  
-- **FR-003**: Users MUST be able to [key interaction, e.g., "reset their password"]
-- **FR-004**: System MUST [data requirement, e.g., "persist user preferences"]
-- **FR-005**: System MUST [behavior, e.g., "log all security events"]
+[視需要新增更多使用者故事並指定優先級]
 
-*Example of marking unclear requirements:*
-
-- **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
-- **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
-
-### Key Entities *(include if feature involves data)*
-
-- **[Entity 1]**: [What it represents, key attributes without implementation]
-- **[Entity 2]**: [What it represents, relationships to other entities]
-
-## Success Criteria *(mandatory)*
+### 邊界情境
 
 <!--
-  ACTION REQUIRED: Define measurable success criteria.
-  These must be technology-agnostic and measurable.
+  操作說明：此區為範例占位，請改為實際的邊界與錯誤情境。
 -->
 
-### Measurable Outcomes
+- 當 [邊界條件] 發生時會如何？
+- 系統如何處理 [錯誤情境]？
 
-- **SC-001**: [Measurable metric, e.g., "Users can complete account creation in under 2 minutes"]
-- **SC-002**: [Measurable metric, e.g., "System handles 1000 concurrent users without degradation"]
-- **SC-003**: [User satisfaction metric, e.g., "90% of users successfully complete primary task on first attempt"]
-- **SC-004**: [Business metric, e.g., "Reduce support tickets related to [X] by 50%"]
+## 需求（必填）
+
+<!--
+  操作說明：請以具體需求取代下列占位文字。
+-->
+
+### 功能需求
+
+- **FR-001**：系統必須 [能力，例如「允許使用者建立帳號」]
+- **FR-002**：系統必須 [能力，例如「驗證電子郵件格式」]  
+- **FR-003**：使用者必須能 [互動，例如「重設密碼」]
+- **FR-004**：系統必須 [資料要求，例如「儲存使用者偏好」]
+- **FR-005**：系統必須 [行為，例如「記錄所有安全事件」]
+
+*用以標示不明需求的範例：*
+
+- **FR-006**：系統必須透過 [NEEDS CLARIFICATION：未指定的驗證方式（電子郵件/SSO/OAuth?）] 驗證使用者
+- **FR-007**：系統必須保留資料 [NEEDS CLARIFICATION：未指定的保存期間]
+
+### 關鍵實體（若功能涉及資料）
+
+- **[Entity 1]**：[代表意義與關鍵屬性（不含實作）]
+- **[Entity 2]**：[代表意義與與其他實體的關係]
+
+## 品質與測試標準（必填）
+
+- **測試策略**：[列出會先撰寫的驗收、整合、回歸與無障礙測試]
+- **覆蓋率目標**：[確認關鍵模組 >=90% 陳述 / >=75% 分支覆蓋，或說明豁免理由]
+- **回歸套件**：[描述 CI、夜間、效能等自動化測試如何執行與紀錄]
+- **資料與樣本**：[列出重現行為所需的 Fixtures/金樣檔]
+- **語言治理**：[說明此規格與派生文件以繁體中文撰寫的流程、審稿人以及其他語言版本的對應來源]
+
+## 體驗與效能基準（必填）
+
+- **設計與內容一致性**：[規範設計 Token、文案來源、在地化與無障礙預期]
+- **一致性測試**：[描述跨裝置視覺回歸或快照覆蓋]
+- **效能預算**：[定義延遲、載荷、CPU、記憶體限制與量測工具]
+- **遙測計畫**：[列出所需的體驗指標（如 FID、捲動 FPS）與警戒門檻]
+
+## 成功指標（必填）
+
+<!--
+  操作說明：定義可量測、與技術無關的成功指標。
+-->
+
+### 可量測成果
+
+- **SC-001**：[指標，例如「使用者可在 2 分鐘內完成註冊」]
+- **SC-002**：[指標，例如「系統可在無退化情況下處理 1000 並發使用者」]
+- **SC-003**：[使用者滿意度，例如「90% 使用者首次操作即成功完成主要任務」]
+- **SC-004**：[商業指標，例如「與 [X] 相關的客服工單減少 50%」]
