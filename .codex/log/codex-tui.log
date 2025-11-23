@@ -1689,3 +1689,615 @@
 [2m2025-11-22T11:54:59.868443Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","mkdir -p specs/001-business-card-manager/checklists"],"workdir":"/mnt/d/program/businesscard"}
 [2m2025-11-22T11:55:06.282091Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","cat <<'EOF' > specs/001-business-card-manager/checklists/requirements.md\n# Specification Quality Checklist: 名片管理系統第一版\n\n**Purpose**: Validate specification completeness and quality before proceeding to planning\n**Created**: 2025-11-21\n**Feature**: [specs/001-business-card-manager/spec.md](../spec.md)\n\n## Content Quality\n\n- [x] No implementation details (languages, frameworks, APIs)\n- [x] Focused on user value and business needs\n- [x] Written for non-technical stakeholders\n- [x] All mandatory sections completed\n\n## Requirement Completeness\n\n- [x] No [NEEDS CLARIFICATION] markers remain\n- [x] Requirements are testable and unambiguous\n- [x] Success criteria are measurable\n- [x] Success criteria are technology-agnostic (no implementation details)\n- [x] All acceptance scenarios are defined\n- [x] Edge cases are identified\n- [x] Scope is clearly bounded\n- [x] Dependencies and assumptions identified\n\n## Feature Readiness\n\n- [x] All functional requirements have clear acceptance criteria\n- [x] User scenarios cover primary flows\n- [x] Feature meets measurable outcomes defined in Success Criteria\n- [x] No implementation details leak into specification\n\n## Notes\n\n- Items marked incomplete require spec updates before `/speckit.clarify` or `/speckit.plan`\nEOF"]}
 [2m2025-11-22T11:55:12.787298Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","git status -sb"],"workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-22T14:02:29.603853Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-22T14:02:31.340277Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-22T14:02:31.340391Z[0m [32m INFO[0m ghost commit captured: 48d05604cdf63a373a67523c3c484c9d1616a39f
+[2m2025-11-22T14:02:31.340401Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-22T14:02:44.567354Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","pwsh .specify/scripts/powershell/check-prerequisites.ps1 -Json -PathsOnly"],"workdir":"/mnt/d/program/businesscard","timeout_ms":1000}
+[2m2025-11-22T14:02:49.934384Z[0m [32m INFO[0m ToolCall: shell {"command":["bash","-lc","powershell .specify/scripts/powershell/check-prerequisites.ps1 -Json -PathsOnly"],"workdir":"/mnt/d/program/businesscard","timeout_ms":1000}
+[2m2025-11-22T14:12:42.966847Z[0m [32m INFO[0m Resuming rollout from "/mnt/d/program/businesscard/.codex/sessions/2025/11/21/rollout-2025-11-21T23-15-42-019aa6fc-4560-7663-ac22-8bfbe1286d96.jsonl"
+[2m2025-11-22T14:12:43.032921Z[0m [32m INFO[0m Resumed rollout with 729 items, conversation ID: Some(ConversationId { uuid: 019aa6fc-4560-7663-ac22-8bfbe1286d96 })
+[2m2025-11-22T14:12:43.032968Z[0m [32m INFO[0m Resumed rollout successfully from "/mnt/d/program/businesscard/.codex/sessions/2025/11/21/rollout-2025-11-21T23-15-42-019aa6fc-4560-7663-ac22-8bfbe1286d96.jsonl"
+[2m2025-11-22T14:16:23.475700Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-22T14:16:25.071541Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-22T14:16:25.071627Z[0m [32m INFO[0m ghost commit captured: 24650491f752176d9cc412ea3649caf54190e8f1
+[2m2025-11-22T14:16:25.071638Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-22T14:16:27.065263Z[0m [32m INFO[0m ToolCall: shell_command {"command":".specify/scripts/powershell/check-prerequisites.ps1 -Json -PathsOnly","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-22T14:16:32.500625Z[0m [32m INFO[0m ToolCall: shell_command {"command":"powershell -ExecutionPolicy Bypass -File .specify/scripts/powershell/check-prerequisites.ps1 -Json -PathsOnly","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-22T14:16:37.739799Z[0m [32m INFO[0m ToolCall: shell_command {"command":".specify/scripts/powershell/check-prerequisites.ps1 -Json -PathsOnly","workdir":"/mnt/d/program/businesscard","with_escalated_permissions":true,"justification":"Need to run the prerequisite PowerShell script with access to system pwsh which may be outside sandbox"}
+[2m2025-11-22T14:26:17.864331Z[0m [32m INFO[0m interrupt received: abort current task, if any
+[2m2025-11-22T14:31:58.618614Z[0m [32m INFO[0m Resuming rollout from "/mnt/d/program/businesscard/.codex/sessions/2025/11/22/rollout-2025-11-22T22-16-15-019aabec-34f0-7970-a779-e50a70d52d1e.jsonl"
+[2m2025-11-22T14:31:58.624431Z[0m [32m INFO[0m Resumed rollout with 29 items, conversation ID: Some(ConversationId { uuid: 019aabec-34f0-7970-a779-e50a70d52d1e })
+[2m2025-11-22T14:31:58.624462Z[0m [32m INFO[0m Resumed rollout successfully from "/mnt/d/program/businesscard/.codex/sessions/2025/11/22/rollout-2025-11-22T22-16-15-019aabec-34f0-7970-a779-e50a70d52d1e.jsonl"
+[2m2025-11-22T14:32:20.905960Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-22T14:32:22.481021Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-22T14:32:22.481106Z[0m [32m INFO[0m ghost commit captured: 7778669ecccd1e01c368347d8cbfd2fcf2ba6880
+[2m2025-11-22T14:32:22.481116Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-22T14:33:46.436432Z[0m [32m INFO[0m Resuming rollout from "/mnt/d/program/businesscard/.codex/sessions/2025/11/22/rollout-2025-11-22T22-16-15-019aabec-34f0-7970-a779-e50a70d52d1e.jsonl"
+[2m2025-11-22T14:33:46.441614Z[0m [32m INFO[0m Resumed rollout with 39 items, conversation ID: Some(ConversationId { uuid: 019aabec-34f0-7970-a779-e50a70d52d1e })
+[2m2025-11-22T14:33:46.441645Z[0m [32m INFO[0m Resumed rollout successfully from "/mnt/d/program/businesscard/.codex/sessions/2025/11/22/rollout-2025-11-22T22-16-15-019aabec-34f0-7970-a779-e50a70d52d1e.jsonl"
+[2m2025-11-22T14:33:56.447827Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-22T14:33:57.986156Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-22T14:33:57.986245Z[0m [32m INFO[0m ghost commit captured: ab7149a64704a055b33177a02f7c98ab31284c29
+[2m2025-11-22T14:33:57.986254Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-22T14:36:59.252746Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-22T14:37:00.791627Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-22T14:37:00.791710Z[0m [32m INFO[0m ghost commit captured: 0b9de182ec9ff53317f11ccfccb10a8bbb9e1573
+[2m2025-11-22T14:37:00.791721Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-22T14:37:04.694106Z[0m [32m INFO[0m ToolCall: shell_command {"command":"cat /mnt/d/program/businesscard/specs/001-business-card-manager/spec.md","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-22T14:39:19.909724Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-22T14:39:21.450510Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-22T14:39:21.450593Z[0m [32m INFO[0m ghost commit captured: 76b8433108b885fb81c78402d0b82b57e720e74b
+[2m2025-11-22T14:39:21.450603Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-22T14:39:28.889713Z[0m [32m INFO[0m ToolCall: shell_command {"command":"date +%F","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-22T14:39:46.428012Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/spec.md
+@@
+ **建立日期**：2025-11-21  
+ **狀態**：草稿  
+ **輸入**：使用者敘述：「以 Android App 掃描名片並同步到 Google 試算表，讓桌面端直接編修與查詢」
+ 
+ **語言要求**：本規格必須以繁體中文 (zh-TW) 撰寫，其他語言僅能作為附錄。
+ 
++## Clarifications
++
++### Session 2025-11-22
++
++- Q: 名片資料列的唯一 `id` 應由哪裡產生以及採用何種生成規則？ → A: 使用時間戳 + 隨機碼（yyyyMMddHHmmss + 4 碼）產生，App 與試算表腳本同樣採用此規則。
++
+ ## 使用者情境與測試（必填）
+@@
+ ### 功能需求
+ 
+ - **FR-001**：系統必須提供 Android 端新增名片流程，含拍攝/選取照片、OCR 預填、人工校正與儲存。
+-- **FR-002**：儲存名片時必須自動產生唯一 `id`、紀錄來源 (`source`)、並同步建立 `created_at`、`updated_at`。
++- **FR-002**：儲存名片時必須自動產生唯一 `id`（格式：`yyyyMMddHHmmss` + 4 位數隨機碼），紀錄來源 (`source`)、並同步建立 `created_at`、`updated_at`；試算表端插入新列時亦以相同規則自動補值。
+ - **FR-003**：App 必須將名片影像上傳至指定的 Google Drive 資料夾並在欄位中紀錄共享 URL。
+ - **FR-004**：Google 試算表 `Contacts` 工作表需預先建好欄位、表頭、受保護的 `id` 欄位與欄位驗證規則（Email、電話格式等）。
+ - **FR-005**：桌面使用者可直接在試算表新增、修改、篩選名片資料，並透過篩選視圖快速取得常用清單。
+@@
+ ### 關鍵實體（若功能涉及資料）
+ 
+-- **ContactRecord**：代表單一名片資料列，欄位包含 id、姓名、公司、職稱、聯絡方式、標籤、備註、來源、影像 URL、時間戳記與最近聯絡日期。
++- **ContactRecord**：代表單一名片資料列，欄位包含 id（格式 `yyyyMMddHHmmss` + 4 位數隨機碼，於 App 端與試算表腳本一致生成）、姓名、公司、職稱、聯絡方式、標籤、備註、來源、影像 URL、時間戳記與最近聯絡日期。
+*** End Patch
+[2m2025-11-22T14:43:31.899149Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-22T14:43:33.470718Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-22T14:43:33.470811Z[0m [32m INFO[0m ghost commit captured: 1f51fd28902d7df550929162e3de0582975ddd5c
+[2m2025-11-22T14:43:33.470820Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-22T14:43:36.993007Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/spec.md
+@@
+ ### Session 2025-11-22
+ 
+ - Q: 名片資料列的唯一 `id` 應由哪裡產生以及採用何種生成規則？ → A: 使用時間戳 + 隨機碼（yyyyMMddHHmmss + 4 碼）產生，App 與試算表腳本同樣採用此規則。
++- Q: Google Drive/試算表的存取權限應如何設定？ → A: 僅限受邀帳號存取（無公開連結），避免外洩。
+*** End Patch
+[2m2025-11-22T14:43:43.019995Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/spec.md
+@@
+ - **FR-007**：系統需提供 OAuth 授權與權限管理介面，讓使用者可選擇/變更要操作的 Google 試算表與 Drive 資料夾。
+ - **FR-008**：需提供最低限度的一致性控管：同一筆資料最後寫入者覆蓋內容，並在欄位中留下最新時間戳記供稽核。
+ - **FR-009**：需支援搜尋與排序（透過 Google 試算表既有功能），包含姓名、公司、標籤、日期等欄位。
++- **FR-010**：Google Drive 資料夾與試算表權限必須僅限受邀帳號存取，不得啟用任何公開連結；應提示使用者確認授權帳號與共享名單。
+@@
+ - **遙測計畫**：記錄掃描成功率、OCR 修正次數、試算表寫入失敗率與授權錯誤次數，並在 5% 以上的異常率時發出警示。
+*** End Patch
+[2m2025-11-22T14:46:12.878259Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-22T14:46:14.415691Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-22T14:46:14.415808Z[0m [32m INFO[0m ghost commit captured: 02b40dc53b2886f72833b540417e3e17ba671b73
+[2m2025-11-22T14:46:14.415818Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-22T14:46:24.639823Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/spec.md
+@@
+ ### Session 2025-11-22
+ 
+ - Q: 名片資料列的唯一 `id` 應由哪裡產生以及採用何種生成規則？ → A: 使用時間戳 + 隨機碼（yyyyMMddHHmmss + 4 碼）產生，App 與試算表腳本同樣採用此規則。
+ - Q: Google Drive/試算表的存取權限應如何設定？ → A: 僅限受邀帳號存取（無公開連結），避免外洩。
++- Q: 離線時可暫存多少筆名片、如何上傳？ → A: 允許多筆暫存，恢復連線後逐筆自動上傳。
+@@
+ ### 功能需求
+ 
+ - **FR-001**：系統必須提供 Android 端新增名片流程，含拍攝/選取照片、OCR 預填、人工校正與儲存。
+ - **FR-002**：儲存名片時必須自動產生唯一 `id`（格式：`yyyyMMddHHmmss` + 4 位數隨機碼），紀錄來源 (`source`)、並同步建立 `created_at`、`updated_at`；試算表端插入新列時亦以相同規則自動補值。
+ - **FR-003**：App 必須將名片影像上傳至指定的 Google Drive 資料夾並在欄位中紀錄共享 URL。
+@@
+ - **FR-008**：需提供最低限度的一致性控管：同一筆資料最後寫入者覆蓋內容，並在欄位中留下最新時間戳記供稽核。
+ - **FR-009**：需支援搜尋與排序（透過 Google 試算表既有功能），包含姓名、公司、標籤、日期等欄位。
+ - **FR-010**：Google Drive 資料夾與試算表權限必須僅限受邀帳號存取，不得啟用任何公開連結；應提示使用者確認授權帳號與共享名單。
++- **FR-011**：離線時允許建立多筆暫存名片，恢復連線後需自動逐筆上傳並回報成功/失敗狀態；若上傳失敗需保留暫存並提示使用者。
+@@
+ ### 邊界情境
+ 
+-- 手機暫時離線：允許暫存一筆草稿並在恢復網路後自動寫入；若與現有 `id` 衝突，需提示重新整理。
++- 手機暫時離線：允許多筆暫存並在恢復網路後逐筆自動寫入；若與現有 `id` 衝突，需提示重新整理或人工處理。
+*** End Patch
+[2m2025-11-22T14:46:28.020138Z[0m [32m INFO[0m ToolCall: shell_command {"command":"grep -n \"邊界情境\" -A6 -B2 specs/001-business-card-manager/spec.md","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-22T14:46:36.402848Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/spec.md
+@@
+ ### Session 2025-11-22
+ 
+ - Q: 名片資料列的唯一 `id` 應由哪裡產生以及採用何種生成規則？ → A: 使用時間戳 + 隨機碼（yyyyMMddHHmmss + 4 碼）產生，App 與試算表腳本同樣採用此規則。
+ - Q: Google Drive/試算表的存取權限應如何設定？ → A: 僅限受邀帳號存取（無公開連結），避免外洩。
++- Q: 離線時可暫存多少筆名片、如何上傳？ → A: 允許多筆暫存，恢復連線後逐筆自動上傳。
+@@
+ - **FR-008**：需提供最低限度的一致性控管：同一筆資料最後寫入者覆蓋內容，並在欄位中留下最新時間戳記供稽核。
+ - **FR-009**：需支援搜尋與排序（透過 Google 試算表既有功能），包含姓名、公司、標籤、日期等欄位。
+ - **FR-010**：Google Drive 資料夾與試算表權限必須僅限受邀帳號存取，不得啟用任何公開連結；應提示使用者確認授權帳號與共享名單。
++- **FR-011**：離線時允許建立多筆暫存名片，恢復連線後需自動逐筆上傳並回報成功/失敗狀態；若上傳失敗需保留暫存並提示使用者。
+@@
+ ### 邊界情境
+ 
+-- 手機暫時離線：允許暫存一筆草稿並在恢復網路後自動寫入；若與現有 `id` 衝突，需提示重新整理。
++- 手機暫時離線：允許多筆暫存並在恢復網路後逐筆自動寫入；若與現有 `id` 衝突，需提示重新整理或人工處理。
+*** End Patch
+[2m2025-11-22T14:46:40.118641Z[0m [32m INFO[0m ToolCall: shell_command {"command":"nl -ba specs/001-business-card-manager/spec.md | sed -n '55,80p'","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-22T14:46:44.254835Z[0m [32m INFO[0m ToolCall: shell_command {"command":"grep -n \"Clarifications\" -A10 -B2 specs/001-business-card-manager/spec.md","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-22T14:46:50.447585Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/spec.md
+@@
+ - Q: 名片資料列的唯一 `id` 應由哪裡產生以及採用何種生成規則？ → A: 使用時間戳 + 隨機碼（yyyyMMddHHmmss + 4 碼）產生，App 與試算表腳本同樣採用此規則。
+ - Q: Google Drive/試算表的存取權限應如何設定？ → A: 僅限受邀帳號存取（無公開連結），避免外洩。
++- Q: 離線時可暫存多少筆名片、如何上傳？ → A: 允許多筆暫存，恢復連線後逐筆自動上傳。
+*** End Patch
+[2m2025-11-22T14:46:58.258673Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/spec.md
+@@
+ - **FR-006**：App 必須支援讀取試算表資料、依 `id` 更新資料列，並在更新時同步刷新 `updated_at`。
+ - **FR-007**：系統需提供 OAuth 授權與權限管理介面，讓使用者可選擇/變更要操作的 Google 試算表與 Drive 資料夾。
+ - **FR-008**：需提供最低限度的一致性控管：同一筆資料最後寫入者覆蓋內容，並在欄位中留下最新時間戳記供稽核。
+ - **FR-009**：需支援搜尋與排序（透過 Google 試算表既有功能），包含姓名、公司、標籤、日期等欄位。
+ - **FR-010**：Google Drive 資料夾與試算表權限必須僅限受邀帳號存取，不得啟用任何公開連結；應提示使用者確認授權帳號與共享名單。
++- **FR-011**：離線時允許建立多筆暫存名片，恢復連線後需自動逐筆上傳並回報成功/失敗狀態；若上傳失敗需保留暫存並提示使用者。
+*** End Patch
+[2m2025-11-22T14:47:03.423930Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/spec.md
+@@
+-### 邊界情境
+-
+-- 手機暫時離線：允許暫存一筆草稿並在恢復網路後自動寫入；若與現有 `id` 衝突，需提示重新整理。
++### 邊界情境
++
++- 手機暫時離線：允許多筆暫存並在恢復網路後逐筆自動寫入；若與現有 `id` 衝突，需提示重新整理或人工處理。
+*** End Patch
+[2m2025-11-22T14:47:06.852035Z[0m [32m INFO[0m ToolCall: shell_command {"command":"nl -ba specs/001-business-card-manager/spec.md | sed -n '60,85p'","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-22T14:47:09.917877Z[0m [32m INFO[0m ToolCall: shell_command {"command":"nl -ba specs/001-business-card-manager/spec.md | sed -n '85,110p'","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-22T14:52:03.491766Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-22T14:52:05.086767Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-22T14:52:05.086851Z[0m [32m INFO[0m ghost commit captured: 4e0d729b7dad36aafff6b9df94a85f69dbaf9b98
+[2m2025-11-22T14:52:05.086860Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-22T14:52:21.734588Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/spec.md
+@@
+ - Q: 名片資料列的唯一 `id` 應由哪裡產生以及採用何種生成規則？ → A: 使用時間戳 + 隨機碼（yyyyMMddHHmmss + 4 碼）產生，App 與試算表腳本同樣採用此規則。
+ - Q: Google Drive/試算表的存取權限應如何設定？ → A: 僅限受邀帳號存取（無公開連結），避免外洩。
+ - Q: 離線時可暫存多少筆名片、如何上傳？ → A: 允許多筆暫存，恢復連線後逐筆自動上傳。
++- Q: OCR 掃描應採用哪種方案？ → A: 採 Google ML Kit 裝置端 OCR 作為主要路徑。
+@@
+ - **FR-005**：桌面使用者可直接在試算表新增、修改、篩選名片資料，並透過篩選視圖快速取得常用清單。
+ - **FR-006**：App 必須支援讀取試算表資料、依 `id` 更新資料列，並在更新時同步刷新 `updated_at`。
+ - **FR-007**：系統需提供 OAuth 授權與權限管理介面，讓使用者可選擇/變更要操作的 Google 試算表與 Drive 資料夾。
+ - **FR-008**：需提供最低限度的一致性控管：同一筆資料最後寫入者覆蓋內容，並在欄位中留下最新時間戳記供稽核。
+ - **FR-009**：需支援搜尋與排序（透過 Google 試算表既有功能），包含姓名、公司、標籤、日期等欄位。
+ - **FR-010**：Google Drive 資料夾與試算表權限必須僅限受邀帳號存取，不得啟用任何公開連結；應提示使用者確認授權帳號與共享名單。
+ - **FR-011**：離線時允許建立多筆暫存名片，恢復連線後需自動逐筆上傳並回報成功/失敗狀態；若上傳失敗需保留暫存並提示使用者。
++- **FR-012**：OCR 預填須以 Google ML Kit 裝置端 OCR 為主要方案，確保離線可用與 5 秒內完成預填；若後續需備援雲端 OCR，應在版本計畫中另行評估與授權。
+@@
+ - **效能預算**：掃描完成後 5 秒內應完成 OCR 預填；試算表同步讀寫需在 2 秒內回應（以 4G 或更佳網路為前提）；列表載入需支援至少 5,000 筆資料而不致於逾時。
+@@
+ - 主要使用者皆持有可上網的 Android 裝置並具備 Google 帳號。
+ - 組織允許以 Google 試算表及 Google Drive 作為正式資料儲存解決方案，並已有 Workspace 管理員協助設定權限。
+ - OCR/AI 服務可透過 SaaS 或預建模型提供，準確率達可用水準，若需進一步訓練將列為未來版本。
+*** End Patch
+[2m2025-11-22T14:52:29.844854Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/spec.md
+@@
+-- OCR/AI 服務可透過 SaaS 或預建模型提供，準確率達可用水準，若需進一步訓練將列為未來版本。
++- OCR 主要採 Google ML Kit 裝置端預建模型；若需雲端/SaaS 備援或進一步訓練，列入未來版本評估。
+*** End Patch
+[2m2025-11-22T14:53:13.702791Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-22T14:53:15.315153Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-22T14:53:15.315242Z[0m [32m INFO[0m ghost commit captured: 6441620a3a529ad328eec546ac1a16a8d286c600
+[2m2025-11-22T14:53:15.315253Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-22T14:53:21.254215Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/spec.md
+@@
+ - Q: 名片資料列的唯一 `id` 應由哪裡產生以及採用何種生成規則？ → A: 使用時間戳 + 隨機碼（yyyyMMddHHmmss + 4 碼）產生，App 與試算表腳本同樣採用此規則。
+ - Q: Google Drive/試算表的存取權限應如何設定？ → A: 僅限受邀帳號存取（無公開連結），避免外洩。
+ - Q: 離線時可暫存多少筆名片、如何上傳？ → A: 允許多筆暫存，恢復連線後逐筆自動上傳。
+ - Q: OCR 掃描應採用哪種方案？ → A: 採 Google ML Kit 裝置端 OCR 作為主要路徑。
++- Q: 刪除策略要如何保留復原性？ → A: 使用 `is_deleted`/`deleted_at` 軟刪除欄位，預設過濾。
+*** End Patch
+[2m2025-11-22T14:53:27.638410Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/spec.md
+@@
+ - **FR-009**：需支援搜尋與排序（透過 Google 試算表既有功能），包含姓名、公司、標籤、日期等欄位。
+ - **FR-010**：Google Drive 資料夾與試算表權限必須僅限受邀帳號存取，不得啟用任何公開連結；應提示使用者確認授權帳號與共享名單。
+ - **FR-011**：離線時允許建立多筆暫存名片，恢復連線後需自動逐筆上傳並回報成功/失敗狀態；若上傳失敗需保留暫存並提示使用者。
+ - **FR-012**：OCR 預填須以 Google ML Kit 裝置端 OCR 為主要方案，確保離線可用與 5 秒內完成預填；若後續需備援雲端 OCR，應在版本計畫中另行評估與授權。
++- **FR-013**：刪除行為採軟刪除，新增 `is_deleted`（布林）與 `deleted_at`（時間戳）；App 與試算表介面預設過濾掉已刪除資料，仍保留稽核可追溯性。
+*** End Patch
+[2m2025-11-22T14:53:33.021465Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/spec.md
+@@
+-- **ContactRecord**：代表單一名片資料列，欄位包含 id（格式 `yyyyMMddHHmmss` + 4 位數隨機碼，於 App 端與試算表腳本一致生成）、姓名、公司、職稱、聯絡方式、標籤、備註、來源、影像 URL、時間戳記與最近聯絡日期。
++- **ContactRecord**：代表單一名片資料列，欄位包含 id（格式 `yyyyMMddHHmmss` + 4 位數隨機碼，於 App 端與試算表腳本一致生成）、姓名、公司、職稱、聯絡方式、標籤、備註、來源、影像 URL、時間戳記、最近聯絡日期、`is_deleted`、`deleted_at`。
+*** End Patch
+[2m2025-11-22T15:07:49.614393Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-22T15:07:51.311238Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-22T15:07:51.311321Z[0m [32m INFO[0m ghost commit captured: 7a97b6a90a2db564bddbd0f38d22b73f3a5ae2c7
+[2m2025-11-22T15:07:51.311364Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-22T15:07:59.846404Z[0m [32m INFO[0m ToolCall: shell_command {"command":".specify/scripts/powershell/setup-plan.ps1 -Json","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-22T15:08:02.785802Z[0m [32m INFO[0m ToolCall: shell_command {"command":"powershell -ExecutionPolicy Bypass -File .specify/scripts/powershell/setup-plan.ps1 -Json","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-22T15:16:33.462438Z[0m [32m INFO[0m Resuming rollout from "/mnt/d/program/businesscard/.codex/sessions/2025/11/22/rollout-2025-11-22T22-16-15-019aabec-34f0-7970-a779-e50a70d52d1e.jsonl"
+[2m2025-11-22T15:16:33.473192Z[0m [32m INFO[0m Resumed rollout with 257 items, conversation ID: Some(ConversationId { uuid: 019aabec-34f0-7970-a779-e50a70d52d1e })
+[2m2025-11-22T15:16:33.473295Z[0m [32m INFO[0m Resumed rollout successfully from "/mnt/d/program/businesscard/.codex/sessions/2025/11/22/rollout-2025-11-22T22-16-15-019aabec-34f0-7970-a779-e50a70d52d1e.jsonl"
+[2m2025-11-22T15:18:36.184560Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-22T15:18:37.822361Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-22T15:18:37.822487Z[0m [32m INFO[0m ghost commit captured: 504f7ac94e11025cc0fafa90aec3fea8f7401e70
+[2m2025-11-22T15:18:37.822498Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-22T15:27:25.474360Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-22T15:27:27.058671Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-22T15:27:27.058808Z[0m [32m INFO[0m ghost commit captured: 37c2fa3e17d4718aaf2c428a654c5ab7a9d68f75
+[2m2025-11-22T15:27:27.058818Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-22T15:27:32.584257Z[0m [32m INFO[0m ToolCall: shell_command {"command":"git branch --show-current","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-22T15:27:36.789560Z[0m [32m INFO[0m ToolCall: shell_command {"command":"ls specs/001-business-card-manager","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-22T15:27:40.407938Z[0m [32m INFO[0m ToolCall: shell_command {"command":"find .specify -maxdepth 2 -type f","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-22T15:27:49.333899Z[0m [32m INFO[0m ToolCall: shell_command {"command":"find specs -maxdepth 3 -type f","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-22T15:28:14.754155Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-22T15:28:16.358129Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-22T15:28:16.358223Z[0m [32m INFO[0m ghost commit captured: 0171db87acfd6a6b39c37c4fb14ab6bdb9904476
+[2m2025-11-22T15:28:16.358233Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-22T15:28:21.460681Z[0m [32m INFO[0m ToolCall: shell_command {"command":"cat .specify/templates/plan-template.md","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-22T15:28:43.549128Z[0m [32m INFO[0m ToolCall: shell_command {"command":"cat .specify/memory/constitution.md","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-22T15:29:19.028352Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: specs/001-business-card-manager/plan.md
++# 實作計畫：名片管理系統第一版
++
++**分支**：`001-business-card-manager` | **日期**：2025-11-22 | **規格**：specs/001-business-card-manager/spec.md  
++**輸入**：來自 `/specs/001-business-card-manager/spec.md` 的功能規格
++
++**語言要求**：本計畫與所有引用內容必須以繁體中文 (zh-TW) 撰寫，其他語言僅能作為附錄。  
++**注意**：此模板由 `/speckit.plan` 指令產生；操作流程請參閱 `.specify/templates/commands/plan.md`。
++
++## 摘要
++
++- Android App 掃描紙本名片，採 Google ML Kit 裝置端 OCR 進行預填，並支援離線多筆暫存、恢復連線後逐筆自動上傳。  
++- 新增/更新資料列時產生唯一 `id`（`yyyyMMddHHmmss` + 4 位隨機碼），同步 `source/created_at/updated_at`，影像上傳至指定 Google Drive 資料夾並寫入共享 URL。  
++- Google 試算表 `Contacts` 為唯一資料來源，含欄位驗證、保護 `id` 欄位，桌面端可直接新增、修改、篩選、軟刪除（`is_deleted/deleted_at`），並維持最後寫入者覆蓋與稽核時間戳。  
++- 安全與存取：Drive/試算表僅限受邀帳號存取，OAuth 授權可更換目標試算表/資料夾。  
++- 體驗與效能：OCR 預填 5 秒內完成；試算表讀寫 2 秒內回應；列表載入需支援至少 5,000 筆資料。
++
++## 技術背景
++
++**程式語言 / 版本**：Kotlin（Android，版本 NEEDS CLARIFICATION）  
++**主要相依**：Google ML Kit（裝置端文字辨識）、Google Sheets API、Google Drive API（實際用法/授權流程 NEEDS CLARIFICATION）  
++**儲存層**：Google 試算表（主存），Google Drive（影像檔）；本地離線暫存方案 NEEDS CLARIFICATION（Room/純檔案/暫存記憶體）  
++**測試框架**：JUnit/Android Instrumentation（預設），端對端/整合測試框架 NEEDS CLARIFICATION  
++**目標平台**：Android 版本範圍 NEEDS CLARIFICATION（建議 10+）  
++**專案型態**：行動（Android App + 雲端試算表/Drive）  
++**效能目標**：OCR 預填 ≤5 秒；試算表讀寫 ≤2 秒；列表 5,000 筆不逾時  
++**運作限制**：需離線暫存多筆並自動補寫；權限僅限受邀帳號；需處理影像上傳失敗與 `id` 衝突提示  
++**規模 / 範圍**：初期 5,000 筆資料列；實際峰值 NEEDS CLARIFICATION
++
++## 憲章檢查
++
++*閘門：Phase 0 研究前必須通過，Phase 1 設計後需再次確認。*
++
++1. **程式碼品質監護**：需定義 Android 模組邊界與服務介面，建立 lint/靜態分析流程（如 ktlint/detekt）並在計畫內標註負責人；所有文件同步於 `/specs/001-business-card-manager/plan.md`。  
++2. **測試界定真實**：為每個使用者故事撰寫至少一個整合/合約測試（掃描 + 寫入、試算表編輯 + 同步、同筆更新覆蓋），並目標達成 >=90% 陳述、>=75% 分支覆蓋；測試資料集與影像樣本需版控。  
++3. **統一體驗保證**：遵循既有設計語言與無障礙要求（WCAG 2.1 AA），記錄主要螢幕的視覺回歸與在地化行為；使用共享元件並紀錄若有偏離。  
++4. **效能可預測性**：明訂 OCR、同步、列表載入預算（見效能目標），規劃 RUM/遙測或 profiler 以監測；在計畫中標示監控指標與警戒門檻（≥5% 異常率告警）。  
++5. **交付與流程標準**：文件（spec/plan/quickstart）全程 zh-TW，與程式碼變更同步更新；遙測計畫與 `/speckit.*` 產物需綁定憲章追蹤。  
++6. **語言治理**：本計畫與相關文件皆以繁體中文撰寫，若有其他語言版本須標明來源並經審稿。
++
++## 專案結構
++
++### 文件（此功能）
++
++```text
++specs/001-business-card-manager/
++├── plan.md              # 本檔案
++├── research.md          # Phase 0 輸出
++├── data-model.md        # Phase 1 輸出
++├── quickstart.md        # Phase 1 輸出
++├── contracts/           # Phase 1 輸出（API/流程合約）
++└── tasks.md             # Phase 2 輸出
++```
++
++### 原始碼（版本庫根目錄）
++
++```text
++android/
++└── app/
++    ├── src/main/            # UI、掃描/OCR、同步模組
++    ├── src/androidTest/     # 儀表/整合測試
++    └── src/test/            # 單元/邏輯測試
++
++automation/
++└── sheets_drive/            # 試算表/Drive 佈建或回歸腳本（若需要）
++```
++
++**結構決策**：以 Android App 為主要程式碼庫，若需要自動化佈建/回歸腳本則置於 `automation/sheets_drive/`，目前不引入額外後端服務。
++
++## 複雜度追蹤
++
++> **僅在憲章檢查有違規但經核准時填寫**
++
++| 違規項 | 為何需要 | 已拒絕的較簡方案 |
++|--------|----------|------------------|
++| （目前無） | （無） | （無） |
+*** End Patch
+[2m2025-11-23T00:04:51.624033Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-23T00:04:54.016807Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-23T00:04:54.016951Z[0m [32m INFO[0m ghost commit captured: 8f1555427d0f4c422b591545fb9e8dcbbf7e6059
+[2m2025-11-23T00:04:54.017021Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-23T00:05:23.159995Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: specs/001-business-card-manager/research.md
++# Research - 名片管理系統第一版
++
++**日期**：2025-11-22  
++**來源**：功能規格 `specs/001-business-card-manager/spec.md`，計畫 `plan.md`
++
++## 決策與依據
++
++### Kotlin / Android 版本
++- **Decision**：Kotlin 1.9.x；Android 最低支援 API 29（Android 10），目標/compile API 34。
++- **Rationale**：API 29 確保現代權限/檔案存取模型並兼容多數現役裝置；API 34 為最新 LTS，便於安全修補與商店要求。
++- **Alternatives considered**：更低版本（<29，放寬存取規則但增加安全/相容風險）；僅鎖定 API 33（較短維運周期）。
++
++### Sheets/Drive 授權與使用方式
++- **Decision**：採 Google Sign-In/OAuth 2，請求最小必要範圍（Sheets/Drive 受邀檔案存取），權杖交由 Google Play services 管理；App 內可切換目標試算表/資料夾。
++- **Rationale**：符合最小權限原則與企業受邀帳號限制，減少自行儲存 refresh token 的安全風險。
++- **Alternatives considered**：服務帳號（不符終端用戶授權流程且較難限制個人受邀帳號）；長期本地儲存 access/refresh token（安全風險高）。
++
++### 離線暫存方案
++- **Decision**：使用 Room 本地資料庫儲存暫存名片與上傳佇列；影像離線儲存為臨時檔路徑並與暫存記錄關聯。
++- **Rationale**：Room 提供交易/佇列與 schema 管理，易於重試與觀察狀態；比純記憶體或檔案更安全可靠。
++- **Alternatives considered**：僅檔案+JSON（缺少交易與一致性保障）；純記憶體（無持久性）；自行 SQLite 實作（維運成本較高）。
++
++### 測試框架與端對端策略
++- **Decision**：單元/邏輯測試採 JUnit；UI/整合使用 Espresso + Instrumentation；離線/重試邏輯可用 Robolectric 作快速回歸；Sheets/Drive 互動以 fake/mock service 或錄製回放。
++- **Rationale**：符合 Android 常見工具鏈，兼顧真機/模擬器驗證與快速本地回歸。
++- **Alternatives considered**：僅使用 Instrumentation（回歸速度慢）；僅 Robolectric（缺真機行為）；Cucumber/BDD（增加維護成本）。
++
++### 目標資料量
++- **Decision**：主要預期 5,000 列，設計上需容忍至 50,000 列（查詢/篩選與分頁策略需可支援）。
++- **Rationale**：規格要求 5,000 列不逾時；預留量級以避免近期升級成本。
++- **Alternatives considered**：只鎖定 5,000（短期足夠但缺擴充彈性）；>100,000（超出試算表實務效能，需改用資料庫）。 
+*** End Patch
+[2m2025-11-23T00:05:36.361111Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: specs/001-business-card-manager/data-model.md
++# Data Model - 名片管理系統第一版
++
++**來源**：`specs/001-business-card-manager/spec.md`  
++**版本**：2025-11-22
++
++## 實體與欄位
++
++### ContactRecord
++- `id` (string, required, unique)：格式 `yyyyMMddHHmmss` + 4 位隨機碼，來源於 App 或試算表腳本。
++- `name` (string, required)：姓名。
++- `company` (string, optional)：公司名稱。
++- `title` (string, optional)：職稱。
++- `email` (string, optional)：需符合 email 格式驗證。
++- `phone` (string, optional)：需符合電話格式驗證（國碼 + 號碼）。
++- `tags` (string/list, optional)：多選標籤；試算表可為逗號分隔或資料驗證清單。
++- `notes` (string, optional)：備註。
++- `source` (enum, required)：`scan` | `manual` | `import`。
++- `image_url` (string, optional)：Google Drive 共享 URL。
++- `created_at` (datetime, required)。
++- `updated_at` (datetime, required)。
++- `last_contact_at` (date, optional)：最近聯絡日期。
++- `is_deleted` (boolean, required, default false)。
++- `deleted_at` (datetime, optional)：軟刪除時間。
++
++### ContactImage
++- `file_name` (string, required)。
++- `drive_id` (string, required)：Drive 物件 ID。
++- `shared_url` (string, required)：對應 ContactRecord.image_url。
++- `created_at` (datetime, required)。
++- `owner_account` (string, required)：上傳帳號（受邀）。
++
++## 關聯
++- ContactRecord 1:1 ContactImage（透過 `image_url`/`drive_id`），影像可為空；刪除時維持軟刪除，不移除影像檔。
++
++## 驗證與規則
++- `id` 唯一且不可更改；App/試算表均使用相同生成規則。
++- `email`/`phone` 必須通過試算表欄位驗證與 App 端基本格式檢查。
++- `is_deleted=true` 時，前端/查詢預設過濾；可於稽核或還原流程中顯示。
++- 欄位驗證與表頭需在試算表 `Contacts` 事前佈建；`id` 欄需保護。
++
++## 狀態 / 轉換
++- 新增：建立 ContactRecord + 上傳 ContactImage（可延後重試）；寫入試算表並設定時間戳與來源。
++- 更新：以 `id` 定位資料列，更新欄位並刷新 `updated_at`。
++- 軟刪除：設定 `is_deleted=true` 與 `deleted_at`；後續查詢預設排除。
++- 離線暫存：以 Room 儲存草稿與影像路徑；恢復上線後逐筆同步，同步成功即移除暫存並寫入試算表。
+*** End Patch
+[2m2025-11-23T00:05:52.226018Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: specs/001-business-card-manager/contracts/contacts-sync.md
++# Contracts - Contacts Sync (名片管理系統第一版)
++
++**目的**：定義 App 與後端（Google Sheets/Drive + 同步服務層）的互動契約，確保掃描、同步、更新與軟刪除行為可測試。  
++**格式**：REST 風格介面，作為本地同步層/自動化腳本的合約參考；實作可直接呼叫 Google API 或以代理服務封裝。
++
++## 欄位約定
++- `id`：`yyyyMMddHHmmss` + 4 位隨機碼（App 或試算表腳本生成，唯一）。
++- `source`：`scan` | `manual` | `import`。
++- `is_deleted`：布林，預設 false；軟刪除時設定 `true` 並填寫 `deleted_at`。
++- 時間：ISO 8601 UTC。
++
++## Endpoints（邏輯合約）
++
++### 1) 建立名片
++- **POST** `/contacts`
++- **Request body**：
++  - `id` (string, required)
++  - `name` (string, required)
++  - `company`, `title`, `email`, `phone`, `tags`, `notes` (optional)
++  - `source` (enum, required)
++  - `image_upload` (binary or pre-signed URL upload step)
++- **Response**：`201 Created` with contact payload + `created_at`, `updated_at`, `image_url`（若先上傳成功）。
++- **試算表映射**：在 `Contacts` 表新增一列並設定欄位驗證；`id` 保護。
++
++### 2) 讀取/查詢
++- **GET** `/contacts?updated_since={ts}&include_deleted={bool}&limit={n}&page_token={token}`
++- **用途**：App 重新載入、桌面端同步；預設 `include_deleted=false`。
++- **Response**：`200 OK`，回傳分頁資料與 `next_page_token`。
++- **試算表映射**：可透過篩選視圖或腳本分頁讀取，需確保排序欄位穩定（`updated_at`）。
++
++### 3) 更新名片
++- **PUT** `/contacts/{id}`
++- **Request body**：可更新除 `id` 外欄位；自動刷新 `updated_at`。
++- **Response**：`200 OK` with updated contact。
++- **併發規則**：最後寫入者覆蓋；回傳最終 `updated_at` 供雙端校驗。
++
++### 4) 軟刪除
++- **POST** `/contacts/{id}/delete`
++- **Request body**：`{ "reason": "user_request" }`（可選）
++- **動作**：設 `is_deleted=true`、`deleted_at=now`，不移除影像檔；回傳 `200 OK`。
++
++### 5) 影像上傳
++- **POST** `/contacts/{id}/image`
++- **流程**：取得上傳位置（Drive 目錄）；完成後回寫 `image_url` 至試算表。
++- **失敗處理**：若上傳失敗，資料列保留，`image_url` 為空並標記待補。
++
++### 6) 離線暫存同步
++- **POST** `/sync/offline`
++- **Request body**：暫存批次（新增/更新/刪除）列表。
++- **行為**：逐筆上傳；成功移出佇列，失敗保留並回傳錯誤碼。
++
++## 驗收要點
++- 欄位驗證：Email/電話格式、必填欄位、`id` 唯一性。
++- 安全：僅受邀帳號可操作指定試算表/Drive；不得使用公開連結。
++- 一致性：最後寫入者覆蓋，`updated_at` 反映最終時間；軟刪除預設過濾。
++- 效能：建立/讀取/更新需滿足規格中的延遲預算（OCR 預填 ≤5 秒，試算表讀寫 ≤2 秒）。
+*** End Patch
+[2m2025-11-23T00:06:05.428337Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: specs/001-business-card-manager/quickstart.md
++# Quickstart - 名片管理系統第一版
++
++**目的**：協助開發者在本機/模擬器快速啟動並驗證掃描、同步、離線暫存與權限流程。  
++**前置**：已在 `001-business-card-manager` 分支。
++
++## 1. 環境需求
++- Android Studio 最新穩定版（含 Kotlin 1.9.x 插件）。
++- Android SDK：目標/compile API 34，最低 API 29。
++- Google Play services / Google Sign-In 已安裝於測試裝置或模擬器。
++- 取得 Google Cloud 專案 OAuth Client (Android) 並設定 SHA-1/包名。
++
++## 2. 專案設定
++1) 匯入專案並同步 Gradle。  
++2) 設定 `google-services.json`（含 OAuth Client）。  
++3) 建立或指派 Google 試算表與 Drive 目錄，僅邀請測試帳號；表格需有 `Contacts` 工作表與欄位驗證。  
++4) 在 App 設定中指定目標試算表 ID 與 Drive 目錄（或透過授權 UI 選擇）。
++
++## 3. 執行與驗證
++1) 在實體機/模擬器執行 App，完成 Google 授權。  
++2) 掃描名片（可使用測試影像），確認 OCR 預填欄位，必要時手動修正後儲存。  
++3) 驗證試算表新增一列，`id/source/created_at/updated_at` 正確，並有影像 URL（若上傳成功）。  
++4) 於桌面端修改資料，App 重新整理應反映最新內容；同筆更新以最後寫入為準。  
++5) 離線模式：關閉網路建立多筆暫存，恢復上線後應逐筆同步並顯示成功/失敗。  
++6) 軟刪除：在 App 或試算表標記 `is_deleted=true`，預設查詢應排除，並可於稽核檢視。
++
++## 4. 測試與驗收
++- 單元/邏輯：JUnit；離線/重試可用 Robolectric。  
++- UI/整合：Espresso + Instrumentation，覆蓋掃描→儲存→同步與桌面更新回讀。  
++- 契約/互動：對 Sheets/Drive 呼叫採 fake/mock 或錄製回放，驗證欄位映射與錯誤處理。  
++- 覆蓋率目標：關鍵同步模組 >=90% 陳述、>=75% 分支。
++
++## 5. 故障排除
++- 授權失敗：確認 SHA-1/包名、邀請帳號與作用中 OAuth Client。  
++- 影像上傳失敗：檢查網路或權限，重試後仍失敗應維持資料列並標記待補。  
++- `id` 衝突：刷新資料後重試；維持時間戳+隨機碼生成規則以降低機率。
+*** End Patch
+[2m2025-11-23T00:06:22.394292Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/plan.md
+@@
+ ## 技術背景
+ 
+-**程式語言 / 版本**：Kotlin（Android，版本 NEEDS CLARIFICATION）  
+-**主要相依**：Google ML Kit（裝置端文字辨識）、Google Sheets API、Google Drive API（實際用法/授權流程 NEEDS CLARIFICATION）  
+-**儲存層**：Google 試算表（主存），Google Drive（影像檔）；本地離線暫存方案 NEEDS CLARIFICATION（Room/純檔案/暫存記憶體）  
+-**測試框架**：JUnit/Android Instrumentation（預設），端對端/整合測試框架 NEEDS CLARIFICATION  
+-**目標平台**：Android 版本範圍 NEEDS CLARIFICATION（建議 10+）  
+-**專案型態**：行動（Android App + 雲端試算表/Drive）  
+-**效能目標**：OCR 預填 ≤5 秒；試算表讀寫 ≤2 秒；列表 5,000 筆不逾時  
+-**運作限制**：需離線暫存多筆並自動補寫；權限僅限受邀帳號；需處理影像上傳失敗與 `id` 衝突提示  
+-**規模 / 範圍**：初期 5,000 筆資料列；實際峰值 NEEDS CLARIFICATION
++**程式語言 / 版本**：Kotlin 1.9.x  
++**主要相依**：Google ML Kit（裝置端文字辨識）、Google Sheets API、Google Drive API（以 Google Sign-In/OAuth 最小範圍存取受邀檔）  
++**儲存層**：Google 試算表（主存）、Google Drive（影像）；本地離線暫存採 Room + 臨時影像檔  
++**測試框架**：JUnit（單元/邏輯）、Espresso + Instrumentation（UI/整合）、Robolectric（離線/重試回歸），對 Sheets/Drive 使用 fake/mock 或錄製回放  
++**目標平台**：Android API 29+（最低），目標/compile API 34  
++**專案型態**：行動（Android App + 試算表/Drive 同步）  
++**效能目標**：OCR 預填 ≤5 秒；試算表讀寫 ≤2 秒；列表 5,000 筆不逾時  
++**運作限制**：需離線暫存多筆並自動補寫；權限僅限受邀帳號；需處理影像上傳失敗與 `id` 衝突提示  
++**規模 / 範圍**：設計支援 5,000 筆為主，需容忍至 50,000 筆
+@@
+ 2. **測試界定真實**：為每個使用者故事撰寫至少一個整合/合約測試（掃描 + 寫入、試算表編輯 + 同步、同筆更新覆蓋），並目標達成 >=90% 陳述、>=75% 分支覆蓋；測試資料集與影像樣本需版控。  
+ 3. **統一體驗保證**：遵循既有設計語言與無障礙要求（WCAG 2.1 AA），記錄主要螢幕的視覺回歸與在地化行為；使用共享元件並紀錄若有偏離。  
+-4. **效能可預測性**：明訂 OCR、同步、列表載入預算（見效能目標），規劃 RUM/遙測或 profiler 以監測；在計畫中標示監控指標與警戒門檻（≥5% 異常率告警）。  
++4. **效能可預測性**：明訂 OCR、同步、列表載入預算（見效能目標），規劃 RUM/遙測或 profiler 以監測；在計畫中標示監控指標與警戒門檻（≥5% 異常率告警），資料量上限 50k 需評估分頁與快取策略。  
+ 5. **交付與流程標準**：文件（spec/plan/quickstart）全程 zh-TW，與程式碼變更同步更新；遙測計畫與 `/speckit.*` 產物需綁定憲章追蹤。  
+ 6. **語言治理**：本計畫與相關文件皆以繁體中文撰寫，若有其他語言版本須標明來源並經審稿。
+*** End Patch
+[2m2025-11-23T01:53:59.523262Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-23T01:54:01.595104Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-23T01:54:01.595231Z[0m [32m INFO[0m ghost commit captured: 0bc9bf9e10989b5d6ea79858f4f5fa8c470fcea9
+[2m2025-11-23T01:54:01.595265Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-23T01:54:20.502230Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/data-model.md
+@@
+-### ContactRecord
+-- `id` (string, required, unique)：格式 `yyyyMMddHHmmss` + 4 位隨機碼，來源於 App 或試算表腳本。
++### ContactRecord
++- `id` (string, required, unique)：格式 `yyyyMMddHHmmss` + 4 位隨機碼，來源於 App 或試算表腳本。
+@@
+-- `image_url` (string, optional)：Google Drive 共享 URL。
+-- `created_at` (datetime, required)。
+-- `updated_at` (datetime, required)。
+-- `last_contact_at` (date, optional)：最近聯絡日期。
+-- `is_deleted` (boolean, required, default false)。
+-- `deleted_at` (datetime, optional)：軟刪除時間。
++- `image_url` (string, optional)：Google Drive 共享 URL。
++- `created_at` (datetime, required)：ISO 8601（UTC+08:00，台北時區）。
++- `updated_at` (datetime, required)：ISO 8601（UTC+08:00，台北時區）。
++- `last_contact_at` (date, optional)：最近聯絡日期，格式 `YYYY-MM-DD`（UTC+08:00）。
++- `is_deleted` (boolean, required, default false)。
++- `deleted_at` (datetime, optional)：軟刪除時間，ISO 8601（UTC+08:00，台北時區）。
+@@
+-### ContactImage
+-- `file_name` (string, required)。
+-- `drive_id` (string, required)：Drive 物件 ID。
+-- `shared_url` (string, required)：對應 ContactRecord.image_url。
+-- `created_at` (datetime, required)。
+-- `owner_account` (string, required)：上傳帳號（受邀）。
++### ContactImage
++- `file_name` (string, required)。
++- `drive_id` (string, required)：Drive 物件 ID。
++- `shared_url` (string, required)：對應 ContactRecord.image_url。
++- `created_at` (datetime, required)：ISO 8601（UTC+08:00，台北時區）。
++- `owner_account` (string, required)：上傳帳號（受邀）。
+@@
+-- 更新：以 `id` 定位資料列，更新欄位並刷新 `updated_at`。
+-- 軟刪除：設定 `is_deleted=true` 與 `deleted_at`；後續查詢預設排除。
++- 更新：以 `id` 定位資料列，更新欄位並刷新 `updated_at`（ISO 8601，UTC+08:00）。
++- 軟刪除：設定 `is_deleted=true` 與 `deleted_at`（ISO 8601，UTC+08:00）；後續查詢預設排除。
+*** End Patch
+[2m2025-11-23T01:54:26.118793Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/contracts/contacts-sync.md
+@@
+-## 欄位約定
+-- `id`：`yyyyMMddHHmmss` + 4 位隨機碼（App 或試算表腳本生成，唯一）。
+-- `source`：`scan` | `manual` | `import`。
+-- `is_deleted`：布林，預設 false；軟刪除時設定 `true` 並填寫 `deleted_at`。
+-- 時間：ISO 8601 UTC。
++## 欄位約定
++- `id`：`yyyyMMddHHmmss` + 4 位隨機碼（App 或試算表腳本生成，唯一）。
++- `source`：`scan` | `manual` | `import`。
++- `is_deleted`：布林，預設 false；軟刪除時設定 `true` 並填寫 `deleted_at`。
++- 時間：ISO 8601（UTC+08:00，台北時區）。
+*** End Patch
+[2m2025-11-23T01:56:34.001138Z[0m [32m INFO[0m spawning ghost snapshot task
