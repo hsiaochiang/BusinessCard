@@ -2301,3 +2301,338 @@
 +- 時間：ISO 8601（UTC+08:00，台北時區）。
 *** End Patch
 [2m2025-11-23T01:56:34.001138Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-23T01:56:35.743948Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-23T01:56:35.744137Z[0m [32m INFO[0m ghost commit captured: 127cd574f3ddc5f5d62ff4f116a1d017f8222ffb
+[2m2025-11-23T01:56:35.744158Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-23T01:56:38.393129Z[0m [32m INFO[0m ToolCall: shell_command {"command":"ls specs/001-business-card-manager","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-23T01:56:42.152577Z[0m [32m INFO[0m ToolCall: shell_command {"command":"rg -n \"Play|上架|store|Play\" specs/001-business-card-manager","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-23T01:56:50.710232Z[0m [32m INFO[0m ToolCall: shell_command {"command":"cat .specify/templates/tasks-template.md","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-23T01:57:03.307596Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/spec.md
+@@
+ - **遙測計畫**：記錄掃描成功率、OCR 修正次數、試算表寫入失敗率與授權錯誤次數，並在 5% 以上的異常率時發出警示。
+ 
+ ## 成功指標（必填）
+@@
+ - 主要使用者皆持有可上網的 Android 裝置並具備 Google 帳號。
+ - 組織允許以 Google 試算表及 Google Drive 作為正式資料儲存解決方案，並已有 Workspace 管理員協助設定權限。
+-- OCR 主要採 Google ML Kit 裝置端預建模型；若需雲端/SaaS 備援或進一步訓練，列入未來版本評估。
++- OCR 主要採 Google ML Kit 裝置端預建模型；若需雲端/SaaS 備援或進一步訓練，列入未來版本評估。
++- 發佈方式為簽署後的 APK 以 side-load 安裝，不涵蓋 Google Play 上架、Play Integrity、內容分級或審查流程。
+*** End Patch
+[2m2025-11-23T01:57:10.080230Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/plan.md
+@@
+ - Google 試算表 `Contacts` 為唯一資料來源，含欄位驗證、保護 `id` 欄位，桌面端可直接新增、修改、篩選、軟刪除（`is_deleted/deleted_at`），並維持最後寫入者覆蓋與稽核時間戳。  
+ - 安全與存取：Drive/試算表僅限受邀帳號存取，OAuth 授權可更換目標試算表/資料夾。  
+ - 體驗與效能：OCR 預填 5 秒內完成；試算表讀寫 2 秒內回應；列表載入需支援至少 5,000 筆資料。
++- 發佈：僅產出簽署 APK 供 side-load 安裝，不涵蓋 Google Play 上架、審查、Play Integrity 或內容分級流程。
+@@
+-**運作限制**：需離線暫存多筆並自動補寫；權限僅限受邀帳號；需處理影像上傳失敗與 `id` 衝突提示  
++**運作限制**：需離線暫存多筆並自動補寫；權限僅限受邀帳號；需處理影像上傳失敗與 `id` 衝突提示；發佈採 side-load（簽署 APK），不經 Google Play 上架/審查  
+*** End Patch
+[2m2025-11-23T01:57:18.700014Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/research.md
+@@
+-### Sheets/Drive 授權與使用方式
+-- **Decision**：採 Google Sign-In/OAuth 2，請求最小必要範圍（Sheets/Drive 受邀檔案存取），權杖交由 Google Play services 管理；App 內可切換目標試算表/資料夾。
+-- **Rationale**：符合最小權限原則與企業受邀帳號限制，減少自行儲存 refresh token 的安全風險。
+-- **Alternatives considered**：服務帳號（不符終端用戶授權流程且較難限制個人受邀帳號）；長期本地儲存 access/refresh token（安全風險高）。
++### Sheets/Drive 授權與使用方式
++- **Decision**：採 Google Sign-In/OAuth 2，請求最小必要範圍（Sheets/Drive 受邀檔案存取），權杖交由 Google Play services 管理；App 內可切換目標試算表/資料夾。
++- **Rationale**：符合最小權限原則與企業受邀帳號限制，減少自行儲存 refresh token 的安全風險。
++- **Alternatives considered**：服務帳號（不符終端用戶授權流程且較難限制個人受邀帳號）；長期本地儲存 access/refresh token（安全風險高）。
++
++### 發佈/交付方式
++- **Decision**：僅產出簽署 APK，透過 side-load 分發與安裝，不進行 Google Play 上架、審查或 Play Integrity 整合。
++- **Rationale**：避免商店審查/內容分級流程，符合內部分發需求；保留必要安全/隱私控制。
++- **Alternatives considered**：上架 Google Play（需要額外審查與 Play Integrity）；企業內部分發管道（需額外 MDM/託管成本）。
+*** End Patch
+[2m2025-11-23T01:57:34.049066Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/quickstart.md
+@@
+-**目的**：協助開發者在本機/模擬器快速啟動並驗證掃描、同步、離線暫存與權限流程。  
+-**前置**：已在 `001-business-card-manager` 分支。
++**目的**：協助開發者在本機/模擬器快速啟動並驗證掃描、同步、離線暫存與權限流程，產出簽署 APK 並以 side-load 安裝（不上架 Google Play）。  
++**前置**：已在 `001-business-card-manager` 分支。
+@@
+-- Android SDK：目標/compile API 34，最低 API 29。
+-- Google Play services / Google Sign-In 已安裝於測試裝置或模擬器。
++- Android SDK：目標/compile API 34，最低 API 29。
++- Google Play services / Google Sign-In 已安裝於測試裝置或模擬器（僅用於 OAuth，不涉 Play Store 上架）。
+ - 取得 Google Cloud 專案 OAuth Client (Android) 並設定 SHA-1/包名。
+@@
+-## 2. 專案設定
++## 2. 專案設定
+ 1) 匯入專案並同步 Gradle。  
+ 2) 設定 `google-services.json`（含 OAuth Client）。  
+ 3) 建立或指派 Google 試算表與 Drive 目錄，僅邀請測試帳號；表格需有 `Contacts` 工作表與欄位驗證。  
+ 4) 在 App 設定中指定目標試算表 ID 與 Drive 目錄（或透過授權 UI 選擇）。
+ 
+-## 3. 執行與驗證
++## 3. Build 與 side-load 安裝
++- 產出簽署 APK（側載用）：`./gradlew assembleRelease`（或對應 flavor），使用專案簽章金鑰。
++- 以 ADB 安裝：`adb install -r app/build/outputs/apk/release/app-release.apk`，或在實體機啟用「允許未知來源」後手動安裝 APK。
++- 不需進行 Google Play 上架、內容分級或 Play Integrity 設定。
++
++## 4. 執行與驗證
+ 1) 在實體機/模擬器執行 App，完成 Google 授權。  
+ 2) 掃描名片（可使用測試影像），確認 OCR 預填欄位，必要時手動修正後儲存。  
+ 3) 驗證試算表新增一列，`id/source/created_at/updated_at` 正確，並有影像 URL（若上傳成功）。  
+ 4) 於桌面端修改資料，App 重新整理應反映最新內容；同筆更新以最後寫入為準。  
+ 5) 離線模式：關閉網路建立多筆暫存，恢復上線後應逐筆同步並顯示成功/失敗。  
+ 6) 軟刪除：在 App 或試算表標記 `is_deleted=true`，預設查詢應排除，並可於稽核檢視。
+ 
+-## 4. 測試與驗收
++## 5. 測試與驗收
+ - 單元/邏輯：JUnit；離線/重試可用 Robolectric。  
+ - UI/整合：Espresso + Instrumentation，覆蓋掃描→儲存→同步與桌面更新回讀。  
+ - 契約/互動：對 Sheets/Drive 呼叫採 fake/mock 或錄製回放，驗證欄位映射與錯誤處理。  
+ - 覆蓋率目標：關鍵同步模組 >=90% 陳述、>=75% 分支。
+ 
+-## 5. 故障排除
++## 6. 故障排除
+ - 授權失敗：確認 SHA-1/包名、邀請帳號與作用中 OAuth Client。  
+ - 影像上傳失敗：檢查網路或權限，重試後仍失敗應維持資料列並標記待補。  
+ - `id` 衝突：刷新資料後重試；維持時間戳+隨機碼生成規則以降低機率。
+*** End Patch
+[2m2025-11-23T01:57:40.418134Z[0m [32m INFO[0m ToolCall: shell_command {"command":"rg -n \"Play\" specs/001-business-card-manager","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-23T01:57:57.044131Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: specs/001-business-card-manager/tasks.md
++# 任務：名片管理系統第一版（side-load APK 發佈）
++
++**輸入**：`spec.md`、`plan.md`、`research.md`、`data-model.md`、`contracts/`  
++**前置需求**：完成 Phase 1–2（基礎建設），不涉及 Google Play 上架；僅產出簽署 APK 供 side-load。
++
++## 憲章強制品質任務（共通）
++- [ ] Q001 [P] 確認模組 ownership、架構說明與 lint/detekt 設定（程式碼品質監護）。
++- [ ] Q002 [P] 擴充自動化測試達 >=90% 陳述 / >=75% 分支（同步/離線/重試核心）。
++- [ ] Q003 驗證 UX 一致性與無障礙（WCAG 2.1 AA），記錄視覺回歸結果。
++- [ ] Q004 量測效能預算：OCR ≤5 秒、讀寫 ≤2 秒、列表 5k 筆不逾時；異常率 ≥5% 觸發告警。
++- [ ] Q005 確認所有文件/指南為繁體中文並同步更新（語言治理）。
++
++## Phase 3：使用者故事 1 - 手機掃描並建檔（P1）
++- [ ] T101 [US1] 實作掃描/OCR 流程（android/app/src/main/...），含 ML Kit、預填與手動修正 UI。
++- [ ] T102 [US1] 實作名片建立服務：生成 `id`、寫入 Room 暫存與 Sheets 同步佇列；處理影像上傳失敗標記。
++- [ ] T103 [US1] 儀表/整合測試：掃描→儲存→同步到試算表（android/app/src/androidTest/...）；契約測試比對 `contracts/contacts-sync.md`。
++
++## Phase 4：使用者故事 2 - 桌面編修與查詢（P1）
++- [ ] T201 [US2] 實作資料讀取/更新：依 `id` 更新列、刷新 `updated_at`、軟刪除欄位；支援篩選/排序（依 spec 欄位）。
++- [ ] T202 [US2] 建立回寫腳本或 API 呼叫封裝，確保試算表欄位驗證與保護規則有效。
++- [ ] T203 [US2] 整合測試：桌面更新 → App 重新整理可見最新內容；軟刪除預設過濾。
++
++## Phase 5：使用者故事 3 - 帳號安全與同步一致性（P2）
++- [ ] T301 [US3] OAuth 權限管理：選擇/變更試算表與 Drive 目錄，僅受邀帳號；最小範圍權限。
++- [ ] T302 [US3] 衝突處理：最後寫入者覆蓋，`updated_at` 反映最終時間；離線多筆佇列逐筆上傳與重試。
++- [ ] T303 [US3] 安全/一致性測試：撤銷授權提示重新登入；同筆同時更新的最終內容與時間戳驗證。
++
++## 發佈與 side-load（不含 Play 上架）
++- [ ] D401 產出簽署 APK：設定簽章金鑰，執行 `./gradlew assembleRelease`，產物 `app/build/outputs/apk/release/app-release.apk`。
++- [ ] D402 驗證 side-load 安裝：`adb install -r ...` 或實體機啟用未知來源後手動安裝；記錄安裝/啟動/授權流程。
++- [ ] D403 回歸測試：以簽署 APK 執行全套整合/契約/離線重試測試，確保與 debug 版一致。
++
++## Phase N：潤飾與跨故事
++- [ ] N501 清理程式碼與文件，確保 spec/plan/quickstart 同步。
++- [ ] N502 追加效能與遙測優化（快取/分頁），針對 50k 列場景做抽樣測試。
++- [ ] N503 安全性檢查：權限範圍、token 管理、日誌脫敏。
+*** End Patch
+[2m2025-11-23T03:03:55.510866Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-23T03:03:57.880589Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-23T03:03:57.881117Z[0m [32m INFO[0m ghost commit captured: 30eb534c2476bd4b889536c6fcd4f86decfc7eb8
+[2m2025-11-23T03:03:57.881186Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-23T03:04:43.193308Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/tasks.md
+@@
+-# 任務：名片管理系統第一版（side-load APK 發佈）
+-
+-**輸入**：`spec.md`、`plan.md`、`research.md`、`data-model.md`、`contracts/`  
+-**前置需求**：完成 Phase 1–2（基礎建設），不涉及 Google Play 上架；僅產出簽署 APK 供 side-load。
+-
+-## 憲章強制品質任務（共通）
+-- [ ] Q001 [P] 確認模組 ownership、架構說明與 lint/detekt 設定（程式碼品質監護）。
+-- [ ] Q002 [P] 擴充自動化測試達 >=90% 陳述 / >=75% 分支（同步/離線/重試核心）。
+-- [ ] Q003 驗證 UX 一致性與無障礙（WCAG 2.1 AA），記錄視覺回歸結果。
+-- [ ] Q004 量測效能預算：OCR ≤5 秒、讀寫 ≤2 秒、列表 5k 筆不逾時；異常率 ≥5% 觸發告警。
+-- [ ] Q005 確認所有文件/指南為繁體中文並同步更新（語言治理）。
+-
+-## Phase 3：使用者故事 1 - 手機掃描並建檔（P1）
+-- [ ] T101 [US1] 實作掃描/OCR 流程（android/app/src/main/...），含 ML Kit、預填與手動修正 UI。
+-- [ ] T102 [US1] 實作名片建立服務：生成 `id`、寫入 Room 暫存與 Sheets 同步佇列；處理影像上傳失敗標記。
+-- [ ] T103 [US1] 儀表/整合測試：掃描→儲存→同步到試算表（android/app/src/androidTest/...）；契約測試比對 `contracts/contacts-sync.md`。
+-
+-## Phase 4：使用者故事 2 - 桌面編修與查詢（P1）
+-- [ ] T201 [US2] 實作資料讀取/更新：依 `id` 更新列、刷新 `updated_at`、軟刪除欄位；支援篩選/排序（依 spec 欄位）。
+-- [ ] T202 [US2] 建立回寫腳本或 API 呼叫封裝，確保試算表欄位驗證與保護規則有效。
+-- [ ] T203 [US2] 整合測試：桌面更新 → App 重新整理可見最新內容；軟刪除預設過濾。
+-
+-## Phase 5：使用者故事 3 - 帳號安全與同步一致性（P2）
+-- [ ] T301 [US3] OAuth 權限管理：選擇/變更試算表與 Drive 目錄，僅受邀帳號；最小範圍權限。
+-- [ ] T302 [US3] 衝突處理：最後寫入者覆蓋，`updated_at` 反映最終時間；離線多筆佇列逐筆上傳與重試。
+-- [ ] T303 [US3] 安全/一致性測試：撤銷授權提示重新登入；同筆同時更新的最終內容與時間戳驗證。
+-
+-## 發佈與 side-load（不含 Play 上架）
+-- [ ] D401 產出簽署 APK：設定簽章金鑰，執行 `./gradlew assembleRelease`，產物 `app/build/outputs/apk/release/app-release.apk`。
+-- [ ] D402 驗證 side-load 安裝：`adb install -r ...` 或實體機啟用未知來源後手動安裝；記錄安裝/啟動/授權流程。
+-- [ ] D403 回歸測試：以簽署 APK 執行全套整合/契約/離線重試測試，確保與 debug 版一致。
+-
+-## Phase N：潤飾與跨故事
+-- [ ] N501 清理程式碼與文件，確保 spec/plan/quickstart 同步。
+-- [ ] N502 追加效能與遙測優化（快取/分頁），針對 50k 列場景做抽樣測試。
+-- [ ] N503 安全性檢查：權限範圍、token 管理、日誌脫敏。
++# 任務：名片管理系統第一版（side-load APK）
++
++**輸入**：`spec.md`、`plan.md`、`research.md`、`data-model.md`、`contracts/`  
++**前置需求**：依計畫完成各階段；發佈僅產出簽署 APK 供 side-load，不涉 Google Play 上架。
++
++## Phase 1：初始化
++- [ ] T001 建立/確認 Android Gradle 專案設定與版本（android/app/build.gradle.kts）
++- [ ] T002 [P] 設定 detekt/ktlint 與 CI 腳本（android/app/，.github/workflows/ 如有）
++- [ ] T003 設定簽章與 keystore 參數（android/app/keystore.properties）
++- [ ] T004 [P] 加入 google-services 與 OAuth Client 設定（android/app/google-services.json）
++
++## Phase 2：基礎建設（阻擋性）
++- [ ] T005 建立 Room 基礎與 ContactRecord/ContactImage schema（android/app/src/main/java/.../data/db）
++- [ ] T006 建立 Sheets/Drive API 封裝與授權流程（android/app/src/main/java/.../data/remote）
++- [ ] T007 [P] 實作統一日誌與錯誤處理、脫敏（android/app/src/main/java/.../core/logging）
++- [ ] T008 建立離線佇列/重試機制骨架（android/app/src/main/java/.../sync）
++- [ ] T009 [P] 設定遙測/指標收集介面（android/app/src/main/java/.../telemetry）
++
++## Phase 3：使用者故事 1 - 手機掃描並建檔（P1）
++- [ ] T010 [US1] 建立掃描與 ML Kit OCR 預填 UI（android/app/src/main/java/.../ui/scan）
++- [ ] T011 [P] [US1] 建立名片建立流程：生成 `id`、寫入 Room 暫存、佇列同步（android/app/src/main/java/.../domain/create）
++- [ ] T012 [P] [US1] 影像上傳與 URL 回寫（android/app/src/main/java/.../data/remote/drive）
++- [ ] T013 [US1] 契約/整合測試：掃描→儲存→寫入試算表（android/app/src/androidTest/java/.../ScanSyncTest.kt）
++
++## Phase 4：使用者故事 2 - 桌面端編修與查詢（P1）
++- [ ] T014 [US2] 實作資料讀取/篩選/排序（android/app/src/main/java/.../data/remote/sheets/Queries.kt）
++- [ ] T015 [P] [US2] 更新/軟刪除寫回流程，刷新 `updated_at`、`is_deleted`（android/app/src/main/java/.../domain/update）
++- [ ] T016 [US2] 整合測試：桌面更新後 App 重新整理顯示最新列（android/app/src/androidTest/java/.../SheetUpdateSyncTest.kt）
++
++## Phase 5：使用者故事 3 - 帳號安全與同步一致性（P2）
++- [ ] T017 [US3] OAuth 設定/切換試算表與資料夾，受邀帳號檢查（android/app/src/main/java/.../auth）
++- [ ] T018 [P] [US3] 衝突處理：最後寫入者覆蓋、`updated_at` 校驗（android/app/src/main/java/.../sync/conflict)
++- [ ] T019 [US3] 撤銷授權/重新登入與一致性驗證測試（android/app/src/androidTest/java/.../AuthConsistencyTest.kt）
++
++## Phase 6：發佈與 side-load（不上架 Play）
++- [ ] T020 產出簽署 APK：`./gradlew assembleRelease`（android/app/build.gradle.kts）
++- [ ] T021 [P] 驗證 side-load 安裝與啟動流程：`adb install -r app/build/outputs/apk/release/app-release.apk`（tests/manual/sideload.md）
++- [ ] T022 回歸測試：以簽署 APK 執行整合/契約/離線重試（android/app/src/androidTest/java/.../ReleaseRegressionTest.kt）
++
++## Phase 7：潤飾與跨故事
++- [ ] T023 清理程式碼/文件並同步 spec/plan/quickstart（docs/ 或 specs/001-business-card-manager/）
++- [ ] T024 [P] 追加效能/遙測優化（分頁/快取）並抽樣 50k 列測試（android/app/src/main/java/.../perf）
++- [ ] T025 安全性強化：權限範圍、token 管理、日誌脫敏檢查（android/app/src/main/java/.../security）
++
++## 依賴與執行順序
++- 故事優先順序：US1 (P1) → US2 (P1) → US3 (P2)。
++- Phase 1 → Phase 2 為阻擋前置；完成後可平行 US1/US2；US3 在核心同步穩定後進行。
++
++## 平行作業範例
++- Phase 1：T002（lint）可與 T003（簽章）並行。
++- Phase 2：T006（API 封裝）與 T007（logging）可並行，需在 T008 佇列骨架前完成基礎介面。
++- US1：T011（建立流程）與 T012（影像上傳）可並行，T013 測試需等待兩者完成。
++- US2：T014 資料讀取與 T015 更新寫回可並行，T016 測試在兩者完成後。
++- 發佈：T021 side-load 驗證可與 T022 回歸測試並行（使用簽署 APK）。
++
++## 實作策略
++- MVP：完成 Phase 1–2，再交付 US1（掃描→寫入 Sheets），驗證 side-load APK。
++- 漸進式：在 US1 穩定後並行 US2，最後處理 US3 的權限與衝突，收斂於 Phase 7 潤飾。
+*** End Patch
+[2m2025-11-23T03:23:13.277477Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-23T03:23:15.316350Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-23T03:23:15.316463Z[0m [32m INFO[0m ghost commit captured: ae005740f835ca8702692a32f44b52924f7bc01e
+[2m2025-11-23T03:23:15.316473Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-23T03:23:22.554682Z[0m [32m INFO[0m ToolCall: shell_command {"command":"cat specs/001-business-card-manager/spec.md","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-23T03:23:26.306389Z[0m [32m INFO[0m ToolCall: shell_command {"command":"cat specs/001-business-card-manager/plan.md","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-23T03:23:29.292756Z[0m [32m INFO[0m ToolCall: shell_command {"command":"cat specs/001-business-card-manager/tasks.md","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-23T03:28:49.409177Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-23T03:28:51.237834Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-23T03:28:51.237954Z[0m [32m INFO[0m ghost commit captured: e7112dfb996a5d055b1ac7d754617beff5542295
+[2m2025-11-23T03:28:51.237966Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-23T03:31:31.114411Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-23T03:31:32.911136Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-23T03:31:32.911247Z[0m [32m INFO[0m ghost commit captured: aa95e6d8aee067f830dfff39206c1d8e25972090
+[2m2025-11-23T03:31:32.911272Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-23T03:32:24.588872Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-23T03:32:26.324015Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-23T03:32:26.324125Z[0m [32m INFO[0m ghost commit captured: 4db6a2d6b24ce5cc56794fff5c66a6bf791a67bc
+[2m2025-11-23T03:32:26.324137Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-23T03:33:12.449292Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/tasks.md
+@@
+ ## Phase 1：初始化
+ - [ ] T001 建立/確認 Android Gradle 專案設定與版本（android/app/build.gradle.kts）
+ - [ ] T002 [P] 設定 detekt/ktlint 與 CI 腳本（android/app/，.github/workflows/ 如有）
+ - [ ] T003 設定簽章與 keystore 參數（android/app/keystore.properties）
+ - [ ] T004 [P] 加入 google-services 與 OAuth Client 設定（android/app/google-services.json）
+ 
+ ## Phase 2：基礎建設（阻擋性）
+-- [ ] T005 建立 Room 基礎與 ContactRecord/ContactImage schema（android/app/src/main/java/.../data/db）
+-- [ ] T006 建立 Sheets/Drive API 封裝與授權流程（android/app/src/main/java/.../data/remote）
+-- [ ] T007 [P] 實作統一日誌與錯誤處理、脫敏（android/app/src/main/java/.../core/logging）
+-- [ ] T008 建立離線佇列/重試機制骨架（android/app/src/main/java/.../sync）
+-- [ ] T009 [P] 設定遙測/指標收集介面（android/app/src/main/java/.../telemetry）
++- [ ] T005 建立 Room 基礎與 ContactRecord/ContactImage schema（android/app/src/main/java/com/businesscard/app/data/db）
++- [ ] T006 建立 Sheets/Drive API 封裝與授權流程（android/app/src/main/java/com/businesscard/app/data/remote）
++- [ ] T007 [P] 實作統一日誌與錯誤處理、脫敏（android/app/src/main/java/com/businesscard/app/core/logging）
++- [ ] T008 建立離線佇列/重試機制骨架（android/app/src/main/java/com/businesscard/app/sync）
++- [ ] T009 [P] 設定遙測/指標收集介面（android/app/src/main/java/com/businesscard/app/telemetry）
++- [ ] T010 佈建 Contacts 試算表欄位/驗證/表頭與 `id` 欄保護並回歸檢查（automation/sheets_drive/contacts_schema_setup.sh）
++- [ ] T011 檢查並設定 Drive/Sheets 權限：僅受邀帳號、禁止公開連結（automation/sheets_drive/permissions_check.sh）
++- [ ] T012 CI 覆蓋率守門：>=90% 陳述 / >=75% 分支，失敗阻擋（.github/workflows/android-ci.yml）
++- [ ] T013 效能基線量測與報表：OCR ≤5 秒、Sheets 讀寫 ≤2 秒、列表 5k；異常率 ≥5% 告警（android/app/src/main/java/com/businesscard/app/perf/PerformanceMonitor.kt + CI 報表）
+ 
+ ## Phase 3：使用者故事 1 - 手機掃描並建檔（P1）
+-- [ ] T010 [US1] 建立掃描與 ML Kit OCR 預填 UI（android/app/src/main/java/.../ui/scan）
+-- [ ] T011 [P] [US1] 建立名片建立流程：生成 `id`、寫入 Room 暫存、佇列同步（android/app/src/main/java/.../domain/create）
+-- [ ] T012 [P] [US1] 影像上傳與 URL 回寫（android/app/src/main/java/.../data/remote/drive）
+-- [ ] T013 [US1] 契約/整合測試：掃描→儲存→寫入試算表（android/app/src/androidTest/java/.../ScanSyncTest.kt）
++- [ ] T014 [US1] 建立掃描與 ML Kit OCR 預填 UI（android/app/src/main/java/com/businesscard/app/ui/scan）
++- [ ] T015 [P] [US1] 建立名片建立流程：生成 `id`、寫入 Room 暫存、佇列同步（android/app/src/main/java/com/businesscard/app/domain/create）
++- [ ] T016 [P] [US1] 影像上傳與 URL 回寫（android/app/src/main/java/com/businesscard/app/data/remote/drive）
++- [ ] T017 [US1] 契約/整合測試：掃描→儲存→寫入試算表（android/app/src/androidTest/java/com/businesscard/app/ScanSyncTest.kt）
++- [ ] T018 [US1] 影像上傳失敗重試與待補標記實作（android/app/src/main/java/com/businesscard/app/data/remote/drive/UploadRetrier.kt）
++- [ ] T019 [US1] androidTest 驗證上傳失敗保留資料列並提示重傳（android/app/src/androidTest/java/com/businesscard/app/UploadRetryTest.kt）
+ 
+ ## Phase 4：使用者故事 2 - 桌面端編修與查詢（P1）
+-- [ ] T014 [US2] 實作資料讀取/篩選/排序（android/app/src/main/java/.../data/remote/sheets/Queries.kt）
+-- [ ] T015 [P] [US2] 更新/軟刪除寫回流程，刷新 `updated_at`、`is_deleted`（android/app/src/main/java/.../domain/update）
+-- [ ] T016 [US2] 整合測試：桌面更新後 App 重新整理顯示最新列（android/app/src/androidTest/java/.../SheetUpdateSyncTest.kt）
++- [ ] T020 [US2] 實作資料讀取/篩選/排序（android/app/src/main/java/com/businesscard/app/data/remote/sheets/Queries.kt）
++- [ ] T021 [P] [US2] 更新/軟刪除寫回流程，刷新 `updated_at`、`is_deleted`（android/app/src/main/java/com/businesscard/app/domain/update）
++- [ ] T022 [US2] 整合測試：桌面更新後 App 重新整理顯示最新列（android/app/src/androidTest/java/com/businesscard/app/SheetUpdateSyncTest.kt）
++- [ ] T023 [US2] 處理試算表端 `id` 衝突提示與回復策略（android/app/src/main/java/com/businesscard/app/sync/ConflictResolver.kt）
++- [ ] T024 [US2] androidTest 驗證桌面插入/衝突情境與提示（android/app/src/androidTest/java/com/businesscard/app/SheetConflictTest.kt）
+ 
+ ## Phase 5：使用者故事 3 - 帳號安全與同步一致性（P2）
+-- [ ] T017 [US3] OAuth 設定/切換試算表與資料夾，受邀帳號檢查（android/app/src/main/java/.../auth）
+-- [ ] T018 [P] [US3] 衝突處理：最後寫入者覆蓋、`updated_at` 校驗（android/app/src/main/java/.../sync/conflict)
+-- [ ] T019 [US3] 撤銷授權/重新登入與一致性驗證測試（android/app/src/androidTest/java/.../AuthConsistencyTest.kt）
++- [ ] T025 [US3] OAuth 設定/切換試算表與資料夾，受邀帳號檢查（android/app/src/main/java/com/businesscard/app/auth）
++- [ ] T026 [P] [US3] 衝突處理：最後寫入者覆蓋、`updated_at` 校驗（android/app/src/main/java/com/businesscard/app/sync/conflict)
++- [ ] T027 [US3] 撤銷授權/重新登入與一致性驗證測試（android/app/src/androidTest/java/com/businesscard/app/AuthConsistencyTest.kt）
++- [ ] T028 [US3] 測試未受邀帳號/公開連結存取被拒（android/app/src/androidTest/java/com/businesscard/app/AccessControlTest.kt）
+ 
+ ## Phase 6：發佈與 side-load（不上架 Play）
+-- [ ] T020 產出簽署 APK：`./gradlew assembleRelease`（android/app/build.gradle.kts）
+-- [ ] T021 [P] 驗證 side-load 安裝與啟動流程：`adb install -r app/build/outputs/apk/release/app-release.apk`（tests/manual/sideload.md）
+-- [ ] T022 回歸測試：以簽署 APK 執行整合/契約/離線重試（android/app/src/androidTest/java/.../ReleaseRegressionTest.kt）
++- [ ] T029 產出簽署 APK：`./gradlew assembleRelease`（android/app/build.gradle.kts）
++- [ ] T030 [P] 驗證 side-load 安裝與啟動/授權流程並記錄結果：`adb install -r app/build/outputs/apk/release/app-release.apk`（tests/manual/sideload.md）
++- [ ] T031 回歸測試：以簽署 APK 執行整合/契約/離線重試（android/app/src/androidTest/java/com/businesscard/app/ReleaseRegressionTest.kt）
+ 
+ ## Phase 7：潤飾與跨故事
+-- [ ] T023 清理程式碼/文件並同步 spec/plan/quickstart（docs/ 或 specs/001-business-card-manager/）
+-- [ ] T024 [P] 追加效能/遙測優化（分頁/快取）並抽樣 50k 列測試（android/app/src/main/java/.../perf）
+-- [ ] T025 安全性強化：權限範圍、token 管理、日誌脫敏檢查（android/app/src/main/java/.../security）
++- [ ] T032 清理程式碼/文件並同步 spec/plan/quickstart（docs/ 或 specs/001-business-card-manager/）
++- [ ] T033 [P] 追加效能/遙測優化（分頁/快取）並抽樣 50k 列測試，對齊效能預算（android/app/src/main/java/com/businesscard/app/perf）
++- [ ] T034 安全性強化：權限範圍、token 管理、日誌脫敏檢查（android/app/src/main/java/com/businesscard/app/security）
++- [ ] T035 排程每日回歸（整合/契約/離線重試）並產出報表（automation/ci/daily-regression.sh）
++- [ ] T036 遙測異常（≥5%）告警設定與驗證（android/app/src/main/java/com/businesscard/app/telemetry/AlertingConfig.kt + automation/alerts/config.md）
++- [ ] T037 合成測試：80% 名片 2 分鐘內入表（android/app/src/androidTest/java/com/businesscard/app/SLAIngestionTest.kt）
++- [ ] T038 合成測試：篩選視圖 30 秒內取得名單，含常用視圖使用率檢核（android/app/src/androidTest/java/com/businesscard/app/FilterSLAViewTest.kt）
++- [ ] T039 報表檢核：欄位完整率 ≥95%（automation/reports/completeness_check.sh）
++- [ ] T040 錯誤率 <2% 與 1 日內追蹤修復報表/告警（automation/reports/error_rate_alert.sh）
+*** End Patch
+[2m2025-11-23T03:33:16.040057Z[0m [32m INFO[0m ToolCall: shell_command {"command":"rg -n \"\\[ \\]\" specs/001-business-card-manager/tasks.md","workdir":"/mnt/d/program/businesscard"}
