@@ -6,6 +6,12 @@
 **語言要求**：本計畫與所有引用內容必須以繁體中文 (zh-TW) 撰寫，其他語言僅能作為附錄。  
 **注意**：此模板由 `/speckit.plan` 指令產生；操作流程請參閱 `.specify/templates/commands/plan.md`。
 
+## 現況與目標
+
+- 目前尚未建立 Android 原始碼，預計後續在本 repo 新增 `android-app/`（Kotlin 1.9、Room、Sheets/Drive、CI）後才啟動實作。
+- 當前階段聚焦整理規格、計畫、任務分解與檢核表，確保文件可通過 requirements checklist。
+- 下方所有開發任務、路徑與依賴均以 `android-app/` 為基準，需在專案建立後依序展開。
+
 ## 摘要
 
 - Android App 掃描紙本名片，採 Google ML Kit 裝置端 OCR 進行預填，並支援離線多筆暫存、恢復連線後逐筆自動上傳。  
@@ -55,7 +61,7 @@ specs/001-business-card-manager/
 ### 原始碼（版本庫根目錄）
 
 ```text
-android/
+android-app/
 └── app/
     ├── src/main/            # UI、掃描/OCR、同步模組
     ├── src/androidTest/     # 儀表/整合測試
@@ -65,7 +71,7 @@ automation/
 └── sheets_drive/            # 試算表/Drive 佈建或回歸腳本（若需要）
 ```
 
-**結構決策**：以 Android App 為主要程式碼庫，若需要自動化佈建/回歸腳本則置於 `automation/sheets_drive/`，目前不引入額外後端服務。
+**結構決策**：以 `android-app/` 為主要程式碼庫根目錄，若需要自動化佈建/回歸腳本則置於 `automation/sheets_drive/`，目前不引入額外後端服務。
 
 ## 複雜度追蹤
 

@@ -3,6 +3,7 @@
 **Purpose**: Validate specification completeness and quality before proceeding to planning
 **Created**: 2025-11-21
 **Feature**: [specs/001-business-card-manager/spec.md](../spec.md)
+**Status**: 規格檢核為 PASS（內容完整、可驗收）；實作與測試需待 `android-app/` 專案建立後啟動，相關任務已在 plan/tasks 標註 Blocked/TODO。
 
 ## Content Quality
 
@@ -31,4 +32,5 @@
 
 ## Notes
 
+- 文件符合規格品質，但目前僅整理規格/計畫/任務，需建立 `android-app/` 後再展開實作。
 - Items marked incomplete require spec updates before `/speckit.clarify` or `/speckit.plan`
