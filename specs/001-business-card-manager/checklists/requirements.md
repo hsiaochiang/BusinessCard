@@ -33,4 +33,5 @@
 ## Notes
 
 - 文件符合規格品質，但目前僅整理規格/計畫/任務，需建立 `android-app/` 後再展開實作。
+- 憑證/設定以環境變數 placeholder 提供（如 `GOOGLE_SERVICES_JSON_PATH`、`ANDROID_RELEASE_KEYSTORE_PATH`、`OAUTH_CLIENT_CONFIG_PATH`），不提交實體檔案，並在 tasks/plan 標記為 Blocked。
 - Items marked incomplete require spec updates before `/speckit.clarify` or `/speckit.plan`

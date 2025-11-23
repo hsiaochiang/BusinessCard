@@ -1,50 +1,26 @@
-﻿# 隞餃?嚗??恣?頂蝯梁洵銝??side-load APK嚗?
+# 任務：名片管理系統第一版（side-load APK）
 
-**頛詨**嚗spec.md`?plan.md`?research.md`?data-model.md`?contracts/`  
-**?蔭?瘙?*嚗?閮摰???畾蛛??潔???箇偷蝵?APK 靘?side-load嚗?瘨?Google Play 銝??
-> ????桀?撠撱箇? `android-app/` 撠?嚗誑銝遙??豢?閮 Blocked/TODO嚗? Android 撠?撱箇?敺銵?
+**輸入**：`spec.md`、`plan.md`、`research.md`、`data-model.md`、`contracts/`  
+**策略**：本階段僅整理規格與任務，暫不建立 Android 原始碼；所有 Android 相關工作維持 Blocked，待後續建立 `android-app/` 後再展開。  
+**憑證與設定**：以環境變數/placeholder 描述，不提交實體檔案（例如 `GOOGLE_SERVICES_JSON_PATH`、`ANDROID_RELEASE_KEYSTORE_PATH`、`OAUTH_CLIENT_CONFIG_PATH`）。
 
-## Blocked 任務彙總
+## Blocked 任務彙總（高階）
 
-| 任務 | Phase | 狀態 | 重點描述 | 路徑/檔案 |
-|------|-------|------|----------|-----------|
-| T001 | 1 | Blocked | 建置/確認 Android Gradle 專案設定 | android-app/app/build.gradle.kts |
-| T002 | 1 | Blocked [P] | 設定 detekt/ktlint 並串接 CI | android-app/app/, .github/workflows/ |
-| T003 | 1 | Blocked | 設定簽署 keystore 資訊 | android-app/app/keystore.properties |
-| T004 | 1 | Blocked [P] | 匯入 google-services 與 OAuth Client 設定 | android-app/app/google-services.json |
-| T005 | 2 | Blocked | 建置 Room ContactRecord/ContactImage schema | android-app/app/src/main/java/com/businesscard/app/data/db |
-| T006 | 2 | Blocked | 建置 Sheets/Drive API 封裝與授權流程 | android-app/app/src/main/java/com/businesscard/app/data/remote |
-| T007 | 2 | Blocked [P] | 建立統一日誌/錯誤追蹤 | android-app/app/src/main/java/com/businesscard/app/core/logging |
-| T008 | 2 | Blocked | 建置同步/偵錯測試骨架 | android-app/app/src/main/java/com/businesscard/app/sync |
-| T009 | 2 | Blocked [P] | 設定遙測/事件追蹤介面 | android-app/app/src/main/java/com/businesscard/app/telemetry |
-| T010 | 2 | Blocked | 建立 Contacts 試算表欄位驗證腳本 | automation/sheets_drive/contacts_schema_setup.sh |
-| T011 | 2 | Blocked | 檢查並設定 Drive/Sheets 權限腳本 | automation/sheets_drive/permissions_check.sh |
-| T012 | 2 | Blocked | CI 覆蓋率門檻設定 | .github/workflows/android-ci.yml |
-| T013 | 2 | Blocked | 性能監控與警示 (OCR/Sheets/5k 行) | android-app/app/src/main/java/com/businesscard/app/perf/PerformanceMonitor.kt, CI 報表 |
-| T014 | 3 | Blocked | US1：建置掃描輸入 + ML Kit OCR UI | android-app/app/src/main/java/com/businesscard/app/ui/scan |
-| T015 | 3 | Blocked [P] | US1：建立寫入流程、生成 id、寫 Room 並入同步佇列 | android-app/app/src/main/java/com/businesscard/app/domain/create |
-| T016 | 3 | Blocked [P] | US1：影像上傳 Drive 並回寫 URL | android-app/app/src/main/java/com/businesscard/app/data/remote/drive |
-| T017 | 3 | Blocked | US1：掃描同步整合測試 | android-app/app/src/androidTest/java/com/businesscard/app/ScanSyncTest.kt |
-| T018 | 3 | Blocked | US1：影像上傳失敗重試紀錄與實作 | android-app/app/src/main/java/com/businesscard/app/data/remote/drive/UploadRetrier.kt |
-| T019 | 3 | Blocked | US1：上傳失敗資料保留與提示的 androidTest | android-app/app/src/androidTest/java/com/businesscard/app/UploadRetryTest.kt |
-| T020 | 4 | Blocked | US2：資料查詢/篩選/排序 | android-app/app/src/main/java/com/businesscard/app/data/remote/sheets/Queries.kt |
-| T021 | 4 | Blocked [P] | US2：更新/刪除寫入流程含 updated_at/is_deleted | android-app/app/src/main/java/com/businesscard/app/domain/update |
-| T022 | 4 | Blocked | US2：更新同步 androidTest | android-app/app/src/androidTest/java/com/businesscard/app/SheetUpdateSyncTest.kt |
-| T023 | 4 | Blocked | US2：端點 id 衝突提示/回復 | android-app/app/src/main/java/com/businesscard/app/sync/ConflictResolver.kt |
-| T024 | 4 | Blocked | US2：桌面端寫入/衝突案例 androidTest | android-app/app/src/androidTest/java/com/businesscard/app/SheetConflictTest.kt |
-| T025 | 5 | Blocked | US3：OAuth 設定與權限檢查 | android-app/app/src/main/java/com/businesscard/app/auth |
-| T026 | 5 | Blocked [P] | US3：衝突處理政策 (寫入者/updated_at 合併) | android-app/app/src/main/java/com/businesscard/app/sync/conflict |
-| T027 | 5 | Blocked | US3：權限/一致性 androidTest | android-app/app/src/androidTest/java/com/businesscard/app/AuthConsistencyTest.kt |
-| T028 | 5 | Blocked | US3：帳號/權限存取控制 androidTest | android-app/app/src/androidTest/java/com/businesscard/app/AccessControlTest.kt |
-| T029 | 6 | Blocked | 產出簽署 Release APK | android-app/app/build.gradle.kts |
-| T030 | 6 | Blocked [P] | 測試 side-load 安裝與更新流程 | tests/manual/sideload.md |
-| T031 | 6 | Blocked | 發佈後迴歸測試 | android-app/app/src/androidTest/java/com/businesscard/app/ReleaseRegressionTest.kt |
-| T032 | 7 | Blocked | 清單流程確認並更新 spec/plan/quickstart | docs/, specs/001-business-card-manager/ |
-| T033 | 7 | Blocked [P] | 追蹤性能/容量極限並完成 50k 測試 | android-app/app/src/main/java/com/businesscard/app/perf |
-| T034 | 7 | Blocked | 安全強化（權限 token 管理、日誌掩碼、稽核） | android-app/app/src/main/java/com/businesscard/app/security |
-| T035 | 7 | Blocked | 每日迴歸腳本與報表 | automation/ci/daily-regression.sh |
-| T036 | 7 | Blocked | 異常率警戒與告警設定 | android-app/app/src/main/java/com/businesscard/app/telemetry/AlertingConfig.kt, automation/alerts/config.md |
-| T037 | 7 | Blocked | SLA 0% 缺漏 2 分鐘內導入 androidTest | android-app/app/src/androidTest/java/com/businesscard/app/SLAIngestionTest.kt |
-| T038 | 7 | Blocked | 30 秒內回應與常用篩選使用情境 androidTest | android-app/app/src/androidTest/java/com/businesscard/app/FilterSLAViewTest.kt |
-| T039 | 7 | Blocked | 報表完整性檢核 | automation/reports/completeness_check.sh |
-| T040 | 7 | Blocked | 錯誤率 <2% 且 1 小時內修復報表/警示 | automation/reports/error_rate_alert.sh |
+| 任務 | Phase | 狀態 | 重點描述 | 路徑/檔案/設定 |
+|------|-------|------|----------|----------------|
+| T001 | 1 | Blocked | 建立 `android-app/` Kotlin/Gradle 專案骨架與目錄（app 模組、Gradle wrapper、.gitignore、Room/CI 插槽） | android-app/, android-app/app/build.gradle.kts |
+| T002 | 1 | Blocked [P] | 佈建 lint/測試/CI 模板（ktlint/detekt、覆蓋率門檻、CI workflow 草稿），不觸發實際建置 | .github/workflows/android-ci.yml |
+| T003 | 1 | Blocked | 設定簽署與雲端服務的 placeholder：`ANDROID_RELEASE_KEYSTORE_PATH`、`GOOGLE_SERVICES_JSON_PATH`、`OAUTH_CLIENT_CONFIG_PATH`，由環境變數/密鑰管理提供 | Gradle signingConfig、雲端設定環境變數 |
+| T004 | 2 | Blocked | 定義資料層與同步骨架（Room schema、同步佇列、重試/錯誤介面），確認與 data-model 一致 | android-app/app/src/main/java/com/businesscard/app/data/, docs |
+| T005 | 2 | Blocked [P] | Sheets/Drive 封裝與授權流程設計：以 OAuth 範圍、試算表/資料夾 ID placeholder，並規劃欄位/權限佈建腳本 | automation/sheets_drive/, env: SHEETS_SPREADSHEET_ID, DRIVE_FOLDER_ID |
+| T006 | 2 | Blocked [P] | 日誌、遙測與警示策略（事件命名、性能門檻、告警匯報介面），預留 5k/50k 資料量的監控點 | android-app/app/src/main/java/com/businesscard/app/telemetry |
+| T007 | 3 | Blocked | US1：掃描/ML Kit OCR 流程與 UI 架構，涵蓋權限、拍照預覽、欄位預填、錯誤提示 | android-app/app/src/main/java/com/businesscard/app/ui/scan |
+| T008 | 3 | Blocked [P] | US1：寫入與同步流程設計（id 生成、Room 暫存、入佇列、Drive 上傳與 URL 回寫），含失敗重試策略 | android-app/app/src/main/java/com/businesscard/app/domain/create, .../data/remote/drive |
+| T009 | 3 | Blocked | US1：整合/儀表測試計畫（OCR + 同步 + 上傳重試），含 androidTest 範本與測試資料準備 | android-app/app/src/androidTest/java/com/businesscard/app/ |
+| T010 | 4 | Blocked | US2：查詢/篩選/排序與快取策略，支援 5k~50k 列，預設排除 `is_deleted=true` | android-app/app/src/main/java/com/businesscard/app/data/remote/sheets/Queries.kt |
+| T011 | 4 | Blocked [P] | US2：更新/刪除/衝突解決政策（桌面端 vs App），同步與回復流程設計 | android-app/app/src/main/java/com/businesscard/app/domain/update, .../sync |
+| T012 | 5 | Blocked | US3：OAuth/帳號切換/權限檢查流程，限制受邀帳號並記錄稽核資訊 | android-app/app/src/main/java/com/businesscard/app/auth |
+| T013 | 5 | Blocked [P] | 安全與合規強化（權杖存取最小化、日誌掩碼、敏感欄位控管）、權限一致性測試計畫 | android-app/app/src/main/java/com/businesscard/app/security |
+| T014 | 6 | Blocked | 打包/簽署/side-load 發佈流程（Gradle 任務、簽章參數從環境變數讀取）、手動安裝/更新檢核腳本 | android-app/app/build.gradle.kts, tests/manual/sideload.md |
+| T015 | 6 | Blocked [P] | 發佈後迴歸/性能/容量/警示報表（50k 資料、錯誤率 <2%）的測試與自動化規劃 | automation/ci/, automation/reports/ |
+| T016 | 7 | Blocked | 文件/流程同步更新：spec/plan/quickstart/tasks、佈建腳本與報表說明 | docs/, specs/001-business-card-manager/, automation/ |

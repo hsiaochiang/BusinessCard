@@ -8,7 +8,8 @@
 
 ## 現況與目標
 
-- 目前尚未建立 Android 原始碼，預計後續在本 repo 新增 `android-app/`（Kotlin 1.9、Room、Sheets/Drive、CI）後才啟動實作。
+- 目前尚未建立 Android 原始碼，預計後續在本 repo 新增 `android-app/`（Kotlin 1.9、Room、Sheets/Drive、CI）後才啟動實作；專案骨架與 Room/CI 插槽已在 tasks.md 標示為 Blocked。
+- 憑證與機密檔不納入版本庫，統一以環境變數/placeholder 提供（如 `GOOGLE_SERVICES_JSON_PATH`、`ANDROID_RELEASE_KEYSTORE_PATH`、`OAUTH_CLIENT_CONFIG_PATH`），由 Gradle/CI 讀取外部路徑。
 - 當前階段聚焦整理規格、計畫、任務分解與檢核表，確保文件可通過 requirements checklist。
 - 下方所有開發任務、路徑與依賴均以 `android-app/` 為基準，需在專案建立後依序展開。
 
