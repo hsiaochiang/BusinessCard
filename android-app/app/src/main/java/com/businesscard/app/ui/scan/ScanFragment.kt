@@ -11,12 +11,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.work.WorkManager
+import com.businesscard.app.BusinessCardApp
+import com.businesscard.app.R
 import com.businesscard.app.databinding.FragmentScanBinding
 import com.businesscard.app.domain.create.CreateContactUseCase
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import com.businesscard.app.BusinessCardApp
-import com.businesscard.app.R
 
 class ScanFragment : Fragment() {
 
