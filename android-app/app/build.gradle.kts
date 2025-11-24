@@ -41,6 +41,9 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    ksp {
+        arg("room.schemaLocation", "$projectDir/schemas")
+    }
     packaging {
         resources {
             excludes += setOf(

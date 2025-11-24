@@ -1,0 +1,5 @@
+<resources>
+    <string name="placeholder_android_release_keystore_path">\$ANDROID_RELEASE_KEYSTORE_PATH</string>
+    <string name="placeholder_google_services_json_path">\$GOOGLE_SERVICES_JSON_PATH</string>
+    <string name="placeholder_oauth_client_config_path">\$OAUTH_CLIENT_CONFIG_PATH</string>
+</resources>
