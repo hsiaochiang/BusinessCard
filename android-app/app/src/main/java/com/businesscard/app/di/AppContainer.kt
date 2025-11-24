@@ -9,11 +9,12 @@ import com.businesscard.app.data.remote.drive.DriveUploader
 import com.businesscard.app.data.remote.sheets.SheetsWriter
 import com.businesscard.app.data.repository.ContactRepository
 import com.businesscard.app.telemetry.NoopTelemetry
+import com.businesscard.app.sync.UploadWorkerFactory
 
 class AppContainer(context: Context) {
     private val telemetry = NoopTelemetry
     private val database = Room.databaseBuilder(
-        context,
+        context.applicationContext,
         ContactDatabase::class.java,
         "contacts.db"
     ).build()
@@ -32,5 +33,9 @@ class AppContainer(context: Context) {
             timeProvider = timeProvider,
             telemetry = telemetry
         )
+    }
+
+    val workerFactory: UploadWorkerFactory by lazy {
+        UploadWorkerFactory(contactRepository)
     }
 }

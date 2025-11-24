@@ -10,16 +10,26 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.work.WorkManager
 import com.businesscard.app.databinding.FragmentScanBinding
+import com.businesscard.app.domain.create.CreateContactUseCase
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import com.businesscard.app.BusinessCardApp
+import com.businesscard.app.R
 
 class ScanFragment : Fragment() {
 
     private var _binding: FragmentScanBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: ScanViewModel by viewModels()
+    private val viewModel: ScanViewModel by viewModels {
+        val app = requireActivity().application as BusinessCardApp
+        val repo = app.appContainer.contactRepository
+        val workManager = WorkManager.getInstance(requireContext())
+        val useCase = CreateContactUseCase(repo, workManager)
+        ScanViewModelFactory(requireActivity().application, useCase)
+    }
 
     private val cameraPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
@@ -59,11 +69,10 @@ class ScanFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.uiState.collectLatest { state ->
                 when (state) {
-                    is ScanUiState.Idle -> binding.statusText.text = getString(com.businesscard.app.R.string.scan_hint)
+                    is ScanUiState.Idle -> binding.statusText.text = getString(R.string.scan_hint)
                     is ScanUiState.Processing -> binding.statusText.text = "處理影像中…"
-                    is ScanUiState.ReadyForUpload -> binding.statusText.text = "已取得影像，準備上傳"
-                    is ScanUiState.Uploading -> binding.statusText.text = "上傳中…"
-                    is ScanUiState.Uploaded -> binding.statusText.text = "上傳完成"
+                    is ScanUiState.Uploading -> binding.statusText.text = "上傳排程中…"
+                    is ScanUiState.Uploaded -> binding.statusText.text = "上傳已排入，待背景同步"
                     is ScanUiState.Error -> binding.statusText.text = state.message
                 }
             }

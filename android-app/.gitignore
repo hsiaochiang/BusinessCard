@@ -22,3 +22,6 @@ captures/
 
 # Google services
 app/google-services.json
+
+# Room schemas
+app/schemas/
