@@ -60,9 +60,9 @@
 - 將 `<PROMPT>` 內容寫入 `PROMPT.txt`。你可以在 **Shell** 中使用類似下面的方式（實際指令可依情況調整，只要效果是「完全覆寫 `PROMPT.txt` 內容」即可）：
 
   ```powershell
-  Set-Content -Path "D:\program\BusinessCard\PROMPT.txt" -Value @'
-/speckit.implement
-'@
+  @'
+  /speckit.implement
+  '@ | Out-File -FilePath "D:\program\businesscard\PROMPT.txt" -Encoding utf8 -NoNewline
   ```
 
 - 規則：

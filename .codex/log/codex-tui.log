@@ -2639,3 +2639,89 @@
 [2m2025-11-23T11:09:28.682089Z[0m [32m INFO[0m Resuming rollout from "/mnt/d/program/businesscard/.codex/sessions/2025/11/22/rollout-2025-11-22T22-16-15-019aabec-34f0-7970-a779-e50a70d52d1e.jsonl"
 [2m2025-11-23T11:09:28.702780Z[0m [32m INFO[0m Resumed rollout with 552 items, conversation ID: Some(ConversationId { uuid: 019aabec-34f0-7970-a779-e50a70d52d1e })
 [2m2025-11-23T11:09:28.702910Z[0m [32m INFO[0m Resumed rollout successfully from "/mnt/d/program/businesscard/.codex/sessions/2025/11/22/rollout-2025-11-22T22-16-15-019aabec-34f0-7970-a779-e50a70d52d1e.jsonl"
+[2m2025-11-24T05:11:10.004151Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-24T05:11:13.002246Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-24T05:11:13.002340Z[0m [32m INFO[0m ghost commit captured: e6365b27a7545fd2ae3cc01d8ce9281eea8a5d48
+[2m2025-11-24T05:11:13.002350Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-24T05:11:18.389875Z[0m [32m INFO[0m ToolCall: shell_command {"command":".specify/scripts/powershell/check-prerequisites.ps1 -Json -RequireTasks -IncludeTasks","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-24T05:11:23.084687Z[0m [32m INFO[0m ToolCall: shell_command {"command":"ls specs/001-business-card-manager","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-24T05:11:26.684286Z[0m [32m INFO[0m ToolCall: shell_command {"command":"ls specs/001-business-card-manager/checklists","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-24T05:11:31.186068Z[0m [32m INFO[0m ToolCall: shell_command {"command":"python - <<'PY'\nimport re, pathlib, json\nroot = pathlib.Path('specs/001-business-card-manager/checklists')\nfiles = sorted(p.name for p in root.glob('*.md'))\nprint(files)\nfor name in files:\n    text = (root/name).read_text()\n    items = re.findall(r'^- \\[( |x|X)\\]', text, flags=re.MULTILINE)\n    total=len(items)\n    completed=sum(1 for s in items if s.lower()=='x')\n    incomplete=total-completed\n    status = '\\u2713 PASS' if incomplete==0 else '\\u2717 FAIL'\n    print(name, total, completed, incomplete, status)\nPY","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-24T05:11:35.889276Z[0m [32m INFO[0m ToolCall: shell_command {"command":"python3 - <<'PY'\nimport re, pathlib\nroot = pathlib.Path('specs/001-business-card-manager/checklists')\nfiles = sorted(p.name for p in root.glob('*.md'))\nprint(files)\nfor name in files:\n    text = (root/name).read_text()\n    items = re.findall(r'^- \\[( |x|X)\\]', text, flags=re.MULTILINE)\n    total=len(items)\n    completed=sum(1 for s in items if s.lower()=='x')\n    incomplete=total-completed\n    status = '\\u2713 PASS' if incomplete==0 else '\\u2717 FAIL'\n    print(name, total, completed, incomplete, status)\nPY","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-24T05:11:40.394878Z[0m [32m INFO[0m ToolCall: shell_command {"command":"cat specs/001-business-card-manager/tasks.md","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-24T05:11:43.916399Z[0m [32m INFO[0m ToolCall: shell_command {"command":"cat specs/001-business-card-manager/plan.md","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-24T05:11:48.250725Z[0m [32m INFO[0m ToolCall: shell_command {"command":"cat specs/001-business-card-manager/checklists/requirements.md","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-24T05:11:51.685908Z[0m [32m INFO[0m ToolCall: shell_command {"command":"cat specs/001-business-card-manager/data-model.md","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-24T05:11:54.861631Z[0m [32m INFO[0m ToolCall: shell_command {"command":"cat specs/001-business-card-manager/research.md","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-24T05:11:58.073268Z[0m [32m INFO[0m ToolCall: shell_command {"command":"cat specs/001-business-card-manager/quickstart.md","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-24T05:12:01.428494Z[0m [32m INFO[0m ToolCall: shell_command {"command":"git rev-parse --git-dir 2>/dev/null","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-24T05:12:04.397205Z[0m [32m INFO[0m ToolCall: shell_command {"command":"ls -a","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-24T05:12:11.470933Z[0m [32m INFO[0m ToolCall: shell_command {"command":"cat .gitignore","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-24T05:12:33.222566Z[0m [32m INFO[0m ToolCall: shell_command {"command":"git status --short","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-24T05:13:06.719644Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/tasks.md
+@@
+ **輸入**：`spec.md`、`plan.md`、`research.md`、`data-model.md`、`contracts/`  
+ **策略**：本階段僅整理規格與任務，暫不建立 Android 原始碼；所有 Android 相關工作維持 Blocked，待後續建立 `android-app/` 後再展開。  
+ **憑證與設定**：以環境變數/placeholder 描述，不提交實體檔案（例如 `GOOGLE_SERVICES_JSON_PATH`、`ANDROID_RELEASE_KEYSTORE_PATH`、`OAUTH_CLIENT_CONFIG_PATH`）。
+ 
+-目前所有工作皆待 `android-app/` 專案骨架建立後才能啟動；後續若有可執行任務會另行分組。
+-
+-## Blocked 任務總表（集中追蹤）
+-
+-| 任務 | Phase | 狀態 | 重點描述 | 路徑/檔案/設定 |
+-|------|-------|------|----------|----------------|
+-| T001 | 1 | Blocked | 建立 `android-app/` Kotlin/Gradle 專案骨架與目錄（app 模組、Gradle wrapper、.gitignore、Room/CI 插槽） | android-app/, android-app/app/build.gradle.kts |
+-| T002 | 1 | Blocked [P] | 佈建 lint/測試/CI 模板（ktlint/detekt、覆蓋率門檻、CI workflow 草稿），不觸發實際建置 | .github/workflows/android-ci.yml |
+-| T003 | 1 | Blocked | 設定簽署與雲端服務的 placeholder：`ANDROID_RELEASE_KEYSTORE_PATH`、`GOOGLE_SERVICES_JSON_PATH`、`OAUTH_CLIENT_CONFIG_PATH`，由環境變數/密鑰管理提供 | Gradle signingConfig、雲端設定環境變數 |
+-| T004 | 2 | Blocked | 定義資料層與同步骨架（Room schema、同步佇列、重試/錯誤介面），確認與 data-model 一致 | android-app/app/src/main/java/com/businesscard/app/data/, docs |
+-| T005 | 2 | Blocked [P] | Sheets/Drive 封裝與授權流程設計：以 OAuth 範圍、試算表/資料夾 ID placeholder，並規劃欄位/權限佈建腳本 | automation/sheets_drive/, env: SHEETS_SPREADSHEET_ID, DRIVE_FOLDER_ID |
+-| T006 | 2 | Blocked [P] | 日誌、遙測與警示策略（事件命名、性能門檻、告警匯報介面），預留 5k/50k 資料量的監控點 | android-app/app/src/main/java/com/businesscard/app/telemetry |
+-| T007 | 3 | Blocked | US1：掃描/ML Kit OCR 流程與 UI 架構，涵蓋權限、拍照預覽、欄位預填、錯誤提示 | android-app/app/src/main/java/com/businesscard/app/ui/scan |
+-| T008 | 3 | Blocked [P] | US1：寫入與同步流程設計（id 生成、Room 暫存、入佇列、Drive 上傳與 URL 回寫），含失敗重試策略 | android-app/app/src/main/java/com/businesscard/app/domain/create, .../data/remote/drive |
+-| T009 | 3 | Blocked | US1：整合/儀表測試計畫（OCR + 同步 + 上傳重試），含 androidTest 範本與測試資料準備 | android-app/app/src/androidTest/java/com/businesscard/app/ |
+-| T010 | 4 | Blocked | US2：查詢/篩選/排序與快取策略，支援 5k~50k 列，預設排除 `is_deleted=true` | android-app/app/src/main/java/com/businesscard/app/data/remote/sheets/Queries.kt |
+-| T011 | 4 | Blocked [P] | US2：更新/刪除/衝突解決政策（桌面端 vs App），同步與回復流程設計 | android-app/app/src/main/java/com/businesscard/app/domain/update, .../sync |
+-| T012 | 5 | Blocked | US3：OAuth/帳號切換/權限檢查流程，限制受邀帳號並記錄稽核資訊 | android-app/app/src/main/java/com/businesscard/app/auth |
+-| T013 | 5 | Blocked [P] | 安全與合規強化（權杖存取最小化、日誌掩碼、敏感欄位控管）、權限一致性測試計畫 | android-app/app/src/main/java/com/businesscard/app/security |
+-| T014 | 6 | Blocked | 打包/簽署/side-load 發佈流程（Gradle 任務、簽章參數從環境變數讀取）、手動安裝/更新檢核腳本 | android-app/app/build.gradle.kts, tests/manual/sideload.md |
+-| T015 | 6 | Blocked [P] | 發佈後迴歸/性能/容量/警示報表（50k 資料、錯誤率 <2%）的測試與自動化規劃 | automation/ci/, automation/reports/ |
+-| T016 | 7 | Blocked | 文件/流程同步更新：spec/plan/quickstart/tasks、佈建腳本與報表說明 | docs/, specs/001-business-card-manager/, automation/ |
++## 目前狀態
++
++- `android-app/` 尚未建立，所有 Phase 1~7 工作均以 Blocked 標註，需待專案骨架完成後逐一解鎖。
++- Android/CI 相關憑證與設定維持以環境變數或外部路徑 placeholder 表示，避免提交實體檔案。
++
++## Blocked 任務總表（集中追蹤）
++
++| 任務 | Phase | 狀態 | 重點描述 | 路徑/檔案/設定 |
++|------|-------|------|----------|----------------|
++| T001 | 1 | Blocked | 建立 `android-app/` Kotlin/Gradle 專案骨架與目錄（app 模組、Gradle wrapper、.gitignore、Room/CI 插槽） | android-app/, android-app/app/build.gradle.kts |
++| T002 | 1 | Blocked [P] | 佈建 lint/測試/CI 模板（ktlint/detekt、覆蓋率門檻、CI workflow 草稿），不觸發實際建置 | .github/workflows/android-ci.yml |
++| T003 | 1 | Blocked | 設定簽署與雲端服務的 placeholder：`ANDROID_RELEASE_KEYSTORE_PATH`、`GOOGLE_SERVICES_JSON_PATH`、`OAUTH_CLIENT_CONFIG_PATH`，由環境變數/密鑰管理提供 | Gradle signingConfig、雲端設定環境變數 |
++| T004 | 2 | Blocked | 定義資料層與同步骨架（Room schema、同步佇列、重試/錯誤介面），確認與 data-model 一致 | android-app/app/src/main/java/com/businesscard/app/data/, docs |
++| T005 | 2 | Blocked [P] | Sheets/Drive 封裝與授權流程設計：以 OAuth 範圍、試算表/資料夾 ID placeholder，並規劃欄位/權限佈建腳本 | automation/sheets_drive/, env: SHEETS_SPREADSHEET_ID, DRIVE_FOLDER_ID |
++| T006 | 2 | Blocked [P] | 日誌、遙測與警示策略（事件命名、性能門檻、告警匯報介面），預留 5k/50k 資料量的監控點 | android-app/app/src/main/java/com/businesscard/app/telemetry |
++| T007 | 3 | Blocked | US1：掃描/ML Kit OCR 流程與 UI 架構，涵蓋權限、拍照預覽、欄位預填、錯誤提示 | android-app/app/src/main/java/com/businesscard/app/ui/scan |
++| T008 | 3 | Blocked [P] | US1：寫入與同步流程設計（id 生成、Room 暫存、入佇列、Drive 上傳與 URL 回寫），含失敗重試策略 | android-app/app/src/main/java/com/businesscard/app/domain/create, .../data/remote/drive |
++| T009 | 3 | Blocked | US1：整合/儀表測試計畫（OCR + 同步 + 上傳重試），含 androidTest 範本與測試資料準備 | android-app/app/src/androidTest/java/com/businesscard/app/ |
++| T010 | 4 | Blocked | US2：查詢/篩選/排序與快取策略，支援 5k~50k 列，預設排除 `is_deleted=true` | android-app/app/src/main/java/com/businesscard/app/data/remote/sheets/Queries.kt |
++| T011 | 4 | Blocked [P] | US2：更新/刪除/衝突解決政策（桌面端 vs App），同步與回復流程設計 | android-app/app/src/main/java/com/businesscard/app/domain/update, .../sync |
++| T012 | 5 | Blocked | US3：OAuth/帳號切換/權限檢查流程，限制受邀帳號並記錄稽核資訊 | android-app/app/src/main/java/com/businesscard/app/auth |
++| T013 | 5 | Blocked [P] | 安全與合規強化（權杖存取最小化、日誌掩碼、敏感欄位控管）、權限一致性測試計畫 | android-app/app/src/main/java/com/businesscard/app/security |
++| T014 | 6 | Blocked | 打包/簽署/side-load 發佈流程（Gradle 任務、簽章參數從環境變數讀取）、手動安裝/更新檢核腳本 | android-app/app/build.gradle.kts, tests/manual/sideload.md |
++| T015 | 6 | Blocked [P] | 發佈後迴歸/性能/容量/警示報表（50k 資料、錯誤率 <2%）的測試與自動化規劃 | automation/ci/, automation/reports/ |
++| T016 | 7 | Blocked | 文件/流程同步更新：spec/plan/quickstart/tasks、佈建腳本與報表說明 | docs/, specs/001-business-card-manager/, automation/ |
+*** End Patch
+[2m2025-11-24T05:13:11.186246Z[0m [32m INFO[0m ToolCall: shell_command {"command":"git status --short","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-24T05:13:14.761370Z[0m [32m INFO[0m ToolCall: shell_command {"command":"git add specs/001-business-card-manager/tasks.md","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-24T05:13:21.515421Z[0m [32m INFO[0m ToolCall: shell_command {"command":"git diff --cached","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-24T05:13:25.442486Z[0m [32m INFO[0m ToolCall: shell_command {"command":"git status --short","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-24T05:13:29.977141Z[0m [32m INFO[0m ToolCall: shell_command {"command":"git commit -m \"調整 tasks 結構並集中 Blocked 任務總表\"","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-24T05:13:34.956050Z[0m [32m INFO[0m ToolCall: shell_command {"command":"git config user.name \"Codex Agent\"","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-24T05:13:38.569821Z[0m [32m INFO[0m ToolCall: shell_command {"command":"git config user.email \"codex@example.com\"","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-24T05:13:41.657422Z[0m [32m INFO[0m ToolCall: shell_command {"command":"git commit -m \"調整 tasks 結構並集中 Blocked 任務總表\"","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-24T05:26:21.984576Z[0m [32m INFO[0m Resuming rollout from "/mnt/d/program/businesscard/.codex/sessions/2025/11/24/rollout-2025-11-24T13-08-04-019ab443-0e94-70c3-a36c-a99900a9344e.jsonl"
+[2m2025-11-24T05:26:21.993480Z[0m [32m INFO[0m Resumed rollout with 181 items, conversation ID: Some(ConversationId { uuid: 019ab443-0e94-70c3-a36c-a99900a9344e })
+[2m2025-11-24T05:26:21.993525Z[0m [32m INFO[0m Resumed rollout successfully from "/mnt/d/program/businesscard/.codex/sessions/2025/11/24/rollout-2025-11-24T13-08-04-019ab443-0e94-70c3-a36c-a99900a9344e.jsonl"
+[2m2025-11-24T05:26:34.331941Z[0m [32m INFO[0m spawning ghost snapshot task
