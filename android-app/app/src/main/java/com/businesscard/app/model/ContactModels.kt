@@ -31,9 +31,9 @@ data class ContactImage(
 )
 
 enum class Source {
-    scan,
-    manual,
-    import
+    SCAN,
+    MANUAL,
+    IMPORT
 }
 
 enum class SyncStatus {
@@ -71,7 +71,7 @@ data class ContactDraftEntity(
         phone = phone,
         tags = tags?.split(",")?.map { it.trim() }?.filter { it.isNotEmpty() },
         notes = notes,
-        source = Source.scan,
+        source = Source.SCAN,
         imageUrl = sharedUrl,
         createdAt = createdAt,
         updatedAt = updatedAt,

@@ -8,9 +8,8 @@ import com.businesscard.app.data.remote.drive.DriveUploadResult
 import com.businesscard.app.data.remote.sheets.SheetsClient
 import com.businesscard.app.data.remote.sheets.SheetsWriteResult
 import com.businesscard.app.model.ContactDraftEntity
-import com.businesscard.app.model.ContactRecord
-import com.businesscard.app.model.SyncStatus
 import com.businesscard.app.model.Source
+import com.businesscard.app.model.SyncStatus
 import com.businesscard.app.telemetry.Telemetry
 import java.util.UUID
 
@@ -32,7 +31,7 @@ class ContactRepository(
     private val idGenerator: IdGenerator,
     private val timeProvider: TimeProvider,
     private val telemetry: Telemetry
-    ) {
+) {
 
     suspend fun createDraft(form: ContactDraftForm): ContactDraftEntity {
         val id = idGenerator.generate()
@@ -82,7 +81,7 @@ class ContactRepository(
         }
 
         val record = draft.asRecord(sharedUrl = sharedUrl.ifEmpty { null })
-        val writeResult = sheetsClient.append(record.copy(source = Source.scan))
+        val writeResult = sheetsClient.append(record.copy(source = Source.SCAN))
         return when (writeResult) {
             is SheetsWriteResult.Success -> {
                 markStatus(draft.localId, SyncStatus.SYNCED)
