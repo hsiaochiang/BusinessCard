@@ -12,9 +12,9 @@ data class OcrResult(
     val tags: List<String> = emptyList()
 )
 
-class OcrProcessor {
+open class OcrProcessor {
     @Suppress("UnusedParameter")
-    suspend fun process(bitmap: Bitmap): OcrResult {
+    open suspend fun process(bitmap: Bitmap): OcrResult {
         // 待後續串接 ML Kit OCR，回傳實際辨識結果
         return OcrResult()
     }
