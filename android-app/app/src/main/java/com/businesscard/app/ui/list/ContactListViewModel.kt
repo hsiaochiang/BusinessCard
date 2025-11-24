@@ -6,11 +6,12 @@ import com.businesscard.app.data.repository.ContactRepository
 import com.businesscard.app.model.ContactQuery
 import com.businesscard.app.model.ContactRecord
 import com.businesscard.app.model.SortBy
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
@@ -21,6 +22,7 @@ data class ContactListUiState(
     val contacts: List<ContactRecord> = emptyList()
 )
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class ContactListViewModel(
     private val repository: ContactRepository
 ) : ViewModel() {
