@@ -4,7 +4,10 @@
 **策略**：本階段僅整理規格與任務，暫不建立 Android 原始碼；所有 Android 相關工作維持 Blocked，待後續建立 `android-app/` 後再展開。  
 **憑證與設定**：以環境變數/placeholder 描述，不提交實體檔案（例如 `GOOGLE_SERVICES_JSON_PATH`、`ANDROID_RELEASE_KEYSTORE_PATH`、`OAUTH_CLIENT_CONFIG_PATH`）。
 
-目前所有工作皆待 `android-app/` 專案骨架建立後才能啟動；後續若有可執行任務會另行分組。
+## 目前狀態
+
+- `android-app/` 尚未建立，所有 Phase 1~7 工作均以 Blocked 標註，需待專案骨架完成後逐一解鎖。
+- Android/CI 相關憑證與設定維持以環境變數或外部路徑 placeholder 表示，避免提交實體檔案。
 
 ## Blocked 任務總表（集中追蹤）
 
