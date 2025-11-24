@@ -17,8 +17,6 @@ style:
     active: true
   WildcardImport:
     active: true
-  ImportOrdering:
-    active: true
 
 formatting:
   active: true
