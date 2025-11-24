@@ -13,7 +13,8 @@ data class OcrResult(
 )
 
 class OcrProcessor {
-    suspend fun process(unusedBitmap: Bitmap): OcrResult {
+    @Suppress("UnusedParameter")
+    suspend fun process(bitmap: Bitmap): OcrResult {
         // 待後續串接 ML Kit OCR，回傳實際辨識結果
         return OcrResult()
     }
