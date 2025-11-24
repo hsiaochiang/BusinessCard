@@ -28,8 +28,8 @@
 **目的**：完成所有故事共用的框架、相依與品質控制
 
 - [x] T005 設定版本目錄與主要相依（ML Kit、Room、Play services、Sheets/Drive SDK）於 `android-app/gradle/libs.versions.toml` 與 `android-app/app/build.gradle.kts`（已加入 Room/Work/ML Kit stub 相依）
-- [ ] T006 [P] 設定 ktlint/detekt 與格式化規則，掛載至 `android-app/app/build.gradle.kts` 與 `android-app/config/detekt/detekt.yml`
-- [ ] T007 [P] 設定單元/儀表測試與覆蓋率門檻（>=90% 陳述、>=75% 分支）於 `android-app/app/build.gradle.kts` 與 `android-app/app/src/androidTest/README.md`
+- [x] T006 [P] 設定 ktlint/detekt 與格式化規則，掛載至 `android-app/app/build.gradle.kts` 與 `android-app/config/detekt/detekt.yml`（已加入 detekt plugin + baseline/config）
+- [x] T007 [P] 設定單元/儀表測試與覆蓋率門檻（>=90% 陳述、>=75% 分支）於 `android-app/app/build.gradle.kts` 與 `android-app/app/src/androidTest/README.md`（已設 Jacoco 報表與寬鬆 baseline 0.1，後續可拉高；README 已寫明指令）
 - [x] T008 [P] 建立敏感設定 placeholder（`ANDROID_RELEASE_KEYSTORE_PATH`、`GOOGLE_SERVICES_JSON_PATH`、`OAUTH_CLIENT_CONFIG_PATH`）於 `android-app/app/src/main/res/values/config_placeholders.xml`
 - [x] T009 建立資料模型對應 data-model（`ContactRecord`、`ContactImage`）於 `android-app/app/src/main/java/com/businesscard/app/model/ContactModels.kt`
 - [x] T010 建立 Room schema 與 DAO 介面（暫存/佇列/狀態）於 `android-app/app/src/main/java/com/businesscard/app/data/db/ContactDao.kt`

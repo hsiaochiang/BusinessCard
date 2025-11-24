@@ -1,0 +1,41 @@
+build:
+  maxIssues: 0
+  excludeCorrectable: false
+
+processors:
+  active: true
+
+config:
+  validation: true
+
+comments:
+  active: true
+
+style:
+  active: true
+  MagicNumber:
+    active: false
+  WildcardImport:
+    active: false
+
+formatting:
+  active: true
+  android: true
+  importOrdering:
+    active: true
+  maxLineLength:
+    active: true
+    autoCorrect: true
+    maximumLineLength: 160
+
+naming:
+  active: true
+
+performance:
+  active: true
+
+potential-bugs:
+  active: true
+
+exceptions:
+  active: true

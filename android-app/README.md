@@ -10,6 +10,12 @@
 4. 建置 Debug：`./gradlew :app:assembleDebug`
 5. 安裝 side-load APK：`adb install -r app/build/outputs/apk/debug/app-debug.apk`
 
+## 品質檢查
+
+- Lint/Detekt：`./gradlew :app:detekt`
+- 單元測試與覆蓋率報表（Jacoco）：`./gradlew :app:testDebugUnitTest :app:jacocoTestReport`
+- 檢查（會串 detekt + 覆蓋率驗證，覆蓋率目前設定寬鬆 baseline 0.1，後續可拉高）：`./gradlew :app:check`
+
 ## 環境變數 / 設定 placeholder
 
 - `ANDROID_RELEASE_KEYSTORE_PATH`
