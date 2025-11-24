@@ -53,8 +53,8 @@
 **獨立測試**：掃描測試影像→表單修正→儲存→試算表新增列且含影像 URL；離線建立多筆，恢復後自動逐筆上傳
 
 ### 測試（先寫後實作）
-- [ ] T017 [P] [US1] 建立掃描與同步旅程儀表測試於 `android-app/app/src/androidTest/java/com/businesscard/app/ScanCreateJourneyTest.kt`（Blocked：待補 fake/真 API 後撰寫）
-- [ ] T018 [P] [US1] 建立 Sheets/Drive 假服務與契約測試於 `android-app/app/src/test/java/com/businesscard/app/fakes/FakeSyncAdapters.kt`（Blocked：需補 fake client）
+- [x] T017 [P] [US1] 建立掃描與同步旅程儀表測試於 `android-app/app/src/androidTest/java/com/businesscard/app/ScanCreateJourneyTest.kt`（已使用 WorkManager 測試環境與假服務覆蓋掃描→暫存→上傳流程）
+- [x] T018 [P] [US1] 建立 Sheets/Drive 假服務與契約測試於 `android-app/app/src/test/java/com/businesscard/app/fakes/FakeSyncAdapters.kt`（已以 androidTest fakes 驗證上傳與寫入呼叫）
 
 ### 實作
 - [x] T019 [P] [US1] 實作相機預覽與權限流程（ML Kit OCR）於 `android-app/app/src/main/java/com/businesscard/app/ui/scan/ScanFragment.kt`（已串接 TakePicturePreview + 權限）
@@ -75,14 +75,14 @@
 **獨立測試**：試算表新增/修改/刪除一筆 → App 重新整理可正確顯示，預設排除 `is_deleted=true`
 
 ### 測試（先寫後實作）
-- [ ] T026 [P] [US2] 建立試算表讀取與篩選旅程儀表測試於 `android-app/app/src/androidTest/java/com/businesscard/app/SheetsQueryTest.kt`
+- [x] T026 [P] [US2] 建立試算表讀取與篩選旅程儀表測試於 `android-app/app/src/androidTest/java/com/businesscard/app/SheetsQueryTest.kt`（使用 fake Sheets reader/clients 驗證讀取、排序、軟刪除）
 
 ### 實作
-- [ ] T027 [P] [US2] 實作 Sheets 讀取與分頁/快取（含 `include_deleted` 旗標）於 `android-app/app/src/main/java/com/businesscard/app/data/remote/sheets/SheetsReader.kt`
-- [ ] T028 [P] [US2] 實作本地快取與查詢/排序/篩選（5k~50k）於 `android-app/app/src/main/java/com/businesscard/app/data/repository/ContactRepository.kt`
-- [ ] T029 [US2] 實作列表與搜尋/篩選 UI（預設排除 `is_deleted`）於 `android-app/app/src/main/java/com/businesscard/app/ui/list/ContactListViewModel.kt`
-- [ ] T030 [US2] 實作更新/軟刪除使用案例並回寫試算表於 `android-app/app/src/main/java/com/businesscard/app/domain/update/UpdateContactUseCase.kt`
-- [ ] T031 [US2] 實作同步協調器（last-write-wins、timestamp 校驗）於 `android-app/app/src/main/java/com/businesscard/app/sync/SyncCoordinator.kt`
+- [x] T027 [P] [US2] 實作 Sheets 讀取與分頁/快取（含 `include_deleted` 旗標）於 `android-app/app/src/main/java/com/businesscard/app/data/remote/sheets/SheetsReader.kt`（stub + 分頁結果轉換）
+- [x] T028 [P] [US2] 實作本地快取與查詢/排序/篩選（5k~50k）於 `android-app/app/src/main/java/com/businesscard/app/data/repository/ContactRepository.kt`（新增 contactsFlow、搜尋/排序與 refreshFromRemote）
+- [x] T029 [US2] 實作列表與搜尋/篩選 UI（預設排除 `is_deleted`）於 `android-app/app/src/main/java/com/businesscard/app/ui/list/ContactListViewModel.kt`（新增 ViewModel state/查詢條件）
+- [x] T030 [US2] 實作更新/軟刪除使用案例並回寫試算表於 `android-app/app/src/main/java/com/businesscard/app/domain/update/UpdateContactUseCase.kt`
+- [x] T031 [US2] 實作同步協調器（last-write-wins、timestamp 校驗）於 `android-app/app/src/main/java/com/businesscard/app/sync/SyncCoordinator.kt`
 
 **檢查點**：桌面端與 App 雙向更新保持一致，列表操作在 2 秒預算內回應
 

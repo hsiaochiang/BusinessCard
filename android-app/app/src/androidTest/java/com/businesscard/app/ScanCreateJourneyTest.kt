@@ -21,6 +21,7 @@ import com.businesscard.app.fakes.FakeDriveClient
 import com.businesscard.app.fakes.FakeOcrProcessor
 import com.businesscard.app.fakes.FakeSheetsClient
 import com.businesscard.app.fakes.FakeTelemetry
+import com.businesscard.app.fakes.FakeSheetsReader
 import com.businesscard.app.model.SyncStatus
 import com.businesscard.app.sync.UploadWorker
 import com.businesscard.app.sync.UploadWorkerFactory
@@ -64,6 +65,7 @@ class ScanCreateJourneyTest {
             dao = database.contactDao(),
             driveClient = drive,
             sheetsClient = sheets,
+            sheetsReader = fakeReaderWithData(mutableListOf()),
             idGenerator = IdGenerator(),
             timeProvider = TimeProvider(),
             telemetry = telemetry
@@ -125,6 +127,9 @@ class ScanCreateJourneyTest {
         assertEquals("測試名片", appended.name)
         assertEquals("drive://${appended.id}.jpg", appended.imageUrl)
     }
+
+    private fun fakeReaderWithData(data: MutableList<com.businesscard.app.model.ContactRecord>): FakeSheetsReader =
+        FakeSheetsReader(data)
 
     private companion object {
         const val TEST_BITMAP_SIZE = 10

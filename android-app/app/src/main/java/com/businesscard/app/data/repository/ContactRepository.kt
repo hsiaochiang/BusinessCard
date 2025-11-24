@@ -6,11 +6,18 @@ import com.businesscard.app.data.db.ContactDao
 import com.businesscard.app.data.remote.drive.DriveClient
 import com.businesscard.app.data.remote.drive.DriveUploadResult
 import com.businesscard.app.data.remote.sheets.SheetsClient
+import com.businesscard.app.data.remote.sheets.SheetsReader
 import com.businesscard.app.data.remote.sheets.SheetsWriteResult
 import com.businesscard.app.model.ContactDraftEntity
+import com.businesscard.app.model.ContactQuery
 import com.businesscard.app.model.Source
 import com.businesscard.app.model.SyncStatus
+import com.businesscard.app.model.ContactRecord
+import com.businesscard.app.model.SortBy
 import com.businesscard.app.telemetry.Telemetry
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.map
 import java.util.UUID
 
 data class ContactDraftForm(
@@ -28,10 +35,13 @@ class ContactRepository(
     private val dao: ContactDao,
     private val driveClient: DriveClient,
     private val sheetsClient: SheetsClient,
+    private val sheetsReader: SheetsReader,
     private val idGenerator: IdGenerator,
     private val timeProvider: TimeProvider,
     private val telemetry: Telemetry
 ) {
+
+    private val contactsFlow = MutableStateFlow<List<ContactRecord>>(emptyList())
 
     suspend fun createDraft(form: ContactDraftForm): ContactDraftEntity {
         val id = idGenerator.generate()
@@ -65,6 +75,55 @@ class ContactRepository(
     suspend fun loadPendingOnce(): List<ContactDraftEntity> =
         dao.getDraftsOnce(listOf(SyncStatus.PENDING, SyncStatus.FAILED))
 
+    fun observeContacts(query: ContactQuery): Flow<List<ContactRecord>> =
+        contactsFlow.map { list ->
+            list.asSequence()
+                .filter { record ->
+                    val matchSearch = query.search.isNullOrBlank() || listOfNotNull(
+                        record.name,
+                        record.company,
+                        record.email,
+                        record.phone,
+                        record.tags?.joinToString(",")
+                    ).any { it.contains(query.search.orEmpty(), ignoreCase = true) }
+                    val matchDeleted = query.includeDeleted || !record.isDeleted
+                    matchSearch && matchDeleted
+                }
+                .sortedWith(
+                    when (query.sortBy) {
+                        SortBy.NAME -> compareBy(String.CASE_INSENSITIVE_ORDER) { it.name }
+                        SortBy.CREATED_AT -> compareBy { it.createdAt }
+                    }
+                )
+                .toList()
+        }
+
+    suspend fun refreshFromRemote(includeDeleted: Boolean) {
+        val fetched = mutableListOf<ContactRecord>()
+        var token: String? = null
+        do {
+            val page = sheetsReader.fetchPage(token, DEFAULT_PAGE_SIZE, includeDeleted)
+            fetched.addAll(page.records)
+            token = page.nextPageToken
+        } while (token != null)
+        contactsFlow.value = fetched
+    }
+
+    suspend fun updateContact(updated: ContactRecord) {
+        val now = timeProvider.nowIso()
+        val newRecord = updated.copy(updatedAt = now)
+        contactsFlow.value = contactsFlow.value.map { if (it.id == newRecord.id) newRecord else it }
+        sheetsClient.update(newRecord)
+    }
+
+    suspend fun softDelete(id: String) {
+        val now = timeProvider.nowIso()
+        val target = contactsFlow.value.firstOrNull { it.id == id } ?: return
+        val deleted = target.copy(isDeleted = true, deletedAt = now, updatedAt = now)
+        contactsFlow.value = contactsFlow.value.map { if (it.id == id) deleted else it }
+        sheetsClient.update(deleted)
+    }
+
     suspend fun processDraft(draft: ContactDraftEntity): Boolean {
         markStatus(draft.localId, SyncStatus.UPLOADING)
         val uploadResult = draft.imagePath?.let { path ->
@@ -93,5 +152,9 @@ class ContactRepository(
                 false
             }
         }
+    }
+
+    private companion object {
+        const val DEFAULT_PAGE_SIZE = 50
     }
 }

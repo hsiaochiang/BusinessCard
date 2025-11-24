@@ -6,10 +6,12 @@ import com.businesscard.app.core.IdGenerator
 import com.businesscard.app.core.TimeProvider
 import com.businesscard.app.data.db.ContactDatabase
 import com.businesscard.app.data.remote.drive.DriveUploader
+import com.businesscard.app.data.remote.sheets.SheetsReader
 import com.businesscard.app.data.remote.sheets.SheetsWriter
+import com.businesscard.app.data.remote.sheets.StubSheetsReader
 import com.businesscard.app.data.repository.ContactRepository
-import com.businesscard.app.telemetry.NoopTelemetry
 import com.businesscard.app.sync.UploadWorkerFactory
+import com.businesscard.app.telemetry.NoopTelemetry
 
 class AppContainer(context: Context) {
     private val telemetry = NoopTelemetry
@@ -23,12 +25,14 @@ class AppContainer(context: Context) {
     private val timeProvider = TimeProvider()
     private val driveClient = DriveUploader(telemetry)
     private val sheetsClient = SheetsWriter(telemetry)
+    private val sheetsReader: SheetsReader = StubSheetsReader()
 
     val contactRepository: ContactRepository by lazy {
         ContactRepository(
             dao = database.contactDao(),
             driveClient = driveClient,
             sheetsClient = sheetsClient,
+            sheetsReader = sheetsReader,
             idGenerator = idGenerator,
             timeProvider = timeProvider,
             telemetry = telemetry

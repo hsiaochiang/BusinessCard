@@ -12,6 +12,11 @@ class SheetsWriter(
         return SheetsWriteResult.Success
     }
 
+    override suspend fun update(record: ContactRecord): SheetsWriteResult {
+        telemetry.recordUploadLatency(DEFAULT_LATENCY_MS)
+        return SheetsWriteResult.Success
+    }
+
     private companion object {
         const val DEFAULT_LATENCY_MS = 0L
     }

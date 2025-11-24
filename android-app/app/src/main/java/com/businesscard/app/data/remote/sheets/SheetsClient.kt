@@ -4,6 +4,7 @@ import com.businesscard.app.model.ContactRecord
 
 interface SheetsClient {
     suspend fun append(record: ContactRecord): SheetsWriteResult
+    suspend fun update(record: ContactRecord): SheetsWriteResult = append(record)
 }
 
 sealed interface SheetsWriteResult {
