@@ -3,6 +3,12 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.detekt)
+
+    id("jacoco")
+}
+
+jacoco {
+    toolVersion = "0.8.11"
 }
 
 android {
@@ -53,10 +59,6 @@ android {
             )
         }
     }
-}
-
-jacoco {
-    toolVersion = "0.8.11"
 }
 
 tasks.withType<Test> {
@@ -143,6 +145,7 @@ dependencies {
     implementation(libs.mlkit.text.recognition)
 
     testImplementation(libs.junit)
+    testImplementation(libs.junit.vintage.engine)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
