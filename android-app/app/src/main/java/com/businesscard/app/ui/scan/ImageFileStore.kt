@@ -10,8 +10,12 @@ class ImageFileStore(private val context: Context) {
     fun save(bitmap: Bitmap): String {
         val file = File(context.cacheDir, "scan-${UUID.randomUUID()}.jpg")
         FileOutputStream(file).use { out ->
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, JPEG_QUALITY, out)
         }
         return file.absolutePath
+    }
+
+    private companion object {
+        const val JPEG_QUALITY = 90
     }
 }

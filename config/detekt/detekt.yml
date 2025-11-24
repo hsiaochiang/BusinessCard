@@ -14,9 +14,11 @@ comments:
 style:
   active: true
   MagicNumber:
-    active: false
+    active: true
   WildcardImport:
-    active: false
+    active: true
+  ImportOrdering:
+    active: true
 
 formatting:
   active: true
