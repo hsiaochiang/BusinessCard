@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">BusinessCardApp</string>
+    <string name="app_name">Business Card</string>
+    <string name="scan_title">掃描名片</string>
+    <string name="scan_hint">拍攝名片以啟動 OCR 預填</string>
+    <string name="scan_action">開始掃描</string>
+    <string name="scan_retry">重試上傳</string>
 </resources>

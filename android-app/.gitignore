@@ -1,15 +1,24 @@
-*.iml
-.gradle
+# Gradle
+.gradle/
+**/build/
 /local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+
+# Android artifacts
+*.apk
+*.aar
+*.ap_
+*.dex
+*.class
+
+# IDE
+.idea/
+*.iml
 .DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
-local.properties
+Thumbs.db
+
+# Generated / logs
+*.log
+captures/
+
+# Google services
+app/google-services.json
