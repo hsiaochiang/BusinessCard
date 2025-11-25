@@ -7290,3 +7290,938 @@
 [2m2025-11-25T00:14:04.557765Z[0m [32m INFO[0m Resumed rollout with 2471 items, conversation ID: Some(ConversationId { uuid: 019ab443-0e94-70c3-a36c-a99900a9344e })
 [2m2025-11-25T00:14:04.557811Z[0m [32m INFO[0m Resumed rollout successfully from "/mnt/d/program/businesscard/.codex/sessions/2025/11/24/rollout-2025-11-24T13-08-04-019ab443-0e94-70c3-a36c-a99900a9344e.jsonl"
 [2m2025-11-25T00:14:45.011211Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-25T00:14:51.861095Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-25T00:14:51.861184Z[0m [32m INFO[0m ghost commit captured: 23ef53ff003012fc81be80d89d98618e262af6c1
+[2m2025-11-25T00:14:51.861298Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-25T00:48:17.770271Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-25T00:48:27.227696Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-25T00:48:27.227811Z[0m [32m INFO[0m ghost commit captured: 664b8b97f59f2739e7ab498bc7f72683528c8912
+[2m2025-11-25T00:48:27.227844Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-25T00:48:36.612622Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: android-app/app/src/main/java/com/businesscard/app/data/repository/ContactRepository.kt
+@@
+-import com.businesscard.app.core.IdGenerator
+-import com.businesscard.app.core.TimeProvider
+-import com.businesscard.app.data.db.ContactDao
+-import com.businesscard.app.data.remote.drive.DriveClient
+-import com.businesscard.app.data.remote.drive.DriveUploadResult
+-import com.businesscard.app.data.remote.sheets.SheetsClient
+-import com.businesscard.app.data.remote.sheets.SheetsReader
+-import com.businesscard.app.data.remote.sheets.SheetsWriteResult
+-import com.businesscard.app.model.ContactDraftEntity
+-import com.businesscard.app.model.ContactQuery
+-import com.businesscard.app.model.ContactRecord
+-import com.businesscard.app.model.SortBy
+-import com.businesscard.app.model.Source
+-import com.businesscard.app.model.SyncStatus
+-import com.businesscard.app.telemetry.Telemetry
+-import kotlinx.coroutines.flow.Flow
+-import kotlinx.coroutines.flow.MutableStateFlow
+-import kotlinx.coroutines.flow.map
+ import java.util.UUID
++import kotlinx.coroutines.flow.Flow
++import kotlinx.coroutines.flow.MutableStateFlow
++import kotlinx.coroutines.flow.map
++import com.businesscard.app.core.IdGenerator
++import com.businesscard.app.core.TimeProvider
++import com.businesscard.app.data.db.ContactDao
++import com.businesscard.app.data.remote.drive.DriveClient
++import com.businesscard.app.data.remote.drive.DriveUploadResult
++import com.businesscard.app.data.remote.sheets.SheetsClient
++import com.businesscard.app.data.remote.sheets.SheetsReader
++import com.businesscard.app.data.remote.sheets.SheetsWriteResult
++import com.businesscard.app.model.ContactDraftEntity
++import com.businesscard.app.model.ContactQuery
++import com.businesscard.app.model.ContactRecord
++import com.businesscard.app.model.SortBy
++import com.businesscard.app.model.Source
++import com.businesscard.app.model.SyncStatus
++import com.businesscard.app.telemetry.Telemetry
+*** End Patch
+[2m2025-11-25T00:48:54.845452Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: specs/001-business-card-manager/architecture-ownership.md
++# 架構與 Ownership 說明（US1 / US2 Phase1）
++
++## 一、目的
++- 提供新進成員與 Reviewer 快速理解 US1（掃描→暫存→離線上傳）與 US2 Phase1（Sheets 讀取 / 快取 / 搜尋 / 排序 / 軟刪除）的分層架構與責任邊界。
++
++## 二、系統分層與資料流總覽
++- UI / ViewModel 層：接收使用者操作（掃描、搜尋、排序、顯示列表），僅透過 UseCase 呼叫 Repository，不直接碰 Remote/DB。
++- UseCase 層：
++  - US1：`CreateContactUseCase` 建立暫存佇列並排程 WorkManager。
++  - US2：`UpdateContactUseCase` 進行更新/軟刪除，`SyncCoordinator` 協調 last-write-wins 與資料同步。
++- Repository 層：`ContactRepository` 協調 Local Room（暫存/快取）與 Remote（SheetsReader/SheetsWriter/DriveClient/OcrProcessor/Telemetry），封裝查詢、排序、過濾、同步邏輯。
++- Local DB 層：Room Entity/Dao 儲存暫存與快取資料，提供查詢/狀態更新。
++- Remote Client 層：Sheets/Drive/OCR/Telemetry 的介面與 stub/fake 實作，負責與外部服務或假服務互動。
++- WorkManager：`UploadWorker` 處理離線佇列上傳，確保網路恢復後背景同步。
++- 資料流（US1）：UI → `ScanViewModel` → `CreateContactUseCase` → `ContactRepository`（暫存佇列 + 圖片上傳 + Sheets 寫入）→ WorkManager 重試。
++- 資料流（US2 Phase1）：UI 列表 → `ContactListViewModel` → `ContactRepository.observeContacts()`（快取 + 篩選排序）→ `refreshFromRemote()` 使用 `SheetsReader` 拉回分頁資料 → `SyncCoordinator`/UseCase 依 `updated_at` 做 last-write-wins。
++
++## 三、主要模組與責任
++- UI / Fragment / Activity：處理畫面與互動，僅觸發 ViewModel 事件；不直接存取資料層。
++- ViewModel：管理 UI state，呼叫 UseCase/Repository，負責協調查詢條件、狀態呈現，不做資料轉換細節。
++- UseCase：封裝單一路徑的業務操作（新增、更新、軟刪除、同步協調）；不處理 UI 細節。
++- Repository：單一入口協調 Room 與 Remote，包含搜尋/排序/軟刪除/同步，避免 UI 直接組 SQL 或直接打 Remote。
++- Local DB（Room）：儲存暫存與快取資料，提供 DAO 查詢與狀態更新；不包含業務判斷。
++- Remote Client（SheetsClient/DriveClient/OcrProcessor/Telemetry + Fake/Stub）：封裝對外/假服務的呼叫與結果轉換；不持久化狀態。
++- Worker / WorkManager：背景執行上傳佇列、重試；不承擔業務決策，只負責按佇列執行。
++
++## 四、Ownership 與協作模式
++
++| 模組/路徑 | 主要角色 | 審查責任 | 維運責任 |
++|-----------|---------|----------|----------|
++| android-app/app/src/main (UI/ViewModel/UseCase/Repository/Worker) | PG/SD | SD/SA | PG |
++| android-app/app/src/androidTest (旅程/假服務測試) | QA/PG | QA/SD | QA |
++| android-app/app/src/test (單元/契約測試) | QA/PG | QA/SD | QA |
++| specs/001-business-card-manager/* (plan/spec/tasks/architecture 等文件) | SA | SA/PM | SA |
++| scripts/perf/* (量測腳本) | QA/PG | QA/SD | QA |
++
++## 五、未來擴充注意事項
++- 新增 US2 後續 Phase 或 US3 時：
++  - 仍透過 UseCase/Repository 取用資料，避免 UI 或 Worker 直連 Remote/DB。
++  - 維持 Fake/Stub 注入能力，確保測試可離線運行。
++  - 變更同步/一致性策略時，集中於 `SyncCoordinator` 與 Repository；不要把邏輯散落 UI/Worker。***
+*** End Patch
+[2m2025-11-25T00:49:08.669648Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: specs/001-business-card-manager/language-governance.md
++# 語言治理與命名規則
++
++## 一、目的
++- 確保程式碼與文件的命名、用字一致，便於後續維護、審查與在地化。
++
++## 二、命名規則（Domain 與技術物件）
++- Record/Entity：表示實際資料列（例：`ContactRecord`，`ContactDraftEntity`），Record 為 Domain，Entity 為 Room 持久化。
++- Draft：暫存/離線資料（例：`ContactDraftForm`、`ContactDraftEntity`）。
++- Query：封裝查詢與過濾參數（例：`ContactQuery`）。  
++- Status/SyncStatus：狀態列舉（`PENDING/UPLOADING/FAILED/SYNCED`）。  
++- SortBy：排序欄位列舉（`NAME/CREATED_AT`）。  
++- Source：資料來源列舉（`SCAN/MANUAL/IMPORT`）。  
++- Repository：僅負責資料來源協調（Local/Remote），不包含 UI 邏輯。  
++- UseCase：動詞片語命名（例如 `CreateContactUseCase`、`UpdateContactUseCase`），封裝單一路徑的業務流程。  
++- Worker：背景任務（例：`UploadWorker`），不做業務決策；Coordinator（例：`SyncCoordinator`）集中一致性邏輯。
++
++## 三、檔名與資料夾結構
++- Kotlin 檔名與類別同名，對應單一職責（例：`ContactRepository.kt` 只做資料協調）。  
++- 測試：  
++  - Unit/contract 測試：`app/src/test/java/...`，以待測類別為名。  
++  - 旅程/儀表測試：`app/src/androidTest/java/...`，以場景命名（例：`ScanCreateJourneyTest`、`SheetsQueryTest`）。  
++- 文件：`specs/001-business-card-manager/` 內依主題分檔（plan/tasks/architecture/language/performance）。  
++- 腳本：`scripts/perf/` 放置量測腳本與說明。
++
++## 四、字串與 i18n 原則
++- 對使用者顯示的文案放在 `strings.xml`；測試資料或日誌中的說明性文字可留在程式碼。  
++- 避免硬編語言代碼，未來多國語系時改用資源檔或字串表。  
++- 避免在程式碼中動態拼接自然語言句子（以格式化字串 + 參數代入）。  
++- 假服務/測試使用的字串可以為英文或簡短描述，不影響使用者介面。
++
++## 五、待討論事項
++- 錯誤代碼與訊息對應表、Telemetry 事件命名規則（待 US3 安全與一致性階段補齊）。  
++- 是否引入多國語系（待產品決策後再定）。
+*** End Patch
+[2m2025-11-25T00:49:31.291805Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: specs/001-business-card-manager/performance-measurement.md
++# 效能量測說明（US1 / US2 Phase1）
++
++## 一、目的
++- 建立可重複的量測方法，追蹤 US1 與 US2 Phase1 的效能，供後續優化與回歸驗證使用。
++
++## 二、量測範圍與指標
++- US1：掃描→暫存→排程上傳（WorkManager）→ 假服務回應  
++  - 指標示例：影像取得→暫存完成時間、暫存→排程建立時間、佇列上傳→假服務回應時間。  
++- US2 Phase1：Sheets 讀取→快取→搜尋/排序/軟刪除→列表更新  
++  - 指標示例：首次讀取時間（含分頁）、快取命中後查詢/排序響應時間、軟刪除後列表更新時間。
++
++## 三、量測方式與腳本說明
++- `scripts/perf/measure-us1-scan-sync.ps1`  
++  - 互動式提示，協助記錄 US1 旅程各步耗時，需已連線裝置或模擬器。  
++  - 輸出：各步驟耗時與總結（平均/最大）。
++- `scripts/perf/measure-us2-sheets-phase1.ps1`  
++  - 互動式提示，模擬讀取/快取/搜尋/軟刪除流程並記錄時間。  
++  - 輸出：各階段耗時統計。
++
++## 四、建議目標值與觀察重點
++- US1：掃描預填 ≤5 秒、佇列上傳→假服務回應 ≤2 秒（同網路環境下）；若偶發超時，記錄網路狀態。  
++- US2 Phase1：首次讀取（含分頁）在 Wi-Fi/模擬假服務下 ≤2 秒；快取命中搜尋/排序應亞秒級。  
++- 異常觀察：長尾/偶發超時、佇列重試次數偏高、列表更新延遲。
++
++## 五、未來自動化方向
++- 導入 Telemetry 量測（掃描耗時、上傳延遲、同步錯誤率），串接儀表板。  
++- 以儀表/整合測試錄製時序，或以 shell/ADB 腳本半自動量測，後續可納入 CI。
+*** End Patch
+[2m2025-11-25T00:49:45.411949Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: scripts/perf/measure-us1-scan-sync.ps1
++# 使用說明：
++# - 目的：量測 US1「掃描→暫存→排程上傳→假服務回應」的手動耗時。
++# - 前置：已啟動模擬器或連線實機；App 已可執行 US1 流程；不修改專案或裝置設定。
++# - 步驟：依提示按 Enter 紀錄各階段時間，輸出總結（次數/總計/平均/最大）。
++
++Write-Host "US1 效能量測開始：請依提示操作 App，按 Enter 繼續。"
++
++$samples = @()
++$stepNames = @("影像取得→暫存完成", "暫存→排程建立", "排程→假服務回應")
++
++while ($true) {
++    $durations = @()
++    foreach ($step in $stepNames) {
++        Read-Host "完成步驟「$step」後按 Enter"
++        $timestamp = Get-Date
++        $durations += $timestamp
++    }
++    # 計算區段差值
++    $delta1 = ($durations[1] - $durations[0]).TotalSeconds
++    $delta2 = ($durations[2] - $durations[1]).TotalSeconds
++    $delta3 = 0 # 若需更細分可再增加，這裡簡化為兩段
++    $samples += [PSCustomObject]@{
++        Step1 = $delta1
++        Step2 = $delta2
++        Step3 = $delta3
++        Total = $delta1 + $delta2 + $delta3
++    }
++    $cont = Read-Host "是否繼續下一輪量測？(y/n)"
++    if ($cont -ne "y") { break }
++}
++
++if ($samples.Count -eq 0) {
++    Write-Host "未記錄任何樣本。"
++    exit 0
++}
++
++$totalCount = $samples.Count
++$totalSum = ($samples | Measure-Object -Property Total -Sum).Sum
++$maxTotal = ($samples | Measure-Object -Property Total -Maximum).Maximum
++$avgTotal = $totalSum / $totalCount
++
++Write-Host "===== 量測結果 ====="
++Write-Host "樣本數：$totalCount"
++Write-Host "總耗時(秒)：$totalSum"
++Write-Host "平均總耗時(秒)：$([Math]::Round($avgTotal,2))"
++Write-Host "最大單次耗時(秒)：$maxTotal"
++Write-Host "詳情（秒）："
++$samples | Format-Table -AutoSize
+*** End Patch
+[2m2025-11-25T00:49:57.153688Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: scripts/perf/measure-us2-sheets-phase1.ps1
++# 使用說明：
++# - 目的：量測 US2 Phase1「Sheets 讀取→快取→搜尋/排序/軟刪除」的手動耗時。
++# - 前置：模擬器/實機已連線，App 已具備 US2 Phase1 功能；不修改專案或裝置設定。
++# - 步驟：依提示按 Enter 紀錄讀取/快取/搜尋/軟刪除耗時，輸出統計。
++
++Write-Host "US2 Phase1 效能量測開始：請依提示操作 App，按 Enter 繼續。"
++
++$samples = @()
++$stepNames = @(
++    "首次讀取（含分頁/快取）完成",
++    "搜尋/排序結果呈現",
++    "軟刪除並刷新列表"
++)
++
++while ($true) {
++    $timestamps = @()
++    foreach ($step in $stepNames) {
++        Read-Host "完成步驟「$step」後按 Enter"
++        $timestamps += Get-Date
++    }
++    $deltaRead = ($timestamps[1] - $timestamps[0]).TotalSeconds
++    $deltaSearch = ($timestamps[2] - $timestamps[1]).TotalSeconds
++    $samples += [PSCustomObject]@{
++        ReadCache = $deltaRead
++        SearchSort = $deltaSearch
++        Total = $deltaRead + $deltaSearch
++    }
++    $cont = Read-Host "是否繼續下一輪量測？(y/n)"
++    if ($cont -ne "y") { break }
++}
++
++if ($samples.Count -eq 0) {
++    Write-Host "未記錄任何樣本。"
++    exit 0
++}
++
++$count = $samples.Count
++$totalSum = ($samples | Measure-Object -Property Total -Sum).Sum
++$avgTotal = $totalSum / $count
++$maxTotal = ($samples | Measure-Object -Property Total -Maximum).Maximum
++
++Write-Host "===== 量測結果 ====="
++Write-Host "樣本數：$count"
++Write-Host "總耗時(秒)：$totalSum"
++Write-Host "平均總耗時(秒)：$([Math]::Round($avgTotal,2))"
++Write-Host "最大單次耗時(秒)：$maxTotal"
++Write-Host "詳情（秒）："
++$samples | Format-Table -AutoSize
+*** End Patch
+[2m2025-11-25T00:50:06.713028Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/tasks.md
+@@
+-## 憲章強制品質任務
+-
+-- [ ] T014 [P] 紀錄模組 Ownership 與架構說明（lint/同步/資料層）於 `android-app/docs/architecture.md`
+-- [ ] T015 驗證語言治理：確保 README、docs、UI 字串為繁體中文並記錄審稿人於 `android-app/docs/i18n.md`
+-- [ ] T016 [P] 建立效能量測腳本/檢查點（OCR ≤5s、試算表讀寫 ≤2s、列表 5k/50k）於 `android-app/docs/perf-checks.md`
++## 憲章強制品質任務
++
++- [x] T014 [P] 紀錄模組 Ownership 與架構說明（lint/同步/資料層）於 `specs/001-business-card-manager/architecture-ownership.md`
++- [x] T015 驗證語言治理：確保 README、docs、UI 字串為繁體中文並記錄審稿人於 `specs/001-business-card-manager/language-governance.md`
++- [x] T016 [P] 建立效能量測腳本/檢查點（OCR ≤5s、試算表讀寫 ≤2s、列表 5k/50k）於 `specs/001-business-card-manager/performance-measurement.md`、`scripts/perf/measure-us1-scan-sync.ps1`、`scripts/perf/measure-us2-sheets-phase1.ps1`
+*** End Patch
+[2m2025-11-25T00:50:14.036448Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/tasks.md
+@@
+ ## Phase 1：初始化（共享基礎設施）
+@@
+ **檢查點**：US1 可離線建立並恢復上傳，表單/影像/試算表一致
+*** End Patch
+[2m2025-11-25T00:50:20.931174Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/tasks.md
+@@
+-**檢查點**：US1 可離線建立並恢復上傳，表單/影像/試算表一致
++**檢查點**：US1 可離線建立並恢復上傳，表單/影像/試算表一致
+*** End Patch
+[2m2025-11-25T00:50:28.663407Z[0m [32m INFO[0m ToolCall: shell_command {"command":"head -n 15 android-app/app/src/main/java/com/businesscard/app/data/repository/ContactRepository.kt","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-25T00:58:26.561127Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-25T00:58:28.735930Z[0m [32m INFO[0m interrupt received: abort current task, if any
+[2m2025-11-25T00:58:28.736154Z[0m [32m INFO[0m ghost snapshot task cancelled
+[2m2025-11-25T00:58:28.736188Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-25T00:58:40.749821Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-25T00:58:46.606999Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-25T00:58:46.607093Z[0m [32m INFO[0m ghost commit captured: 27fd4c160eb4364827a74e592549568ab8370396
+[2m2025-11-25T00:58:46.607105Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-25T01:07:22.088987Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-25T01:07:27.949362Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-25T01:07:27.949454Z[0m [32m INFO[0m ghost commit captured: f1ba3c38131183b9b64cf68e63b6ce57e1799a36
+[2m2025-11-25T01:07:27.949464Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-25T01:07:57.241949Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: docs/architecture/ownership.md
++# 架構與 Ownership 說明（US1／US2 Phase1）
++
++## 一、目的
++- 讓新進成員與 Reviewer 快速掌握 US1（掃描→暫存→離線上傳）與 US2 Phase1（Sheets 讀取／快取／搜尋／排序／軟刪除）的分層架構、資料流與責任邊界。
++
++## 二、系統分層與資料流總覽
++- UI／ViewModel：接收使用者操作（掃描、搜尋、排序、顯示列表），僅呼叫 UseCase／Repository；不直接碰 Remote 或 DB。
++- UseCase：
++  - US1：`CreateContactUseCase` 建立暫存佇列並排程 WorkManager。
++  - US2：`UpdateContactUseCase` 進行更新／軟刪除，`SyncCoordinator` 集中 last-write-wins 與資料合併策略。
++- Repository：`ContactRepository` 協調 Local（Room）與 Remote（SheetsReader／SheetsWriter／DriveClient／OcrProcessor／Telemetry），封裝搜尋、排序、過濾、同步邏輯。
++- Local DB：Room Entity／Dao 儲存暫存與快取資料，提供查詢與狀態更新；不包含業務判斷。
++- Remote Client：Sheets／Drive／OCR／Telemetry 介面及 stub/fake；負責對外呼叫或假服務互動，不持久化狀態。
++- WorkManager：`UploadWorker` 處理離線佇列上傳與重試；不做業務決策，只執行佇列。
++- 資料流（US1）：UI → `ScanViewModel` → `CreateContactUseCase` → `ContactRepository`（暫存＋影像上傳＋ Sheets 寫入）→ WorkManager 重試。
++- 資料流（US2 Phase1）：UI 列表 → `ContactListViewModel` → `ContactRepository.observeContacts()`（快取＋篩選排序）→ `refreshFromRemote()` 使用 `SheetsReader` 拉回分頁資料 → `SyncCoordinator` 依 `updated_at` 決定覆蓋方向。
++
++## 三、主要模組與責任
++- UI／Fragment／Activity：處理畫面與互動，觸發 ViewModel 事件；不直接存取資料層。
++- ViewModel：管理 UI state，呼叫 UseCase／Repository，協調查詢條件與狀態呈現；不進行資料層決策。
++- UseCase：封裝單一路徑的業務操作（新增、更新、軟刪除、同步協調）；不處理 UI 細節。
++- Repository：單一入口協調 Room 與 Remote，包含搜尋／排序／軟刪除／同步；避免 UI 直接組 SQL 或直連 Remote。
++- Local DB（Room）：儲存暫存與快取資料，提供 DAO 查詢與狀態更新；不含業務邏輯。
++- Remote Client（SheetsClient／DriveClient／OcrProcessor／Telemetry + Fake/Stub）：封裝對外／假服務呼叫與結果轉換；不持久化狀態。
++- Worker／WorkManager：背景執行佇列與重試；不承擔業務決策。
++
++## 四、Ownership 與協作模式
++
++| 模組／路徑 | 主要角色 | 審查責任 | 維運責任 |
++|-----------|---------|----------|----------|
++| android-app/app/src/main (UI／ViewModel／UseCase／Repository／Worker) | PG／SD | SD／SA | PG |
++| android-app/app/src/androidTest (旅程／假服務測試) | QA／PG | QA／SD | QA |
++| android-app/app/src/test (單元／契約測試) | QA／PG | QA／SD | QA |
++| specs/001-business-card-manager/* | SA | SA／PM | SA |
++| docs/* | SA／SD | SA | SA |
++| scripts/perf/* | QA／PG | QA／SD | QA |
++
++## 五、未來擴充注意事項
++- 新增 US2 後續 Phase 或 US3 時，仍需透過 UseCase／Repository，避免 UI 或 Worker 直連資料層。
++- 維持 Fake／Stub 注入能力，確保離線與自動化測試可運行。
++- 同步與一致性策略集中在 `SyncCoordinator` 與 Repository，避免邏輯分散於 UI／Worker。***
+*** End Patch
+[2m2025-11-25T01:08:10.939574Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: docs/guidelines/i18n-rules.md
++# 語言治理與命名規範
++
++## 一、目的
++- 統一命名與用字規則，維持程式碼與文件一致性，降低審查與在地化成本。
++
++## 二、命名規則（Domain／技術物件）
++- Record／Entity：代表資料列（例：`ContactRecord`），Entity 為 Room 持久化（例：`ContactDraftEntity`）。
++- Draft：暫存／離線資料（例：`ContactDraftForm`、`ContactDraftEntity`）。
++- Query：查詢與過濾參數（例：`ContactQuery`）；SortBy／SyncStatus／Source 以列舉表示狀態或排序欄位。
++- Repository：僅做資料來源協調（Local／Remote），不含 UI 邏輯；命名 `*Repository`。
++- UseCase：動詞片語命名（例：`CreateContactUseCase`、`UpdateContactUseCase`），封裝單一路徑。
++- Worker／Coordinator：背景任務與一致性調度（例：`UploadWorker`、`SyncCoordinator`）；避免承載業務決策。
++
++## 三、檔名與資料夾結構
++- Kotlin 檔名與類別同名且單一職責（例：`ContactRepository.kt` 管理聯絡人資料來源）。
++- 測試：  
++  - Unit／contract：`app/src/test/java/...`，以待測類別命名。  
++  - 旅程／儀表：`app/src/androidTest/java/...`，以場景命名（例：`ScanCreateJourneyTest`、`SheetsQueryTest`）。
++- 文件：`specs/001-business-card-manager/`、`docs/` 依主題分檔；腳本置於 `scripts/` 或 `tools/`。
++
++## 四、字串與 i18n 原則
++- 面向使用者的文案放在 `strings.xml`；測試或 log 用的說明可留在程式碼或測試資料。
++- 避免硬編語言代碼；未來若多國語系，改用資源檔或字串表。
++- 避免在程式碼中組接自然語言長句，改用格式化字串＋參數。
++- Fake／測試資料可使用簡潔英／中文，不影響 UI。
++
++## 五、審查清單（新增功能時檢核）
++- 類別命名符合職責（Repository 不含 UI，UseCase 為動詞片語）。  
++  - 字串是否置於適當資源檔；測試資料是否獨立於程式碼。  
++  - 是否保留 Fake／Stub 注入點以利測試。  
++  - 列舉／狀態命名是否遵循大寫或 UpperCamel（Source/SyncStatus/SortBy）。  
++  - 檔案是否放在對應資料夾（main/test/androidTest/docs/scripts）。
++
++## 六、待討論事項
++- 錯誤代碼與訊息對應表、Telemetry 事件命名規範（待 US3 安全一致性階段補齊）。  
++- 多國語系策略與審稿流程（待產品決策後訂定）。***
+*** End Patch
+[2m2025-11-25T01:08:19.170701Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: tools/perf/run_perf_contacts.sh
++#!/usr/bin/env bash
++# 用途：量測 US1 掃描→暫存→排程上傳→假服務回應的手動耗時。
++# 前置：已連線裝置/模擬器，可操作 US1 流程；本腳本不修改專案或裝置設定。
++
++echo "US1 效能量測（手動）"
++echo "1) 依提示操作 App：掃描→暫存→排程上傳→等待假服務回應"
++echo "2) 每完成一步按 Enter 紀錄時間"
++
++read -p "按 Enter 開始量測..." _
++start=$(date +%s)
++read -p "影像取得並暫存完成後按 Enter..." _
++mid1=$(date +%s)
++read -p "排程建立並開始上傳後按 Enter..." _
++mid2=$(date +%s)
++read -p "假服務回應並確認結果後按 Enter..." _
++end=$(date +%s)
++
++delta1=$((mid1-start))
++delta2=$((mid2-mid1))
++delta3=$((end-mid2))
++total=$((end-start))
++
++echo "===== 量測結果（秒）====="
++echo "影像→暫存：$delta1"
++echo "暫存→排程：$delta2"
++echo "排程→回應：$delta3"
++echo "總耗時：$total"
+*** End Patch
+[2m2025-11-25T01:08:28.034806Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: tools/perf/run_perf_sheets.sh
++#!/usr/bin/env bash
++# 用途：量測 US2 Phase1 讀取→快取→搜尋/排序/軟刪除的手動耗時。
++# 前置：已連線裝置/模擬器，可操作 US2 Phase1 功能；本腳本不修改專案或裝置設定。
++
++echo "US2 Phase1 效能量測（手動）"
++echo "1) 依提示操作 App：首次讀取（含快取）→搜尋/排序→軟刪除並刷新"
++echo "2) 每完成一步按 Enter 紀錄時間"
++
++read -p "按 Enter 開始量測..." _
++start=$(date +%s)
++read -p "首次讀取/快取完成後按 Enter..." _
++mid1=$(date +%s)
++read -p "搜尋/排序結果呈現後按 Enter..." _
++mid2=$(date +%s)
++read -p "軟刪除並刷新列表後按 Enter..." _
++end=$(date +%s)
++
++deltaRead=$((mid1-start))
++deltaSearch=$((mid2-mid1))
++deltaDelete=$((end-mid2))
++total=$((end-start))
++
++echo "===== 量測結果（秒）====="
++echo "讀取/快取：$deltaRead"
++echo "搜尋/排序：$deltaSearch"
++echo "軟刪除/刷新：$deltaDelete"
++echo "總耗時：$total"
+*** End Patch
+[2m2025-11-25T01:08:35.297121Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: android-app/app/src/main/java/com/businesscard/app/us3/models/Permissions.kt
++package com.businesscard.app.us3.models
++
++data class AccountSession(
++    val accountId: String,
++    val email: String?,
++    val lastAuthAt: String?
++)
++
++enum class PermissionScope {
++    SHEETS_READ,
++    SHEETS_WRITE,
++    DRIVE_READ,
++    DRIVE_WRITE
++}
++
++data class AccessRequest(
++    val scopes: Set<PermissionScope>,
++    val spreadsheetId: String?,
++    val driveFolderId: String?
++)
++
++data class AccessDecision(
++    val allowed: Boolean,
++    val reason: String? = null
++)
+*** End Patch
+[2m2025-11-25T01:08:42.875621Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: android-app/app/src/main/java/com/businesscard/app/us3/security/PermissionChecker.kt
++package com.businesscard.app.us3.security
++
++import com.businesscard.app.us3.models.AccessDecision
++import com.businesscard.app.us3.models.AccessRequest
++import com.businesscard.app.us3.models.AccountSession
++
++class PermissionChecker {
++    fun evaluate(request: AccessRequest, session: AccountSession?): AccessDecision {
++        if (session == null) {
++            return AccessDecision(allowed = false, reason = "session_missing")
++        }
++        return AccessDecision(allowed = true)
++    }
++}
+*** End Patch
+[2m2025-11-25T01:08:49.355963Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: android-app/app/src/main/java/com/businesscard/app/us3/security/ConsistencyPolicy.kt
++package com.businesscard.app.us3.security
++
++class ConsistencyPolicy {
++    fun shouldOverride(localUpdatedAt: String?, remoteUpdatedAt: String?): Boolean {
++        if (localUpdatedAt == null) return true
++        if (remoteUpdatedAt == null) return false
++        return remoteUpdatedAt > localUpdatedAt
++    }
++}
+*** End Patch
+[2m2025-11-25T01:08:57.299811Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: android-app/app/src/main/java/com/businesscard/app/us3/usecase/AccessControlUseCase.kt
++package com.businesscard.app.us3.usecase
++
++import com.businesscard.app.us3.models.AccessDecision
++import com.businesscard.app.us3.models.AccessRequest
++import com.businesscard.app.us3.models.AccountSession
++import com.businesscard.app.us3.security.PermissionChecker
++
++class AccessControlUseCase(
++    private val permissionChecker: PermissionChecker
++) {
++    fun evaluate(request: AccessRequest, session: AccountSession?): AccessDecision =
++        permissionChecker.evaluate(request, session)
++}
+*** End Patch
+[2m2025-11-25T01:09:04.270877Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: android-app/app/src/main/java/com/businesscard/app/us3/usecase/ConflictResolutionUseCase.kt
++package com.businesscard.app.us3.usecase
++
++import com.businesscard.app.model.ContactRecord
++import com.businesscard.app.us3.security.ConsistencyPolicy
++
++class ConflictResolutionUseCase(
++    private val policy: ConsistencyPolicy
++) {
++    fun resolve(local: ContactRecord, remote: ContactRecord): ContactRecord =
++        if (policy.shouldOverride(local.updatedAt, remote.updatedAt)) remote else local
++}
+*** End Patch
+[2m2025-11-25T01:09:12.250346Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: android-app/app/src/main/java/com/businesscard/app/us3/usecase/AuditSecurityEventUseCase.kt
++package com.businesscard.app.us3.usecase
++
++import com.businesscard.app.telemetry.Telemetry
++
++class AuditSecurityEventUseCase(
++    private val telemetry: Telemetry
++) {
++    fun record(event: String) {
++        telemetry.recordAuthEvent(event)
++    }
++}
+*** End Patch
+[2m2025-11-25T01:09:19.997237Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: android-app/app/src/main/java/com/businesscard/app/us3/viewmodel/AccountViewModel.kt
++package com.businesscard.app.us3.viewmodel
++
++import androidx.lifecycle.ViewModel
++import com.businesscard.app.us3.models.AccessRequest
++import com.businesscard.app.us3.models.AccountSession
++import com.businesscard.app.us3.usecase.AccessControlUseCase
++
++class AccountViewModel(
++    private val accessControlUseCase: AccessControlUseCase
++) : ViewModel() {
++    fun canAccess(request: AccessRequest, session: AccountSession?) =
++        accessControlUseCase.evaluate(request, session)
++}
+*** End Patch
+[2m2025-11-25T01:09:28.322051Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: android-app/app/src/main/java/com/businesscard/app/us3/viewmodel/SecurityViewModel.kt
++package com.businesscard.app.us3.viewmodel
++
++import androidx.lifecycle.ViewModel
++import com.businesscard.app.model.ContactRecord
++import com.businesscard.app.us3.usecase.ConflictResolutionUseCase
++
++class SecurityViewModel(
++    private val conflictResolutionUseCase: ConflictResolutionUseCase
++) : ViewModel() {
++    fun pickLatest(local: ContactRecord, remote: ContactRecord): ContactRecord =
++        conflictResolutionUseCase.resolve(local, remote)
++}
+*** End Patch
+[2m2025-11-25T01:09:40.027605Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: tests/manual/us2/acceptance.md
++# US2 手動驗收指引（Phase1）
++
++## 目的
++- 確認試算表讀取／快取／搜尋／排序／軟刪除流程可用且行為一致。
++
++## 前置
++- 已啟動模擬器或實機並完成基本設定。
++- App 版本包含 US2 Phase1 功能，假 Sheets 服務可正常回應。
++
++## 驗收步驟
++1) 啟動 App，進入聯絡人列表。  
++2) 觸發刷新：應讀取試算表並顯示最新資料，預設排除 `is_deleted=true`。  
++3) 搜尋「Alice」並切換排序（姓名／建立時間）：結果應正確並保持過濾。  
++4) 編輯一筆資料後再刷新：應呈現最新欄位與 `updated_at`。  
++5) 軟刪除一筆資料後刷新：預設列表不應顯示；切換「包含刪除」則需顯示並標記已刪除。  
++6) 返回列表，確認無當機或異常訊息。  
++
++## 預期
++- 列表更新不超時，搜尋／排序與軟刪除行為一致。  
++- 不顯示刪除資料（除非顯式啟用包含刪除）。  
++- 假服務回應期間 App 不崩潰且可重新整理。
+*** End Patch
+[2m2025-11-25T01:09:51.488412Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: tests/manual/us3/acceptance.md
++# US3 手動驗收指引（安全與一致性 Stub）
++
++## 目的
++- 確認 US3 的授權／一致性 stub 介面與流程佈線無異常，尚未串真實 API。
++
++## 前置
++- 模擬器或實機已連線；App 版本含 US3 stub（PermissionChecker／ConsistencyPolicy／UseCase／ViewModel）。
++
++## 驗收步驟
++1) 啟動 App，執行基本導航（無需真實授權 UI），確保無崩潰。  
++2) 以測試 session 模擬 AccessRequest（讀寫 Sheets/Drive），呼叫 ViewModel 的判斷接口：應回傳允許/拒絕的預設結果，不應拋例外。  
++3) 以兩筆 ContactRecord 模擬衝突，呼叫 `SecurityViewModel.pickLatest`：應回傳 updated_at 較新的紀錄。  
++4) 觀察 log/假 Telemetry，如有記錄應不影響流程。  
++
++## 預期
++- Stub 介面可被呼叫且不崩潰，預設決策可返回合理結果。  
++- 無權限時回傳拒絕訊息，不應造成程式異常。  
++- 衝突解析以 updated_at 較新者為準。
+*** End Patch
+[2m2025-11-25T01:10:02.348291Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: tests/data/us2_samples.json
++[
++  {
++    "id": "ID1001",
++    "name": "Alice Example",
++    "company": "Alpha Corp",
++    "email": "alice@example.com",
++    "phone": "0912345678",
++    "tags": ["vip"],
++    "is_deleted": false,
++    "updated_at": "2025-01-10T00:00:00+08:00"
++  },
++  {
++    "id": "ID1002",
++    "name": "Bob Example",
++    "company": "Beta LLC",
++    "email": "bob@example.com",
++    "phone": "0922333444",
++    "tags": ["partner"],
++    "is_deleted": true,
++    "updated_at": "2025-02-01T00:00:00+08:00"
++  }
++]
+*** End Patch
+[2m2025-11-25T01:10:10.979987Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: tests/data/us3_samples.json
++[
++  {
++    "id": "ID3001",
++    "name": "Secure Alice",
++    "account": "alice.secure@example.com",
++    "last_updated": "2025-03-01T00:00:00+08:00",
++    "is_deleted": false
++  },
++  {
++    "id": "ID3002",
++    "name": "Conflict Bob",
++    "account": "bob.conflict@example.com",
++    "last_updated": "2025-03-02T00:00:00+08:00",
++    "is_deleted": true
++  }
++]
+*** End Patch
+[2m2025-11-25T01:10:25.015904Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: android-app/app/src/main/java/com/businesscard/app/data/repository/ContactRepository.kt
+@@
+-import java.util.UUID
+-import kotlinx.coroutines.flow.Flow
+-import kotlinx.coroutines.flow.MutableStateFlow
+-import kotlinx.coroutines.flow.map
+-import com.businesscard.app.core.IdGenerator
+-import com.businesscard.app.core.TimeProvider
+-import com.businesscard.app.data.db.ContactDao
+-import com.businesscard.app.data.remote.drive.DriveClient
+-import com.businesscard.app.data.remote.drive.DriveUploadResult
+-import com.businesscard.app.data.remote.sheets.SheetsClient
+-import com.businesscard.app.data.remote.sheets.SheetsReader
+-import com.businesscard.app.data.remote.sheets.SheetsWriteResult
+-import com.businesscard.app.model.ContactDraftEntity
+-import com.businesscard.app.model.ContactQuery
+-import com.businesscard.app.model.ContactRecord
+-import com.businesscard.app.model.SortBy
+-import com.businesscard.app.model.Source
+-import com.businesscard.app.model.SyncStatus
+-import com.businesscard.app.telemetry.Telemetry
++import java.util.UUID
++import kotlinx.coroutines.flow.Flow
++import kotlinx.coroutines.flow.MutableStateFlow
++import kotlinx.coroutines.flow.map
++import com.businesscard.app.core.IdGenerator
++import com.businesscard.app.core.TimeProvider
++import com.businesscard.app.data.db.ContactDao
++import com.businesscard.app.data.remote.drive.DriveClient
++import com.businesscard.app.data.remote.drive.DriveUploadResult
++import com.businesscard.app.data.remote.sheets.SheetsClient
++import com.businesscard.app.data.remote.sheets.SheetsReader
++import com.businesscard.app.data.remote.sheets.SheetsWriteResult
++import com.businesscard.app.model.ContactDraftEntity
++import com.businesscard.app.model.ContactQuery
++import com.businesscard.app.model.ContactRecord
++import com.businesscard.app.model.SortBy
++import com.businesscard.app.model.Source
++import com.businesscard.app.model.SyncStatus
++import com.businesscard.app.telemetry.Telemetry
+*** End Patch
+[2m2025-11-25T01:10:31.751006Z[0m [32m INFO[0m ToolCall: shell_command {"command":"python3 - <<'PY'\nfrom pathlib import Path\ntext=Path('android-app/app/src/main/java/com/businesscard/app/data/repository/ContactRepository.kt').read_text()\nprint(text.split('\\n')[:15])\nPY","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-25T01:10:43.895385Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: android-app/app/src/main/java/com/businesscard/app/data/repository/ContactRepository.kt
+@@
+-import com.businesscard.app.core.IdGenerator
+-import com.businesscard.app.core.TimeProvider
+-import com.businesscard.app.data.db.ContactDao
+-import com.businesscard.app.data.remote.drive.DriveClient
+-import com.businesscard.app.data.remote.drive.DriveUploadResult
+-import com.businesscard.app.data.remote.sheets.SheetsClient
+-import com.businesscard.app.data.remote.sheets.SheetsReader
+-import com.businesscard.app.data.remote.sheets.SheetsWriteResult
+-import com.businesscard.app.model.ContactDraftEntity
+-import com.businesscard.app.model.ContactQuery
+-import com.businesscard.app.model.ContactRecord
+-import com.businesscard.app.model.SortBy
+-import com.businesscard.app.model.Source
+-import com.businesscard.app.model.SyncStatus
+-import com.businesscard.app.telemetry.Telemetry
+-import kotlinx.coroutines.flow.Flow
+-import kotlinx.coroutines.flow.MutableStateFlow
+-import kotlinx.coroutines.flow.map
+-import java.util.UUID
++import java.util.UUID
++import kotlinx.coroutines.flow.Flow
++import kotlinx.coroutines.flow.MutableStateFlow
++import kotlinx.coroutines.flow.map
++import com.businesscard.app.core.IdGenerator
++import com.businesscard.app.core.TimeProvider
++import com.businesscard.app.data.db.ContactDao
++import com.businesscard.app.data.remote.drive.DriveClient
++import com.businesscard.app.data.remote.drive.DriveUploadResult
++import com.businesscard.app.data.remote.sheets.SheetsClient
++import com.businesscard.app.data.remote.sheets.SheetsReader
++import com.businesscard.app.data.remote.sheets.SheetsWriteResult
++import com.businesscard.app.model.ContactDraftEntity
++import com.businesscard.app.model.ContactQuery
++import com.businesscard.app.model.ContactRecord
++import com.businesscard.app.model.SortBy
++import com.businesscard.app.model.Source
++import com.businesscard.app.model.SyncStatus
++import com.businesscard.app.telemetry.Telemetry
+*** End Patch
+[2m2025-11-25T01:10:55.500868Z[0m [32m INFO[0m ToolCall: shell_command {"command":"git add android-app/app/src/main/java/com/businesscard/app/data/repository/ContactRepository.kt docs/architecture/ownership.md docs/guidelines/i18n-rules.md specs/001-business-card-manager/architecture-ownership.md specs/001-business-card-manager/language-governance.md specs/001-business-card-manager/performance-measurement.md tools/perf/run_perf_contacts.sh tools/perf/run_perf_sheets.sh scripts/perf/measure-us1-scan-sync.ps1 scripts/perf/measure-us2-sheets-phase1.ps1 android-app/app/src/main/java/com/businesscard/app/us3/models/Permissions.kt android-app/app/src/main/java/com/businesscard/app/us3/security/PermissionChecker.kt android-app/app/src/main/java/com/businesscard/app/us3/security/ConsistencyPolicy.kt android-app/app/src/main/java/com/businesscard/app/us3/usecase/AccessControlUseCase.kt android-app/app/src/main/java/com/businesscard/app/us3/usecase/ConflictResolutionUseCase.kt android-app/app/src/main/java/com/businesscard/app/us3/usecase/AuditSecurityEventUseCase.kt android-app/app/src/main/java/com/businesscard/app/us3/viewmodel/AccountViewModel.kt android-app/app/src/main/java/com/businesscard/app/us3/viewmodel/SecurityViewModel.kt tests/manual/us2/acceptance.md tests/manual/us3/acceptance.md tests/data/us2_samples.json tests/data/us3_samples.json","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-25T01:11:04.142497Z[0m [32m INFO[0m ToolCall: shell_command {"command":".android-app/gradlew.bat -p android-app :app:detekt","workdir":"/mnt/d/program/businesscard","timeout_ms":120000}
+[2m2025-11-25T01:11:11.873010Z[0m [32m INFO[0m ToolCall: shell_command {"command":"rg \"T014\" specs/001-business-card-manager/tasks.md"}
+[2m2025-11-25T01:15:25.860296Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-25T01:15:27.670024Z[0m [32m INFO[0m interrupt received: abort current task, if any
+[2m2025-11-25T01:15:27.670178Z[0m [32m INFO[0m ghost snapshot task cancelled
+[2m2025-11-25T01:15:27.670424Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-25T01:19:35.743318Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-25T01:19:36.931711Z[0m [32m INFO[0m interrupt received: abort current task, if any
+[2m2025-11-25T01:19:36.931812Z[0m [32m INFO[0m ghost snapshot task cancelled
+[2m2025-11-25T01:19:36.931829Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-25T01:19:54.712057Z[0m [32m INFO[0m Resuming rollout from "/mnt/d/program/businesscard/.codex/sessions/2025/11/24/rollout-2025-11-24T13-08-04-019ab443-0e94-70c3-a36c-a99900a9344e.jsonl"
+[2m2025-11-25T01:19:54.749446Z[0m [32m INFO[0m Resumed rollout with 2693 items, conversation ID: Some(ConversationId { uuid: 019ab443-0e94-70c3-a36c-a99900a9344e })
+[2m2025-11-25T01:19:54.749570Z[0m [32m INFO[0m Resumed rollout successfully from "/mnt/d/program/businesscard/.codex/sessions/2025/11/24/rollout-2025-11-24T13-08-04-019ab443-0e94-70c3-a36c-a99900a9344e.jsonl"
+[2m2025-11-25T01:21:09.506786Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-25T01:21:15.831945Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-25T01:21:15.832037Z[0m [32m INFO[0m ghost commit captured: 79ce1d970760615a87c8e283e363bb584b6d5e58
+[2m2025-11-25T01:21:15.832047Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-25T01:21:22.103299Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: android-app/app/src/main/java/com/businesscard/app/us3/security/ConsistencyPolicy.kt
+@@
+ class ConsistencyPolicy {
+     fun shouldOverride(localUpdatedAt: String?, remoteUpdatedAt: String?): Boolean {
+-        if (localUpdatedAt == null) return true
+-        if (remoteUpdatedAt == null) return false
+-        return remoteUpdatedAt > localUpdatedAt
++        val decision = when {
++            localUpdatedAt == null && remoteUpdatedAt != null -> true
++            remoteUpdatedAt == null -> false
++            else -> remoteUpdatedAt > localUpdatedAt
++        }
++        return decision
+     }
+ }
+*** End Patch
+[2m2025-11-25T01:21:30.980833Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: android-app/app/src/main/java/com/businesscard/app/us3/security/PermissionChecker.kt
+@@
+ class PermissionChecker {
+     fun evaluate(request: AccessRequest, session: AccountSession?): AccessDecision {
+-        if (session == null) {
+-            return AccessDecision(allowed = false, reason = "session_missing")
+-        }
+-        return AccessDecision(allowed = true)
++        if (session == null) {
++            return AccessDecision(allowed = false, reason = "session_missing")
++        }
++        if (request.scopes.isEmpty()) {
++            return AccessDecision(allowed = false, reason = "no_scope_requested")
++        }
++        return AccessDecision(allowed = true)
+     }
+ }
+*** End Patch
+[2m2025-11-25T01:21:39.491870Z[0m [32m INFO[0m ToolCall: shell_command {"command":"git add android-app/app/src/main/java/com/businesscard/app/us3/security/ConsistencyPolicy.kt android-app/app/src/main/java/com/businesscard/app/us3/security/PermissionChecker.kt","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-25T01:21:48.669517Z[0m [32m INFO[0m ToolCall: shell_command {"command":".android-app/gradlew.bat -p android-app :app:detekt","workdir":"/mnt/d/program/businesscard","timeout_ms":120000}
+[2m2025-11-25T01:27:03.972921Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-25T01:27:10.628076Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-25T01:27:10.628170Z[0m [32m INFO[0m ghost commit captured: f842f75f6aa98c3bdfff6266b7fd36b3dc6f77db
+[2m2025-11-25T01:27:10.628179Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-25T01:27:14.209672Z[0m [32m INFO[0m ToolCall: shell_command {"command":"python3 - <<'PY'\nfrom pathlib import Path\np=Path('android-app/app/src/main/java/com/businesscard/app/data/repository/ContactRepository.kt')\nprint(p.read_text())\nPY","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-25T01:27:32.808450Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: android-app/app/src/main/java/com/businesscard/app/data/repository/ContactRepository.kt
+@@
+-import com.businesscard.app.core.IdGenerator
+-import com.businesscard.app.core.TimeProvider
+-import com.businesscard.app.data.db.ContactDao
+-import com.businesscard.app.data.remote.drive.DriveClient
+-import com.businesscard.app.data.remote.drive.DriveUploadResult
+-import com.businesscard.app.data.remote.sheets.SheetsClient
+-import com.businesscard.app.data.remote.sheets.SheetsReader
+-import com.businesscard.app.data.remote.sheets.SheetsWriteResult
+-import com.businesscard.app.model.ContactRecord
+-import com.businesscard.app.model.SortBy
+-import com.businesscard.app.model.Source
+-import com.businesscard.app.model.SyncStatus
+-import com.businesscard.app.telemetry.Telemetry
+-import kotlinx.coroutines.flow.Flow
+-import kotlinx.coroutines.flow.MutableStateFlow
+-import kotlinx.coroutines.flow.map
+ import java.util.UUID
++import kotlinx.coroutines.flow.Flow
++import kotlinx.coroutines.flow.MutableStateFlow
++import kotlinx.coroutines.flow.map
++import com.businesscard.app.core.IdGenerator
++import com.businesscard.app.core.TimeProvider
++import com.businesscard.app.data.db.ContactDao
++import com.businesscard.app.data.remote.drive.DriveClient
++import com.businesscard.app.data.remote.drive.DriveUploadResult
++import com.businesscard.app.data.remote.sheets.SheetsClient
++import com.businesscard.app.data.remote.sheets.SheetsReader
++import com.businesscard.app.data.remote.sheets.SheetsWriteResult
++import com.businesscard.app.model.ContactDraftEntity
++import com.businesscard.app.model.ContactQuery
++import com.businesscard.app.model.ContactRecord
++import com.businesscard.app.model.SortBy
++import com.businesscard.app.model.Source
++import com.businesscard.app.model.SyncStatus
++import com.businesscard.app.telemetry.Telemetry
+*** End Patch
+[2m2025-11-25T01:27:41.727497Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: android-app/app/src/main/java/com/businesscard/app/us3/security/PermissionChecker.kt
+@@
+ class PermissionChecker {
+-    fun evaluate(request: AccessRequest, session: AccountSession?): AccessDecision {
+-        if (session == null) {
+-            return AccessDecision(allowed = false, reason = "session_missing")
+-        }
+-        if (request.scopes.isEmpty()) {
+-            return AccessDecision(allowed = false, reason = "no_scope_requested")
+-        }
+-        return AccessDecision(allowed = true)
++    fun evaluate(request: AccessRequest, session: AccountSession?): AccessDecision =
++        when {
++            session == null -> AccessDecision(allowed = false, reason = "session_missing")
++            request.scopes.isEmpty() -> AccessDecision(allowed = false, reason = "no_scope_requested")
++            else -> AccessDecision(allowed = true)
++        }
+ }
+*** End Patch
+[2m2025-11-25T01:27:51.875456Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: android-app/app/src/main/java/com/businesscard/app/us3/security/ConsistencyPolicy.kt
+@@
+-class ConsistencyPolicy {
+-    fun shouldOverride(localUpdatedAt: String?, remoteUpdatedAt: String?): Boolean {
+-        val decision = when {
+-            localUpdatedAt == null && remoteUpdatedAt != null -> true
+-            remoteUpdatedAt == null -> false
+-            else -> remoteUpdatedAt > localUpdatedAt
+-        }
+-        return decision
+-    }
+-}
++class ConsistencyPolicy {
++    fun shouldOverride(localUpdatedAt: String?, remoteUpdatedAt: String?): Boolean =
++        when {
++            localUpdatedAt == null && remoteUpdatedAt != null -> true
++            remoteUpdatedAt == null -> false
++            else -> remoteUpdatedAt > localUpdatedAt
++        }
++}
+*** End Patch
+[2m2025-11-25T01:28:00.849236Z[0m [32m INFO[0m ToolCall: shell_command {"command":"git add android-app/app/src/main/java/com/businesscard/app/us3/security/PermissionChecker.kt android-app/app/src/main/java/com/businesscard/app/us3/security/ConsistencyPolicy.kt android-app/app/src/main/java/com/businesscard/app/data/repository/ContactRepository.kt"}
+[2m2025-11-25T01:28:09.246358Z[0m [32m INFO[0m ToolCall: shell_command {"command":".android-app/gradlew.bat -p android-app :app:detekt","timeout_ms":120000}
+[2m2025-11-25T01:32:58.458760Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-25T01:33:05.462575Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-25T01:33:05.462669Z[0m [32m INFO[0m ghost commit captured: 10777d91a678cb26f37e27e5ad7a7282df74ccbb
+[2m2025-11-25T01:33:05.462681Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-25T01:33:08.328367Z[0m [32m INFO[0m ToolCall: shell_command {"command":"cat android-app/app/src/main/java/com/businesscard/app/us3/security/PermissionChecker.kt","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-25T01:33:21.517723Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: android-app/app/src/main/java/com/businesscard/app/us3/security/PermissionChecker.kt
+@@
+ class PermissionChecker {
+     fun evaluate(request: AccessRequest, session: AccountSession?): AccessDecision =
+         when {
+             session == null -> AccessDecision(allowed = false, reason = "session_missing")
+             request.scopes.isEmpty() -> AccessDecision(allowed = false, reason = "no_scope_requested")
+             else -> AccessDecision(allowed = true)
+         }
+ }
+-}
+*** End Patch
+[2m2025-11-25T01:33:28.008217Z[0m [32m INFO[0m ToolCall: shell_command {"command":"git add android-app/app/src/main/java/com/businesscard/app/us3/security/PermissionChecker.kt","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-25T01:34:17.899415Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-25T01:34:25.531952Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-25T01:34:25.532043Z[0m [32m INFO[0m ghost commit captured: ac81727617d5da7f279127432d1c1e797d8d7d50
+[2m2025-11-25T01:34:25.532054Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-25T01:34:34.302438Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: android-app/app/src/main/java/com/businesscard/app/us3/security/ConsistencyPolicy.kt
+@@
+ class ConsistencyPolicy {
+-    fun shouldOverride(localUpdatedAt: String?, remoteUpdatedAt: String?): Boolean =
+-        when {
+-            localUpdatedAt == null && remoteUpdatedAt != null -> true
+-            remoteUpdatedAt == null -> false
+-            else -> remoteUpdatedAt > localUpdatedAt
+-        }
++    fun shouldOverride(localUpdatedAt: String?, remoteUpdatedAt: String?): Boolean {
++        val remote = remoteUpdatedAt ?: return false
++        val local = localUpdatedAt ?: return true
++        return remote > local
++    }
+ }
+*** End Patch
+[2m2025-11-25T01:34:41.762206Z[0m [32m INFO[0m ToolCall: shell_command {"command":"git add android-app/app/src/main/java/com/businesscard/app/us3/security/ConsistencyPolicy.kt","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-25T01:37:02.426216Z[0m [32m INFO[0m spawning ghost snapshot task

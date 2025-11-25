@@ -41,9 +41,9 @@
 
 ## 憲章強制品質任務
 
-- [ ] T014 [P] 紀錄模組 Ownership 與架構說明（lint/同步/資料層）於 `android-app/docs/architecture.md`
-- [ ] T015 驗證語言治理：確保 README、docs、UI 字串為繁體中文並記錄審稿人於 `android-app/docs/i18n.md`
-- [ ] T016 [P] 建立效能量測腳本/檢查點（OCR ≤5s、試算表讀寫 ≤2s、列表 5k/50k）於 `android-app/docs/perf-checks.md`
+- [x] T014 [P] 紀錄模組 Ownership 與架構說明（lint/同步/資料層）於 `specs/001-business-card-manager/architecture-ownership.md`
+- [x] T015 驗證語言治理：確保 README、docs、UI 字串為繁體中文並記錄審稿人於 `specs/001-business-card-manager/language-governance.md`
+- [x] T016 [P] 建立效能量測腳本/檢查點（OCR ≤5s、試算表讀寫 ≤2s、列表 5k/50k）於 `specs/001-business-card-manager/performance-measurement.md`、`scripts/perf/measure-us1-scan-sync.ps1`、`scripts/perf/measure-us2-sheets-phase1.ps1`
 
 ---
 

@@ -1,0 +1,16 @@
+[
+  {
+    "id": "ID3001",
+    "name": "Secure Alice",
+    "account": "alice.secure@example.com",
+    "last_updated": "2025-03-01T00:00:00+08:00",
+    "is_deleted": false
+  },
+  {
+    "id": "ID3002",
+    "name": "Conflict Bob",
+    "account": "bob.conflict@example.com",
+    "last_updated": "2025-03-02T00:00:00+08:00",
+    "is_deleted": true
+  }
+]
