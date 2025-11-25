@@ -8225,3 +8225,207 @@
 *** End Patch
 [2m2025-11-25T01:34:41.762206Z[0m [32m INFO[0m ToolCall: shell_command {"command":"git add android-app/app/src/main/java/com/businesscard/app/us3/security/ConsistencyPolicy.kt","workdir":"/mnt/d/program/businesscard"}
 [2m2025-11-25T01:37:02.426216Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-25T01:37:09.045933Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-25T01:37:09.046050Z[0m [32m INFO[0m ghost commit captured: bee8901ec1226bce0ef584757505632b09ca3cba
+[2m2025-11-25T01:37:09.046062Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-25T01:37:16.081899Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: android-app/app/src/main/java/com/businesscard/app/us3/security/ConsistencyPolicy.kt
+@@
+ class ConsistencyPolicy {
+-    fun shouldOverride(localUpdatedAt: String?, remoteUpdatedAt: String?): Boolean {
+-        val remote = remoteUpdatedAt ?: return false
+-        val local = localUpdatedAt ?: return true
+-        return remote > local
+-    }
++    fun shouldOverride(localUpdatedAt: String?, remoteUpdatedAt: String?): Boolean =
++        when {
++            remoteUpdatedAt == null -> false
++            localUpdatedAt == null -> true
++            else -> remoteUpdatedAt > localUpdatedAt
++        }
+ }
+*** End Patch
+[2m2025-11-25T01:37:24.155876Z[0m [32m INFO[0m ToolCall: shell_command {"command":"git add android-app/app/src/main/java/com/businesscard/app/us3/security/ConsistencyPolicy.kt","workdir":"/mnt/d/program/businesscard"}
+[2m2025-11-25T01:46:13.039231Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-25T01:46:20.721715Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-25T01:46:20.721803Z[0m [32m INFO[0m ghost commit captured: a8ca70354b95cf9f1aefa0557e51d2cf33251677
+[2m2025-11-25T01:46:20.721814Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-25T01:47:19.126684Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-25T01:47:26.071426Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-25T01:47:26.071516Z[0m [32m INFO[0m ghost commit captured: d5f4f312bf7abb056cfaf46f25f9deeb36ed0131
+[2m2025-11-25T01:47:26.071526Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-25T01:47:28.164129Z[0m [32m INFO[0m ToolCall: shell_command {"command":"git status --short"}
+[2m2025-11-25T01:47:38.465986Z[0m [32m INFO[0m ToolCall: shell_command {"command":"git log --oneline | head -n 5"}
+[2m2025-11-25T01:47:47.705700Z[0m [32m INFO[0m ToolCall: shell_command {"command":"git show HEAD:docs/architecture/ownership.md | head"}
+[2m2025-11-25T01:47:57.017418Z[0m [32m INFO[0m ToolCall: shell_command {"command":"git push","workdir":"/mnt/d/program/businesscard","timeout_ms":120000,"with_escalated_permissions":false}
+[2m2025-11-25T01:48:26.885518Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-25T01:48:33.769712Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-25T01:48:33.769787Z[0m [32m INFO[0m ghost commit captured: a06bc134f7a2750ea693762de99ff82f02e116a1
+[2m2025-11-25T01:48:33.769797Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-25T01:51:29.750920Z[0m [32m INFO[0m Resuming rollout from "/mnt/d/program/businesscard/.codex/sessions/2025/11/24/rollout-2025-11-24T13-08-04-019ab443-0e94-70c3-a36c-a99900a9344e.jsonl"
+[2m2025-11-25T01:51:29.802968Z[0m [32m INFO[0m Resumed rollout with 2888 items, conversation ID: Some(ConversationId { uuid: 019ab443-0e94-70c3-a36c-a99900a9344e })
+[2m2025-11-25T01:51:29.803020Z[0m [32m INFO[0m Resumed rollout successfully from "/mnt/d/program/businesscard/.codex/sessions/2025/11/24/rollout-2025-11-24T13-08-04-019ab443-0e94-70c3-a36c-a99900a9344e.jsonl"
+[2m2025-11-25T01:51:41.136047Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-25T01:51:47.629419Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-25T01:51:47.629505Z[0m [32m INFO[0m ghost commit captured: c6606866a5b8a1ace5aa016b3f17e48388e15be8
+[2m2025-11-25T01:51:47.629515Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-25T01:53:19.122105Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-25T01:53:25.854305Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-25T01:53:25.854393Z[0m [32m INFO[0m ghost commit captured: 320c1a1e0071d8ba175709d823f81e6e99f3e2e1
+[2m2025-11-25T01:53:25.854405Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-25T01:54:49.878678Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-25T01:54:56.345248Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-25T01:54:56.345335Z[0m [32m INFO[0m ghost commit captured: 73abec268916110e13db41ff9954dd5e1220096b
+[2m2025-11-25T01:54:56.345346Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-25T01:55:14.416745Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: android-app/app/src/test/java/com/businesscard/app/us3/PermissionCheckerTest.kt
++package com.businesscard.app.us3
++
++import com.businesscard.app.us3.models.AccessRequest
++import com.businesscard.app.us3.models.AccountSession
++import com.businesscard.app.us3.models.PermissionScope
++import com.businesscard.app.us3.security.PermissionChecker
++import org.junit.Assert.assertFalse
++import org.junit.Assert.assertTrue
++import org.junit.Test
++
++class PermissionCheckerTest {
++
++    private val checker = PermissionChecker()
++
++    @Test
++    fun deniesWhenSessionMissing() {
++        val decision = checker.evaluate(
++            AccessRequest(scopes = setOf(PermissionScope.SHEETS_READ), spreadsheetId = "id", driveFolderId = "folder"),
++            session = null
++        )
++        assertFalse(decision.allowed)
++    }
++
++    @Test
++    fun deniesWhenNoScope() {
++        val session = AccountSession(accountId = "user", email = "user@example.com", lastAuthAt = "2025-01-01")
++        val decision = checker.evaluate(
++            AccessRequest(scopes = emptySet(), spreadsheetId = "id", driveFolderId = "folder"),
++            session = session
++        )
++        assertFalse(decision.allowed)
++    }
++
++    @Test
++    fun allowsWhenSessionAndScopePresent() {
++        val session = AccountSession(accountId = "user", email = "user@example.com", lastAuthAt = "2025-01-01")
++        val decision = checker.evaluate(
++            AccessRequest(scopes = setOf(PermissionScope.SHEETS_READ), spreadsheetId = "id", driveFolderId = "folder"),
++            session = session
++        )
++        assertTrue(decision.allowed)
++    }
++}
+*** End Patch
+[2m2025-11-25T01:55:23.977563Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Add File: android-app/app/src/test/java/com/businesscard/app/us3/ConsistencyPolicyTest.kt
++package com.businesscard.app.us3
++
++import com.businesscard.app.us3.security.ConsistencyPolicy
++import org.junit.Assert.assertFalse
++import org.junit.Assert.assertTrue
++import org.junit.Test
++
++class ConsistencyPolicyTest {
++
++    private val policy = ConsistencyPolicy()
++
++    @Test
++    fun remoteMissingReturnsFalse() {
++        assertFalse(policy.shouldOverride(localUpdatedAt = "2025-01-01", remoteUpdatedAt = null))
++    }
++
++    @Test
++    fun localMissingReturnsTrue() {
++        assertTrue(policy.shouldOverride(localUpdatedAt = null, remoteUpdatedAt = "2025-01-02"))
++    }
++
++    @Test
++    fun newerRemoteWins() {
++        assertTrue(policy.shouldOverride(localUpdatedAt = "2025-01-01", remoteUpdatedAt = "2025-02-01"))
++        assertFalse(policy.shouldOverride(localUpdatedAt = "2025-02-01", remoteUpdatedAt = "2025-01-01"))
++    }
++}
+*** End Patch
+[2m2025-11-25T01:55:32.141052Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/checklists/requirements.md
+@@
+ **Status**: 規格檢核為 PASS（內容完整、可驗收）；實作與測試需待 `android-app/` 專案建立後啟動，相關任務已在 plan/tasks 標註 Blocked/TODO。
++**備註**：US1、US2 Phase1、品質任務 T014~T016、US3 安全一致性 stub 已完成；US3 實際授權/一致性邏輯與後續優化將於 T032~T039 追蹤。
+*** End Patch
+[2m2025-11-25T01:55:47.364940Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/tasks.md
+@@
+ ## Phase 5：使用者故事 3 - 帳號安全與同步一致性（優先級：P2）
+@@
+-### 測試（先寫後實作）
+-- [ ] T032 [P] [US3] 建立授權/帳號切換/衝突旅程儀表測試於 `android-app/app/src/androidTest/java/com/businesscard/app/AuthAndAccessTest.kt`
+-
+-### 實作
+-- [ ] T033 [US3] 實作 OAuth 登入與帳號切換 UI/流程於 `android-app/app/src/main/java/com/businesscard/app/auth/AuthManager.kt`
+-- [ ] T034 [US3] 實作權限檢查（受邀帳號驗證、試算表/Drive 權限提示）於 `android-app/app/src/main/java/com/businesscard/app/auth/PermissionVerifier.kt`
+-- [ ] T035 [US3] 實作稽核與安全事件記錄（授權、更新、刪除）於 `android-app/app/src/main/java/com/businesscard/app/telemetry/AuditLogger.kt`
+-- [ ] T036 [US3] 實作併發一致性防護（`updated_at` 校驗與衝突提示）於 `android-app/app/src/main/java/com/businesscard/app/sync/ConsistencyGuard.kt`
++- ### 測試（先寫後實作）
++- [ ] T032 [P] [US3] 建立授權/帳號切換/衝突旅程儀表測試於 `android-app/app/src/androidTest/java/com/businesscard/app/AuthAndAccessTest.kt`
++
++### 實作
++- [ ] T033 [US3] 實作 OAuth 登入與帳號切換 UI/流程於 `android-app/app/src/main/java/com/businesscard/app/auth/AuthManager.kt`
++- [ ] T034 [US3] 實作權限檢查（受邀帳號驗證、試算表/Drive 權限提示）於 `android-app/app/src/main/java/com/businesscard/app/auth/PermissionVerifier.kt`
++- [ ] T035 [US3] 實作稽核與安全事件記錄（授權、更新、刪除）於 `android-app/app/src/main/java/com/businesscard/app/telemetry/AuditLogger.kt`
++- [ ] T036 [US3] 實作併發一致性防護（`updated_at` 校驗與衝突提示）於 `android-app/app/src/main/java/com/businesscard/app/sync/ConsistencyGuard.kt`
+*** End Patch
+[2m2025-11-25T01:56:05.788204Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/tasks.md
+@@
+-## Phase 5：使用者故事 3 - 帳號安全與同步一致性（優先級：P2）
+-
+-**目標**：確保僅受邀帳號可存取 Sheets/Drive，並在多端併發時維持一致性與稽核  
+-**獨立測試**：撤銷授權帳號需重新登入；同筆資料雙端修改後以最後寫入者覆蓋並更新 `updated_at`
+-
+-### 測試（先寫後實作）
+-- [ ] T032 [P] [US3] 建立授權/帳號切換/衝突旅程儀表測試於 `android-app/app/src/androidTest/java/com/businesscard/app/AuthAndAccessTest.kt`
+-
+-### 實作
+-- [ ] T033 [US3] 實作 OAuth 登入與帳號切換 UI/流程於 `android-app/app/src/main/java/com/businesscard/app/auth/AuthManager.kt`
+-- [ ] T034 [US3] 實作權限檢查（受邀帳號驗證、試算表/Drive 權限提示）於 `android-app/app/src/main/java/com/businesscard/app/auth/PermissionVerifier.kt`
+-- [ ] T035 [US3] 實作稽核與安全事件記錄（授權、更新、刪除）於 `android-app/app/src/main/java/com/businesscard/app/telemetry/AuditLogger.kt`
+-- [ ] T036 [US3] 實作併發一致性防護（`updated_at` 校驗與衝突提示）於 `android-app/app/src/main/java/com/businesscard/app/sync/ConsistencyGuard.kt`
+-
+-**檢查點**：僅受邀帳號可操作；衝突情境下最後寫入者覆蓋並可追溯
++## Phase 5：使用者故事 3 - 帳號安全與同步一致性（優先級：P2）
++
++**目標**：確保僅受邀帳號可存取 Sheets/Drive，並在多端併發時維持一致性與稽核  
++**獨立測試**：撤銷授權帳號需重新登入；同筆資料雙端修改後以最後寫入者覆蓋並更新 `updated_at`
++
++### 測試（先寫後實作）
++- [ ] T032 [P] [US3] 建立授權/帳號切換/衝突旅程儀表測試於 `android-app/app/src/androidTest/java/com/businesscard/app/AuthAndAccessTest.kt`
++
++### 實作
++- [ ] T033 [US3] 實作 OAuth 登入與帳號切換 UI/流程於 `android-app/app/src/main/java/com/businesscard/app/auth/AuthManager.kt`
++- [ ] T034 [US3] 實作權限檢查（受邀帳號驗證、試算表/Drive 權限提示）於 `android-app/app/src/main/java/com/businesscard/app/auth/PermissionVerifier.kt`
++- [ ] T035 [US3] 實作稽核與安全事件記錄（授權、更新、刪除）於 `android-app/app/src/main/java/com/businesscard/app/telemetry/AuditLogger.kt`
++- [ ] T036 [US3] 實作併發一致性防護（`updated_at` 校驗與衝突提示）於 `android-app/app/src/main/java/com/businesscard/app/sync/ConsistencyGuard.kt`
++
++**檢查點**：僅受邀帳號可操作；衝突情境下最後寫入者覆蓋並可追溯
+*** End Patch
+[2m2025-11-25T01:56:13.237013Z[0m [32m INFO[0m ToolCall: shell_command {"command":"sed -n '85,140p' specs/001-business-card-manager/tasks.md"}
+[2m2025-11-25T01:56:22.779588Z[0m [32m INFO[0m ToolCall: apply_patch *** Begin Patch
+*** Update File: specs/001-business-card-manager/tasks.md
+@@
+-### 測試（先寫後實作）
+-- [ ] T032 [P] [US3] 建立授權/帳號切換/衝突旅程儀表測試於 `android-app/app/src/androidTest/java/com/businesscard/app/AuthAndAccessTest.kt`
++### 測試（先寫後實作）
++- [ ] T032 [P] [US3] 建立授權/帳號切換/衝突旅程儀表測試於 `android-app/app/src/androidTest/java/com/businesscard/app/AuthAndAccessTest.kt`
+*** End Patch
+[2m2025-11-25T01:59:50.532043Z[0m [32m INFO[0m spawning ghost snapshot task
+[2m2025-11-25T01:59:57.326064Z[0m [32m INFO[0m ghost snapshot blocking task finished
+[2m2025-11-25T01:59:57.326161Z[0m [32m INFO[0m ghost commit captured: 9b156ea2165819f2144b35cfdbf899f4de69391b
+[2m2025-11-25T01:59:57.326171Z[0m [32m INFO[0m ghost snapshot gate marked ready
+[2m2025-11-25T02:00:28.831563Z[0m [32m INFO[0m spawning ghost snapshot task

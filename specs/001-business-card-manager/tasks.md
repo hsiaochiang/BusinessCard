@@ -93,7 +93,7 @@
 **目標**：確保僅受邀帳號可存取 Sheets/Drive，並在多端併發時維持一致性與稽核  
 **獨立測試**：撤銷授權帳號需重新登入；同筆資料雙端修改後以最後寫入者覆蓋並更新 `updated_at`
 
-### 測試（先寫後實作）
+- ### 測試（先寫後實作）
 - [ ] T032 [P] [US3] 建立授權/帳號切換/衝突旅程儀表測試於 `android-app/app/src/androidTest/java/com/businesscard/app/AuthAndAccessTest.kt`
 
 ### 實作

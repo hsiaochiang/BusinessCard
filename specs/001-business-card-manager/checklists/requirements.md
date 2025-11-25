@@ -4,6 +4,7 @@
 **Created**: 2025-11-21
 **Feature**: [specs/001-business-card-manager/spec.md](../spec.md)
 **Status**: 規格檢核為 PASS（內容完整、可驗收）；實作與測試需待 `android-app/` 專案建立後啟動，相關任務已在 plan/tasks 標註 Blocked/TODO。
+**備註**：US1、US2 Phase1、品質任務 T014~T016、US3 安全一致性 stub 已完成；US3 實際授權/一致性邏輯與後續優化將於 T032~T039 追蹤。
 
 ## Content Quality
 
