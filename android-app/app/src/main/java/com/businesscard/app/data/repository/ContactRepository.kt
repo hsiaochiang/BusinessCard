@@ -1,6 +1,5 @@
 package com.businesscard.app.data.repository
 
-import java.util.UUID
 import com.businesscard.app.core.IdGenerator
 import com.businesscard.app.core.TimeProvider
 import com.businesscard.app.data.db.ContactDao
@@ -19,6 +18,7 @@ import com.businesscard.app.telemetry.Telemetry
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
+import java.util.UUID
 
 data class ContactDraftForm(
     val name: String,
