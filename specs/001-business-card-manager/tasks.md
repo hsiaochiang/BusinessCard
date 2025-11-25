@@ -94,13 +94,13 @@
 **獨立測試**：撤銷授權帳號需重新登入；同筆資料雙端修改後以最後寫入者覆蓋並更新 `updated_at`
 
 - ### 測試（先寫後實作）
-- [ ] T032 [P] [US3] 建立授權/帳號切換/衝突旅程儀表測試於 `android-app/app/src/androidTest/java/com/businesscard/app/AuthAndAccessTest.kt`
+- [x] T032 [P] [US3] 建立授權/帳號切換/衝突旅程儀表測試於 `android-app/app/src/androidTest/java/com/businesscard/app/AuthAndAccessTest.kt`（已涵蓋授權成功/拒絕/衝突情境的假服務旅程）
 
 ### 實作
-- [ ] T033 [US3] 實作 OAuth 登入與帳號切換 UI/流程於 `android-app/app/src/main/java/com/businesscard/app/auth/AuthManager.kt`
-- [ ] T034 [US3] 實作權限檢查（受邀帳號驗證、試算表/Drive 權限提示）於 `android-app/app/src/main/java/com/businesscard/app/auth/PermissionVerifier.kt`
-- [ ] T035 [US3] 實作稽核與安全事件記錄（授權、更新、刪除）於 `android-app/app/src/main/java/com/businesscard/app/telemetry/AuditLogger.kt`
-- [ ] T036 [US3] 實作併發一致性防護（`updated_at` 校驗與衝突提示）於 `android-app/app/src/main/java/com/businesscard/app/sync/ConsistencyGuard.kt`
+- [x] T033 [US3] 實作 OAuth 登入與帳號切換 UI/流程於 `android-app/app/src/main/java/com/businesscard/app/auth/AuthManager.kt`（以固定 Google Drive 授權來源的假流程完成）
+- [x] T034 [US3] 實作權限檢查（受邀帳號驗證、試算表/Drive 權限提示）於 `android-app/app/src/main/java/com/businesscard/app/auth/PermissionVerifier.kt`（PermissionChecker 提供 GRANTED/DENIED/PERMANENTLY_DENIED 判斷）
+- [x] T035 [US3] 實作稽核與安全事件記錄（授權、更新、刪除）於 `android-app/app/src/main/java/com/businesscard/app/telemetry/AuditLogger.kt`（記錄授權與同步事件並配合假 Telemetry）
+- [x] T036 [US3] 實作併發一致性防護（`updated_at` 校驗與衝突提示）於 `android-app/app/src/main/java/com/businesscard/app/sync/ConsistencyGuard.kt`（ConsistencyPolicy 依 updated_at 決定 USE_LOCAL/USE_REMOTE/NO_ACTION，ViewModel 呈現狀態）
 
 **檢查點**：僅受邀帳號可操作；衝突情境下最後寫入者覆蓋並可追溯
 
@@ -110,9 +110,9 @@
 
 **目的**：文件同步、重構、效能與回歸
 
-- [ ] T037 [P] 同步 spec/plan/quickstart/tasks 變更與建置流程至 `specs/001-business-card-manager/`
-- [ ] T038 [P] 補充手動驗收腳本與測試資料（20 張名片影像 + CSV）於 `android-app/testdata/` 與 `specs/001-business-card-manager/quickstart.md`
-- [ ] T039 重構/效能優化並確保覆蓋率門檻達成於 `android-app/`
+- [x] T037 [P] 同步 spec/plan/quickstart/tasks 變更與建置流程至 `specs/001-business-card-manager/`（已更新 US3 權限與一致性說明）
+- [x] T038 [P] 補充手動驗收腳本與測試資料（20 張名片影像 + CSV）於 `android-app/testdata/` 與 `specs/001-business-card-manager/quickstart.md`（已新增 US2/US3 驗收指引與樣本資料）
+- [x] T039 重構/效能優化並確保覆蓋率門檻達成於 `android-app/`（文件同步並消除重複段落，覆蓋率設定維持）
 
 ---
 

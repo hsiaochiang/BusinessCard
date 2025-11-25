@@ -38,4 +38,8 @@
 ## 五、未來擴充注意事項
 - 新增 US2 後續 Phase 或 US3 時，仍需透過 UseCase／Repository，避免 UI 或 Worker 直連資料層。
 - 維持 Fake／Stub 注入能力，確保離線與自動化測試可運行。
-- 同步與一致性策略集中在 `SyncCoordinator` 與 Repository，避免邏輯分散於 UI／Worker。***
+- 同步與一致性策略集中在 `SyncCoordinator` 與 Repository，避免邏輯分散於 UI／Worker。
+
+## 六、US3 摘要
+- 角色：在 US1/US2 基礎 CRUD 與同步之上，提供 Google Drive 授權與資料一致性判斷的安全層。
+- 資料流：`ContactsViewModel` → UseCase/SyncCoordinator → `ContactRepository` → FakeDriveClient/FakeSheetsClient，權限檢查由 `PermissionChecker`（固定來源）處理，一致性由 `ConsistencyPolicy` 決定採用 local/remote 或不動作。

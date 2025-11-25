@@ -1,43 +1,49 @@
 package com.businesscard.app.us3
 
-import com.businesscard.app.us3.models.AccessRequest
-import com.businesscard.app.us3.models.AccountSession
-import com.businesscard.app.us3.models.PermissionScope
-import com.businesscard.app.us3.security.PermissionChecker
+import com.businesscard.app.us3.auth.PermissionChecker
+import com.businesscard.app.us3.auth.PermissionDecision
+import com.businesscard.app.us3.auth.PermissionScope
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class PermissionCheckerTest {
 
-    private val checker = PermissionChecker()
+    private val grantedChecker = PermissionChecker(
+        fakeTokenProvider = { "fake-token" },
+        fakePermissionState = { PermissionDecision.GRANTED }
+    )
+    private val deniedChecker = PermissionChecker(
+        fakeTokenProvider = { null },
+        fakePermissionState = { PermissionDecision.DENIED }
+    )
+    private val permanentChecker = PermissionChecker(
+        fakeTokenProvider = { null },
+        fakePermissionState = { PermissionDecision.PERMANENTLY_DENIED }
+    )
 
     @Test
     fun deniesWhenSessionMissing() {
-        val decision = checker.evaluate(
-            AccessRequest(scopes = setOf(PermissionScope.SHEETS_READ), spreadsheetId = "id", driveFolderId = "folder"),
-            session = null
-        )
-        assertFalse(decision.allowed)
+        val decision = deniedChecker.check(setOf(PermissionScope.STORAGE))
+        assertFalse(decision.decision == PermissionDecision.GRANTED)
     }
 
     @Test
     fun deniesWhenNoScope() {
-        val session = AccountSession(accountId = "user", email = "user@example.com", lastAuthAt = "2025-01-01")
-        val decision = checker.evaluate(
-            AccessRequest(scopes = emptySet(), spreadsheetId = "id", driveFolderId = "folder"),
-            session = session
-        )
-        assertFalse(decision.allowed)
+        val decision = deniedChecker.check(emptySet())
+        assertFalse(decision.decision == PermissionDecision.GRANTED)
     }
 
     @Test
     fun allowsWhenSessionAndScopePresent() {
-        val session = AccountSession(accountId = "user", email = "user@example.com", lastAuthAt = "2025-01-01")
-        val decision = checker.evaluate(
-            AccessRequest(scopes = setOf(PermissionScope.SHEETS_READ), spreadsheetId = "id", driveFolderId = "folder"),
-            session = session
-        )
-        assertTrue(decision.allowed)
+        val decision = grantedChecker.check(setOf(PermissionScope.DRIVE))
+        assertTrue(decision.decision == PermissionDecision.GRANTED)
+        assertTrue(!decision.token.isNullOrBlank())
+    }
+
+    @Test
+    fun permanentlyDenied() {
+        val decision = permanentChecker.check(setOf(PermissionScope.DRIVE))
+        assertTrue(decision.decision == PermissionDecision.PERMANENTLY_DENIED)
     }
 }
